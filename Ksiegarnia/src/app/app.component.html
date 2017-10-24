@@ -1,7 +1,7 @@
 <div class="container">
-  <header class="row mt-1">
+  <header class="pt-4 pb-4 row bg-primary text-white">
     <div class="logo col-sm-6">
-      <a href="">NaszaKsiegarnia.pl</a>
+      <a href="" class="text-white">NaszaKsiegarnia.pl</a>
     </div>
     <div class="basket col-sm-3">
       <a href=""><h4>Twój koszyk</h4></a>
@@ -15,54 +15,88 @@
       </div>
     </div>
   </header>
-  <div class="navigation row">
-    <div class="search">
-      <form action="/" method="post" class="form-inline my-2 my-lg-0">
-        <label>Wybierz kategorię:
-          <select name="category" class="form-control">
-            <option>Lektury</option>
-            <option>Literatura piękna</option>
-            <option>Literatura faktu</option>
-            <option>Literatura dziecięca</option>
-            <option>Podręczniki</option>
-            <option>Encyklopedie i słowniki</option>
-            <option>Komiksy</option>
-            <option>Poezja</option>
-            <option>Poradniki</option>
-            <option>Sport i turystyka</option>
-            <option>Pozostałe</option>
-          </select>
-        </label>
-        <input type="text" class="form-control mr-sm-2" name="keywords" placeholder="Wpisz słowa kluczowe" />
+  <form action="/" method="post" class="margins">
+    <div class="form-row align-items-center">
+      <div class="col-md-3">
+        <select name="category" class="form-control">
+          <option>Lektury</option>
+          <option>Literatura piękna</option>
+          <option>Literatura faktu</option>
+          <option>Literatura dziecięca</option>
+          <option>Podręczniki</option>
+          <option>Encyklopedie i słowniki</option>
+          <option>Komiksy</option>
+          <option>Poezja</option>
+          <option>Poradniki</option>
+          <option>Sport i turystyka</option>
+          <option>Pozostałe</option>
+        </select>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" name="keywords" placeholder="Wpisz słowa kluczowe" />
+      </div>
+      <div class="col-md-3">
         <button class="btn btn-primary">Szukaj</button>
-      </form>
+      </div>
     </div>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-      <a href="" class="nav-link">Lektury</a>
-      <a href="" class="nav-link">Literatura piękna</a>
-      <a href="" class="nav-link">Literatura faktu</a>
-      <a href="" class="nav-link">Literatura dziecięca</a>
-      <a href="" class="nav-link">Podręczniki</a>
-      <a href="" class="nav-link">Encyklopedie i słowniki</a>
-      <a href="" class="nav-link">Komiksy</a>
-      <a href="" class="nav-link">Poezja</a>
-      <a href="" class="nav-link">Poradniki</a>
-      <a href="" class="nav-link">Sport i turystyka</a>
-      <a href="" class="nav-link">Pozostałe</a>
+  </form>
+  <nav class="margins navbar navbar-expand navbar-light bg-light rounded">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav row mx-auto">
+          <li class="nav-item">
+              <a href="" class="nav-link">Lektury</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Literatura piękna</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Literatura faktu</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Literatura dziecięca</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Podręczniki</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Encyklopedie i&nbsp;słowniki</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Komiksy</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Poezja</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Poradniki</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Sport i&nbsp;turystyka</a>
+          </li>
+          <li class="nav-item">
+              <a href="" class="nav-link">Pozostałe</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-  </div>
-  <section>
+  <section class="margins">
     Treść strony
   </section>
-  <footer>
-    <div class="newsletter">
-      <h2>Newsletter:</h2>
-      <form action="/" method="post" class="form-inline my-2 my-lg-0">
-        <input type="text" class="form-control mr-sm-2" name="subscriber" placeholder="Wpisz adres e-mail" />
-        <button class="btn btn-primary">Zamów</button>
+  <footer class="margins">
+    <div class="row" style="text-align: center;">
+      <h3 class="newsletter col-md-2">Newsletter: </h3>
+      <form action="/" method="post" class="col">
+        <div class="form-row align-items-center">
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="newsletter" name="subscriber" placeholder="Wpisz adres e-mail" />
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary">Zamów</button>
+          </div>
+        </div>
       </form>
     </div>
-    <div class="info-pages d-flex justify-content-between">
+    <div class="info-pages d-flex justify-content-between margins">
       <a href="" class="p-2">O nas</a>
       <a href="" class="p-2">Sposoby i koszty dostawy</a>
       <a href="" class="p-2">Regulamin</a>
