@@ -1,23 +1,24 @@
 <div class="container">
   <header class="pt-4 pb-4 row bg-primary text-white">
     <div class="logo col-sm-6">
-      <a href="" class="text-white">NaszaKsiegarnia.pl</a>
+      <h3><a href="" class="noUnderline text-white">NaszaKsiegarnia.pl</a></h3>
     </div>
-    <div class="basket col-sm-3">
-      <a href=""><h4>Twój koszyk</h4></a>
-      <h6>99,99 zł</h6>
+    <div class="basket col-sm-3 col-6">
+      <h3><a href="" class="noUnderline text-white">Twój koszyk</a></h3>
+      <a href="" class="noUnderline text-white">99,99 zł</a>
     </div>
-    <div class="your-profile col-sm-3">
-      <a href=""><h4>Twoje konto</h4></a>
+    <div class="your-profile col-sm-3 col-6">
+      <h3><a href="" class="noUnderline text-white">Twoje konto</a></h3>
       <div class="hgroup row">
-        <a href="" class="col-xl-4 col-lg-5 col-md-6"><h6>Logowanie</h6></a>
-        <a href="" class="col-xl-4 col-lg-5 col-md-6"><h6>Rejestracja</h6></a>
+        <h6><a href="" class="noUnderline col-xl-4 col-lg-5 col-md-6 text-white">Logowanie</a></h6>
+        <h6><a href="" class="noUnderline col-xl-4 col-lg-5 col-md-6 text-white">Rejestracja</a></h6>
       </div>
     </div>
   </header>
-  <form action="/" method="post" class="margins">
+  <div class="background">
+  <form action="/" method="post" class="paddings margins background">
     <div class="form-row align-items-center">
-      <div class="col-md-3">
+      <div class="col-md-3 col-sm-3 min">
         <select name="category" class="form-control">
           <option>Lektury</option>
           <option>Literatura piękna</option>
@@ -32,15 +33,15 @@
           <option>Pozostałe</option>
         </select>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5 col-sm-5 min">
         <input type="text" class="form-control" name="keywords" placeholder="Wpisz słowa kluczowe" />
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-sm-3 min">
         <button class="btn btn-primary">Szukaj</button>
       </div>
     </div>
   </form>
-  <nav class="margins navbar navbar-expand navbar-light bg-light rounded">
+  <nav class="paddings margins navbar navbar-expand navbar-light bg-light rounded background">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav row mx-auto">
           <li class="nav-item">
@@ -79,29 +80,29 @@
         </ul>
       </div>
     </nav>
-  <section class="margins">
+  </div>
+  <section class="paddings margins">
     Treść strony
   </section>
-  <footer class="margins">
+  <footer class="paddings margins background">
     <div class="row" style="text-align: center;">
-      <h3 class="newsletter col-md-2">Newsletter: </h3>
+      <h3 class="newsletter col-md-3 col-sm-4">Newsletter: </h3>
       <form action="/" method="post" class="col">
         <div class="form-row align-items-center">
-          <div class="col-md-8">
+          <div class="col-md-7 col-sm-6 min">
             <input type="text" class="form-control" id="newsletter" name="subscriber" placeholder="Wpisz adres e-mail" />
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-2 min">
             <button type="submit" class="btn btn-primary">Zamów</button>
           </div>
         </div>
       </form>
     </div>
-    <div class="info-pages d-flex justify-content-between margins">
-      <a href="" class="p-2">O nas</a>
-      <a href="" class="p-2">Sposoby i koszty dostawy</a>
-      <a href="" class="p-2">Regulamin</a>
-      <a href="" class="p-2">Pomoc</a>
-      <a href="" class="p-2">Kontakt</a>
+    <div class="info-pages d-flex flex-wrap justify-content-around paddings bg-primary min">
+      <a href="" class="p-2 text-white">O&nbsp;nas</a>
+      <a href="" class="p-2 text-white">Sposoby i&nbsp;koszty dostawy</a>
+      <a href="" class="p-2 text-white">Regulamin</a>
+      <a href="" class="p-2 text-white">Kontakt</a>
     </div>
   </footer>
 </div>
