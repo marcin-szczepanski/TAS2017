@@ -1,5 +1,6 @@
 package hello;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,10 +15,5 @@ public class GreetingController {
 	@RequestMapping("/greeting")
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
-	}
-
-	@RequestMapping("/gatunek")
-	public String gatunek() {
-		return new String(connectURL.test());
 	}
 }
