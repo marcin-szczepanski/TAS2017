@@ -1,6 +1,5 @@
 .paddings {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
 }
 
 .margins {
@@ -19,7 +18,7 @@
 .noUnderline:hover {
   text-decoration: none;
   transition: 500ms;
-  color: rgb(199, 199, 199) !important;
+  color: #323841 !important;
 }
 
 .background {
@@ -34,4 +33,68 @@
   .no-flex {
     display: block;
   }
+}
+
+.text-gray {
+  color: #374150 !important;
+  font-weight: bold;
+}
+
+.text-light-gray {
+  color: #8497a7 !important;
+}
+
+.background-blue {
+  background-color: rgb(16, 41, 79);
+}
+
+.background-light-blue {
+  background-color: #65a5eb;
+  border: 0;
+}
+
+.background-light-blue:hover {
+  background-color: #ff7b00;
+}
+
+.text-orange {
+  color: #ff7b00 !important;
+}
+
+.text-orange:hover {
+  color: #d16200 !important;
+}
+
+.text-blue {
+  color: #1c55a6 !important;
+}
+
+.text-blue:hover {
+  color: #224c86 !important;
+}
+
+.newsletter-section {
+  padding-bottom: 1rem;
+}
+
+.bradius {
+  border-radius: 0.5rem;
+}
+
+.bradius-bottom {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.bradius-top {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.adres {
+  padding: 1rem;
+}
+
+.container, .body {
+  background-color: #cfe0ed;
 }
