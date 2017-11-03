@@ -12,4 +12,10 @@ export class AboutBookComponent implements OnInit {
   ngOnInit() {
   }
 
+  book = {
+    title: "title",
+    author: "author",
+    price: "24.99 zł"
+  };
+
 }

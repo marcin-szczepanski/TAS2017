@@ -1,3 +1,16 @@
-<p>
-  about-book works!
-</p>
+<div>
+  <div class="about-book row">
+    <div class="figure d-flex flex-column justify-content-around col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6">
+      <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded">
+      <div>
+        <h5 class="text-gray">
+          <a href="" class="noUnderline text-gray">
+            {{ book.title }}
+          </a>
+        </h5>
+        <h6>{{ book.author }}</h6>
+        <h6>{{ book.price }}</h6>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,4 +12,37 @@ export class NewestComponent implements OnInit {
   ngOnInit() {
   }
 
+  books = [
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    }
+  ];
+
 }
