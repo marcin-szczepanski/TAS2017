@@ -9,6 +9,7 @@ import { AboutBookComponent } from './about-book/about-book.component';
 import { BooksInCategoryComponent } from './books-in-category/books-in-category.component';
 import { BooksInSearchComponent } from './books-in-search/books-in-search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
+import { NewestComponent } from './newest/newest.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
     AboutBookComponent,
     BooksInCategoryComponent,
     BooksInSearchComponent,
-    StaticPagesComponent
+    StaticPagesComponent,
+    NewestComponent
   ],
   imports: [
     BrowserModule,

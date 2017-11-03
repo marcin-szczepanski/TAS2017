@@ -3,7 +3,9 @@
   <div *ngFor="let book of books" class="figure d-flex justify-content-around col-xl-6 col-lg-6 col-md-6 col-sm-12">
     <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded">
     <div>
-      <p class="figure-caption">A caption for the above image.</p>
+      <p class="figure-caption">{{ book.title }}</p>
+      <p class="figure-caption">{{ book.author }}</p>
+      <p class="figure-caption">{{ book.price }}</p>
     </div>
   </div>
 </div>

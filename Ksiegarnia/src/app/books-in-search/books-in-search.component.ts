@@ -12,6 +12,57 @@ export class BooksInSearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  books = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  books = [
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+    {
+      title: "title",
+      author: "author",
+      price: "24.99 zł"
+    },
+  ];
 
 }
