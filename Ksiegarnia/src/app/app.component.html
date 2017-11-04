@@ -2,17 +2,17 @@
   <div class="container">
     <header class="pt-4 pb-4 row text-gray">
       <div class="logo col-sm-6">
-        <h3><a href="" class="noUnderline text-gray">NaszaKsiegarnia.pl</a></h3>
+        <h3><a class="noUnderline text-gray link" (click)="mode = 0">NaszaKsiegarnia.pl</a></h3>
       </div>
       <div class="basket col-sm-3 col-6">
-        <h3><a href="" class="noUnderline text-gray">Twój koszyk</a></h3>
-        <a href="" class="noUnderline text-blue">99,99 zł</a>
+        <h3><a class="noUnderline text-gray link">Twój koszyk</a></h3>
+        <a class="noUnderline text-blue  link">99,99 zł</a>
       </div>
       <div class="your-profile col-sm-3 col-6">
-        <h3><a href="" class="noUnderline text-gray">Twoje konto</a></h3>
+        <h3><a class="noUnderline text-gray link">Twoje konto</a></h3>
         <div class="hgroup row">
-          <h6><a href="" class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange">Logowanie</a></h6>
-          <h6><a href="" class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange">Rejestracja</a></h6>
+          <h6><a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link">Logowanie</a></h6>
+          <h6><a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link">Rejestracja</a></h6>
         </div>
       </div>
     </header>
@@ -38,54 +38,58 @@
           <input type="text" class="form-control" name="keywords" placeholder="Wpisz słowa kluczowe" />
         </div>
         <div class="col-md-3 col-sm-3 min">
-          <button class="btn btn-primary background-light-blue">Szukaj</button>
+          <button class="btn btn-primary background-light-blue" (click)="getBooks(); mode = 3">Szukaj</button>
         </div>
-        <a href="/" class="text-white mt-2">Wyszukiwanie zaawansowane</a>
+        <a class="text-white mt-2 link" (click)="mode = 2">Wyszukiwanie zaawansowane</a>
       </div>
     </form>
     <nav class="paddings margins navbar navbar-expand navbar-light bg-light bradius-bottom background">
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav row mx-auto">
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Lektury</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Lektury</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Literatura piękna</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Literatura piękna</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Literatura faktu</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Literatura faktu</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Literatura dziecięca</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Literatura dziecięca</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Podręczniki</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Podręczniki</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Encyklopedie i&nbsp;słowniki</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Encyklopedie i&nbsp;słowniki</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Komiksy</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Komiksy</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Poezja</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Poezja</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Poradniki</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Poradniki</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Sport i&nbsp;turystyka</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Sport i&nbsp;turystyka</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-gray">Pozostałe</a>
+                <a class="nav-link text-gray link" (click)="mode = 4">Pozostałe</a>
             </li>
           </ul>
         </div>
       </nav>
     </div>
     <section class="adres text-light-gray paddings margins"></section>
-    <section class="paddings margins bradius mb-4 bg-white">
-      Treść strony
+    <section class="paddings margins bradius mb-4 bg-white" [ngSwitch]="mode">
+      <app-static-pages *ngSwitchCase="1"></app-static-pages>
+      <app-advanced-search *ngSwitchCase="2"></app-advanced-search>
+      <app-books-in-search *ngSwitchCase="3"></app-books-in-search>
+      <app-books-in-category *ngSwitchCase="4"></app-books-in-category>
+      <app-newest *ngSwitchDefault></app-newest>
     </section>
     <footer class="paddings margins background-blue mt-4 bradius">
       <div class="row newsletter-section mt-4" style="text-align: center;">
@@ -102,10 +106,10 @@
         </form>
       </div>
       <div class="info-pages d-flex flex-wrap justify-content-around paddings bradius mt-4 background min">
-        <a href="" class="p-2 text-white" style="text-align: center;">O&nbsp;nas</a>
-        <a href="" class="p-2 text-white" style="text-align: center;">Sposoby i&nbsp;koszty dostawy</a>
-        <a href="" class="p-2 text-white" style="text-align: center;">Regulamin</a>
-        <a href="" class="p-2 text-white" style="text-align: center;">Kontakt</a>
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">O&nbsp;nas</a>
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">Sposoby i&nbsp;koszty dostawy</a>
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">Regulamin</a>
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">Kontakt</a>
       </div>
     </footer>
     <div class="pb-4 pt-4" style="text-align: center;">
