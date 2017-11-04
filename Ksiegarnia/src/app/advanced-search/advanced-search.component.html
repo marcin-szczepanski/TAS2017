@@ -1,1 +1,40 @@
-<h5 class="text-gray">Wyszukiwanie zaawansowane</h5>
+<h5 class="text-gray pb-2">Wyszukiwanie zaawansowane</h5>
+<form action="/" method="post" class="paddings margins bg-primary bradius-top">
+  <div class="form-row align-items-center">
+    <div class="col-md-4 col-sm-4 min">
+      <select name="category" class="form-control mb-2">
+        <option>Lektury</option>
+        <option>Literatura piękna</option>
+        <option>Literatura faktu</option>
+        <option>Literatura dziecięca</option>
+        <option>Podręczniki</option>
+        <option>Encyklopedie i słowniki</option>
+        <option>Komiksy</option>
+        <option>Poezja</option>
+        <option>Poradniki</option>
+        <option>Sport i turystyka</option>
+        <option>Pozostałe</option>
+      </select>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="year" placeholder="Wpisz rok wydania" />
+      </div>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="pages" placeholder="Wpisz ilość stron" />
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6 min">
+      <div class="mb-2">
+        <input type="text" class="form-control" name="title" placeholder="Wpisz tytuł" />
+      </div>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="author" placeholder="Wpisz autora" />
+      </div>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="publishing" placeholder="Wpisz wydawnictwo" />
+      </div>
+    </div>
+  </div>
+  <div class="mb-2">
+    <button class="btn btn-primary background-light-blue">Szukaj</button>
+  </div>
+</form>
