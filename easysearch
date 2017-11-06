@@ -1,0 +1,15 @@
+--TU TWORZY SIĘ WIDOK WSZYSTKICH KSIĄŻEK
+
+CREATE OR ALTER VIEW EASYSEARCH(Nazwa,Imie_autora,Nazwisko_autora,Kategoria,Cena)
+as
+SELECT k.Nazwa,a.Imie,a.Nazwisko,t.Kat,k.Cena
+FROM Ksiazka k
+	JOIN Kategoria t ON k.Kategoria = t.id
+	JOIN Autor a ON k.Autor = a.id
+--
+
+--TUTAJ JEST SELECT DO SZUKANIA KSIĄŻEK PO KATEGORII, W MIEJSCE 'LITERATURA FAKTU' MOŻECIE WSTAWIĆ ZMIENNĄ Z NAZWĄ KATEGORII LUB DLA KAŻDEJ KATEGORII RĘCZNIE TO ZMIENIĆ
+
+Select Nazwa,Imie_autora,Nazwisko_autora,Cena from EASYSEARCH WHERE Kategoria = 'Literatura faktu'
+
+--
