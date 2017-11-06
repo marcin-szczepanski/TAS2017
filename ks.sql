@@ -86,30 +86,39 @@ mail varchar(40));
 
 --INSERTY
 
-insert into Uzytkownik values(1,'admin','admin','email@admin.pl','Jakub','Lenartowicz','666666666','Sobieskiego 100/100','Poznañ','60-688')
-insert into Uzytkownik values(2,'admin2','admin2','email2@admin.pl','Jakub2','Lenartowicz2','222222222','Batorego 200/200','Poznañ','62-622')
+insert into Uzytkownik values(1,'admin','admin','email@admin.pl','Jakub','Lenartowicz','666666666','Sobieskiego 100/100','PoznaÃ±','60-688')
+insert into Uzytkownik values(2,'admin2','admin2','email2@admin.pl','Jakub2','Lenartowicz2','222222222','Batorego 200/200','PoznaÃ±','62-622')
 
 insert into Wydawnictwo values(1,'Albatros')
 insert into Wydawnictwo values(2,'Czwarta Strona')
+insert into Wydawnictwo values(3,'Muza')
+
 
 insert into Gatunek values(1,'kryminal')
 insert into Gatunek values(2,'thriller')
 insert into Gatunek values(3,'sensacja')
 
 insert into Kategoria values(1,'Lektury');
-insert into Kategoria values(2,'Literatura piêkna');
+insert into Kategoria values(2,'Literatura piÄ™kna');
 insert into Kategoria values(3,'Literatura faktu');
-insert into Kategoria values(4,'Literatura dzieciêca');
+insert into Kategoria values(4,'Literatura dzieciÄ™ca');
+insert into Kategoria values(5,'PodrÄ™czniki');
+insert into Kategoria values(6,'Encyklopedie i sÅ‚owniki');
+insert into Kategoria values(7,'Komiksy');
+insert into Kategoria values(8,'Poezja');
+insert into Kategoria values(9,'Poradniki');
+insert into Kategoria values(10,'Sport i turystyka');
+insert into Kategoria values(11,'PozostaÅ‚e');
 
 insert into Autor values(1,'Harlan','Coben')
-insert into Autor values(2,'Remigiusz','Mróz')
+insert into Autor values(2,'Remigiusz','MrÃ³z')
 
 insert into StatusTransakcji values(1,'Zakonczono')
 insert into StatusTransakcji values(2,'W trakcie')
 
 
 insert into Ksiazka values(1,'Schronienie',1,1,1,3,'2017-09-27',7,564,9788379767120,17.65,3);
-insert into Ksiazka values(2,'Oskar¿enie',2,2,3,3,'2017-09-27',7,368,9788365781703,20.80,3);
+insert into Ksiazka values(2,'OskarÅ¼enie',2,2,3,3,'2017-09-27',7,368,9788365781703,20.80,3);
 
 insert into Egzemplarz values(111,1)
 insert into Egzemplarz values(112,1)
