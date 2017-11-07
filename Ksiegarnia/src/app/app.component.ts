@@ -10,6 +10,8 @@ export class AppComponent {
   title = 'app works!';
   
   books = null;
+  books2 = null;
+  booksPrice = null;
 
   mode = 0;
 
