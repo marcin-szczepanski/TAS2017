@@ -1,16 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
-@Component({
-  selector: 'app-books-in-search',
-  templateUrl: './books-in-search.component.html',
-  styleUrls: ['./books-in-search.component.css']
-})
-export class BooksInSearchComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+@Injectable()
+export class SearchService {
 
   books = [
     {
@@ -64,5 +56,37 @@ export class BooksInSearchComponent implements OnInit {
       price: "24.99 zł"
     },
   ];
+
+  answer = {};
+
+  constructor(private http: Http) { }
+
+  getService(url: string): Promise<any> {
+    return this.http
+        .get(url)
+        .toPromise()
+        .then(res => this.extractData(res));
+  }
+
+  private extractData(res: Response) {
+    this.answer = res.json();;
+    return res.json() || {};
+  }
+
+  search(query="") {
+    let url = "http://localhost:8080/author";
+    let data = this.getService(url)
+    .then(answer => console.log(this.answer));
+    return this.answer;
+  }
+
+  works() {
+    return "works!";
+  }
+
+  getData(c = "", y = "", pa = "", a = "", t = "", pu = "") {
+    console.log(c+y+pa+a+t+pu);
+    return this.books;
+  }
 
 }

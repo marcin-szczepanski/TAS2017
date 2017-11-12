@@ -2,7 +2,8 @@
 <form action="/" method="post" class="paddings margins bg-primary bradius-top">
   <div class="form-row align-items-center">
     <div class="col-md-4 col-sm-4 min">
-      <select name="category" class="form-control mb-2">
+      <select (change)="category = $event.target.value" class="form-control mb-2">
+        <option label="-- wybierz kategorię --"></option>
         <option>Lektury</option>
         <option>Literatura piękna</option>
         <option>Literatura faktu</option>
@@ -16,25 +17,25 @@
         <option>Pozostałe</option>
       </select>
       <div class="mb-2">
-        <input type="text" class="form-control" name="year" placeholder="Wpisz rok wydania" />
+        <input type="text" class="form-control" name="year" (keyup)="year = $event.target.value" placeholder="Wpisz rok wydania" />
       </div>
       <div class="mb-2">
-        <input type="text" class="form-control" name="pages" placeholder="Wpisz ilość stron" />
+        <input type="text" class="form-control" name="pages" (keyup)="pages = $event.target.value" placeholder="Wpisz ilość stron" />
       </div>
     </div>
     <div class="col-md-6 col-sm-6 min">
       <div class="mb-2">
-        <input type="text" class="form-control" name="title" placeholder="Wpisz tytuł" />
+        <input type="text" class="form-control" name="title" (keyup)="title = $event.target.value" placeholder="Wpisz tytuł" />
       </div>
       <div class="mb-2">
-        <input type="text" class="form-control" name="author" placeholder="Wpisz autora" />
+        <input type="text" class="form-control" name="author" (keyup)="author = $event.target.value" placeholder="Wpisz autora" />
       </div>
       <div class="mb-2">
-        <input type="text" class="form-control" name="publishing" placeholder="Wpisz wydawnictwo" />
+        <input type="text" class="form-control" name="publishing" (keyup)="publishing = $event.target.value" placeholder="Wpisz wydawnictwo" />
       </div>
     </div>
   </div>
   <div class="mb-2">
-    <button class="btn btn-primary background-light-blue">Szukaj</button>
+    <button class="btn btn-primary background-light-blue" (click)="listBooks()">Szukaj</button>
   </div>
 </form>

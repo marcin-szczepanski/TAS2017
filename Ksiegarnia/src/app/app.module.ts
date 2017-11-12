@@ -11,6 +11,8 @@ import { BooksInSearchComponent } from './books-in-search/books-in-search.compon
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { NewestComponent } from './newest/newest.component';
 
+import { SearchService } from './search.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { NewestComponent } from './newest/newest.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    SearchService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
