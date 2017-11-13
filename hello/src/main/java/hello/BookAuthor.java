@@ -1,14 +1,17 @@
 package hello;
 
-public class TOP6 {
+public class BookAuthor {
+	protected String id;
 	protected String nazwa;
 	protected String imie;
 	protected String nazwisko;
 	protected String ocena;
 	protected String kategoria;
 	protected String cena;
+
 	
-	public TOP6(String naz, String i, String n, String o, String k, String c) {
+	public BookAuthor(String id, String naz, String i, String n, String o, String k, String c) {
+		this.id=id;
 		this.nazwa = naz;
 		this.imie = i;
 		this.nazwisko = n;
@@ -17,6 +20,13 @@ public class TOP6 {
 		this.cena = c;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getNazwa() {
 		return nazwa;
 	}
