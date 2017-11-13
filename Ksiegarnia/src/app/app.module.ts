@@ -16,6 +16,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { OrderCompComponent } from './order-comp/order-comp.component';
 import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
 
+import { SearchService } from './search.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.compo
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    SearchService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

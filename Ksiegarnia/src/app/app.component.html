@@ -20,7 +20,8 @@
     <form action="/" method="post" class="paddings margins bg-primary bradius-top">
       <div class="form-row align-items-center">
         <div class="col-md-3 col-sm-3 min">
-          <select name="category" class="form-control">
+          <select (change)="category = $event.target.value" name="category" class="form-control">
+            <option label="-- wybierz kategorię --"></option>
             <option>Lektury</option>
             <option>Literatura piękna</option>
             <option>Literatura faktu</option>
@@ -35,7 +36,7 @@
           </select>
         </div>
         <div class="col-md-5 col-sm-5 min">
-          <input type="text" class="form-control" name="keywords" placeholder="Wpisz słowa kluczowe" />
+          <input type="text" class="form-control" name="keywords" (keyup)="query = $event.target.value" placeholder="Wpisz słowa kluczowe" />
         </div>
         <div class="col-md-3 col-sm-3 min">
           <button class="btn btn-primary background-light-blue" (click)="getBooks(); mode = 3">Szukaj</button>
@@ -47,37 +48,37 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav row mx-auto">
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Lektury</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Lektury</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Literatura piękna</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Literatura piękna</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Literatura faktu</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Literatura faktu</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Literatura dziecięca</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Literatura dziecięca</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Podręczniki</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Podręczniki</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Encyklopedie i&nbsp;słowniki</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Encyklopedie i&nbsp;słowniki</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Komiksy</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Komiksy</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Poezja</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Poezja</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Poradniki</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Poradniki</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Sport i&nbsp;turystyka</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Sport i&nbsp;turystyka</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-gray link" (click)="mode = 4">Pozostałe</a>
+                <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Pozostałe</a>
             </li>
           </ul>
         </div>
@@ -94,6 +95,7 @@
       <app-order-comp *ngSwitchCase="7"></app-order-comp>
       <app-shopping-basket *ngSwitchCase="8"></app-shopping-basket>
       <app-my-profile *ngSwitchCase="9"></app-my-profile>
+      <app-books-in-category category="{{ categorySearch }}" *ngSwitchCase="4"></app-books-in-category>
       <app-newest *ngSwitchDefault></app-newest>
     </section>
     <footer class="paddings margins background-blue mt-4 bradius">
@@ -102,10 +104,10 @@
         <form action="/" method="post" class="col">
           <div class="form-row align-items-center">
             <div class="col-md-7 col-sm-6 min">
-              <input type="text" class="form-control" id="newsletter" name="subscriber" placeholder="Wpisz adres e-mail" />
+              <input type="text" required class="form-control" id="newsletter" name="subscriber" (keyup)="email = $event.target.value" placeholder="Wpisz adres e-mail" />
             </div>
             <div class="col-md-2 col-sm-2 min">
-              <button type="submit" class="btn btn-primary">Zamów</button>
+              <button type="submit" class="btn btn-primary" (click)="saveEmail()">Zamów</button>
             </div>
           </div>
         </form>

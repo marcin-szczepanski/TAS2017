@@ -1,70 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { SearchService } from '../search.service'
 
 @Component({
   selector: 'app-books-in-category',
   templateUrl: './books-in-category.component.html',
-  styleUrls: ['./books-in-category.component.css']
+  styleUrls: ['./books-in-category.component.css'],
+  providers: [
+    SearchService
+  ]
 })
-export class BooksInCategoryComponent implements OnInit {
+export class BooksInCategoryComponent implements OnChanges  {
+  
+  @Input() category : string;
 
-  constructor() { }
+  books = {};
+  test = {};
 
-  ngOnInit() {
+  constructor(private searchService:SearchService) { 
+    
   }
 
-  category = "Nazwa kategorii";
+  ngOnInit() {
+    
+  }
 
-  books = [
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-  ];
+  ngOnChanges(changes: SimpleChanges) {
+    const categoryChanges = changes['category'];
+    if (categoryChanges) {
+      console.log(this.searchService.works());
+      this.books = this.searchService.getData(this.category);
+     // this.test = this.searchService.search();
+     // console.log(this.test);
+    }
+  }
+
+
 
 }
