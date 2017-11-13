@@ -7,65 +7,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingBasketComponent implements OnInit {
 
-
-  doZaplaty = 0;
-  constructor() { }
-
-  ngOnInit() {
-  }
-
   zamowienie = [
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
     {
-      title: "title",
-      author: "author",
+      title: 'title',
+      author: 'author',
       price: 24.99
     },
   ];
 
-
+  doZaplaty = 0;
+  constructor() { }
+  ngOnInit() {
+  }
 }

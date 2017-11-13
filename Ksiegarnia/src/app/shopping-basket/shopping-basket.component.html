@@ -2,15 +2,17 @@
 <div class="row">
   <ul class="list-group">
     <li *ngFor="let book of zamowienie" class="list-group-item">
-      <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded">
-      <a class="noUnderline text-gray link">{{ book.title }}</a>{{ book.author }} {{ book.price }}
-      <button type="submit" class="btn btn-primary">Usuń z koszyka</button>
+      <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded removeMargin">
+      <a class="noUnderline text-gray link">{{ book.title }}</a>
+      <p class="removeMargin">{{ book.author }}</p>
+      <p class="removeMargin">{{ book.price }} zł</p>
+      <button type="submit" class="btn btn-primary background-light-blue">Usuń z koszyka</button>
     </li>
   </ul>
 </div>
-<div>
-  <h2>
-    Do zapłaty: {{doZaplaty}}zł.
-  </h2>
+<div class="summary">
+  <h5>
+    Razem: {{doZaplaty}} zł.
+  </h5>
   <button type="submit" class="btn btn-primary">Złóż zamówienie</button>
 </div>
