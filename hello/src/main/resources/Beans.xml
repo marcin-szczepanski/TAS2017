@@ -25,5 +25,10 @@
       class = "hello.BookAuthorDAO">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
+   
+   <bean id = "Book" 
+      class = "hello.BookDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
       
 </beans>
