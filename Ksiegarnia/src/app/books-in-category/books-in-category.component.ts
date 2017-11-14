@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { SearchService } from '../search.service'
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { SearchService } from '../search.service';
 
 @Component({
   selector: 'app-books-in-category',
@@ -11,27 +11,40 @@ import { SearchService } from '../search.service'
 })
 export class BooksInCategoryComponent implements OnChanges  {
   
-  @Input() category : string;
+  @Input() category: string;
 
-  books = {};
-  test = {};
+  @Output() modeChanged = new EventEmitter();
+  @Output() bookIdChanged = new EventEmitter();
 
-  constructor(private searchService:SearchService) { 
-    
+  modeCategory = 0;
+  books = [];
+  answer = {};
+  bookId = undefined;
+  url = 'books?category=';
+
+  constructor(private searchService: SearchService) {
+    this.getBooks(this.category);
   }
 
-  ngOnInit() {
-    
+  changeMode($event) {
+    this.modeChanged.emit(5);
+  }
+
+  changeBookId($event) {
+    this.bookIdChanged.emit(this.bookId);
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.books = [];
     const categoryChanges = changes['category'];
     if (categoryChanges) {
-      console.log(this.searchService.works());
-      this.books = this.searchService.getData(this.category);
-     // this.test = this.searchService.search();
-     // console.log(this.test);
+      this.getBooks(this.category);
     }
+  }
+
+  getBooks(category) {
+    this.books = [];
+    this.books = this.searchService.getBooks(this.url + category);
   }
 
 

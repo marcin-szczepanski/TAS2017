@@ -27,8 +27,8 @@ export class AdvancedSearchComponent implements OnInit {
     let data = this.getService(url)
     .then(answer => console.log(this.answer));
     return this.answer; */
-    console.log(this.searchService.works());
-    this.searchService.getData(category, year, pages, author, title, publishing);
+   // console.log(this.searchService.works());
+    //this.searchService.getData(category, year, pages, author, title, publishing);
     return {};
   }
 

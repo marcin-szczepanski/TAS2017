@@ -89,9 +89,9 @@
       <app-static-pages *ngSwitchCase="1"></app-static-pages>
       <app-advanced-search *ngSwitchCase="2"></app-advanced-search>
       <app-books-in-search *ngSwitchCase="3"></app-books-in-search>
-      <app-books-in-category category="{{ categorySearch }}" *ngSwitchCase="4"></app-books-in-category>
+      <app-books-in-category category="{{ categorySearch }}" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchCase="4"></app-books-in-category>
       <app-about-book *ngSwitchCase="5" (load)="setId()" ident="{{ idBook }}"></app-about-book>
-      <app-newest (modeNewestChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchDefault></app-newest>
+      <app-newest (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchDefault></app-newest>
     </section>
     <footer class="paddings margins background-blue mt-4 bradius">
       <div class="row newsletter-section mt-4" style="text-align: center;">
