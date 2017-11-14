@@ -12,11 +12,20 @@ export class AppComponent {
   query = "";
   email = "";
   mode = 0;
+  idBook = -1;
   categorySearch = "";
   answer = {};
 
   constructor(private http: Http) {
   
+  }
+
+  setMode(data) {
+    this.mode = data;
+  }
+
+  setIdBook(data) {
+    this.idBook = data;
   }
 
   getService(url: string): Promise<any> {

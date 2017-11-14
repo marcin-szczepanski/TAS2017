@@ -2,7 +2,7 @@
   <div class="container">
     <header class="pt-4 pb-4 row text-gray">
       <div class="logo col-sm-6">
-        <h3><a class="noUnderline text-gray link" (click)="mode = 0">NaszaKsiegarnia.pl</a></h3>
+        <h3><a class="noUnderline text-gray link" modeNewest="0" (click)="mode = 0">NaszaKsiegarnia.pl</a></h3>
       </div>
       <div class="basket col-sm-3 col-6">
         <h3><a class="noUnderline text-gray link">Twój koszyk</a></h3>
@@ -90,7 +90,8 @@
       <app-advanced-search *ngSwitchCase="2"></app-advanced-search>
       <app-books-in-search *ngSwitchCase="3"></app-books-in-search>
       <app-books-in-category category="{{ categorySearch }}" *ngSwitchCase="4"></app-books-in-category>
-      <app-newest *ngSwitchDefault></app-newest>
+      <app-about-book *ngSwitchCase="5" (load)="setId()" ident="{{ idBook }}"></app-about-book>
+      <app-newest (modeNewestChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchDefault></app-newest>
     </section>
     <footer class="paddings margins background-blue mt-4 bradius">
       <div class="row newsletter-section mt-4" style="text-align: center;">
