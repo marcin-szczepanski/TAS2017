@@ -9,6 +9,10 @@ export class SignUpComponent implements OnInit {
 
   constructor() { }
 
+  rejestracja(){
+    alert("Rejestruje!");
+  }
+
   ngOnInit() {
   }
 

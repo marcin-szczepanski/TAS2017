@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {FormsModule} from '@angular/forms';
 import { SignUpComponent } from './sign-up.component';
 
 describe('SignUpComponent', () => {
