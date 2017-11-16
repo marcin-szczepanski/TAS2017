@@ -10,12 +10,12 @@ public class BookAuthor {
 	protected String cena;
 
 	
-	public BookAuthor(String id, String naz, String i, String n, String o, String k, String c) {
+	public BookAuthor(String id, String naz, String i, String n, String k, String c) {
 		this.id=id;
 		this.nazwa = naz;
 		this.imie = i;
 		this.nazwisko = n;
-		this.ocena = o;
+		//this.ocena = o;
 		this.kategoria = k;
 		this.cena = c;
 	}
@@ -45,12 +45,7 @@ public class BookAuthor {
 	public void setNazwisko(String nazwisko) {
 		this.nazwisko = nazwisko;
 	}
-	public String getOcena() {
-		return ocena;
-	}
-	public void setOcena(String ocena) {
-		this.ocena = ocena;
-	}
+	
 	public String getKategoria() {
 		return kategoria;
 	}

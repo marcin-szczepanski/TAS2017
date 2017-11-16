@@ -16,7 +16,10 @@ public class BookAuthorDAO {
    }
 
    public ArrayList<BookAuthor> listTOP6() {
-      String SQL = "Select * from TOP6";
+      String SQL = "SELECT DISTINCT TOP 6  b.*,AVG(o.ocena)\n" + 
+      		"FROM ALLBOOKS b JOIN Oceny o ON b.id = o.id_ks\n" + 
+      		"group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena\n" + 
+      		"ORDER BY AVG(o.ocena) DESC";
       ArrayList <BookAuthor> top6 = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
       return top6;
    }
