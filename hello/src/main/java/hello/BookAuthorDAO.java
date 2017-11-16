@@ -22,7 +22,7 @@ public class BookAuthorDAO {
    }
    
    public ArrayList<BookAuthor> listByCategory(String category) {
-	      String SQL = "Select * from EASYSEARCH WHERE Kategoria ='"+ category+"'";
+	      String SQL = "Select DISTINCT * from ALLBOOKS WHERE Kategoria ='"+ category+"'";
 	      ArrayList <BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
 	      return list;
 	   }

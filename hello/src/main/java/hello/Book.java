@@ -12,9 +12,11 @@ public class Book {
 	protected String strony;
 	protected String isbn;
 	protected String cena;
+	protected String opis;
+	protected String ilosc;
 	
 	public Book(String id, String nazwa, String autor, String wydawnictwo, String gatunek, String kategoria,
-			String rok_wyd, String ocena, String strony, String isbn, String cena) {
+			String rok_wyd, String ocena, String strony, String isbn, String cena, String opis, String ilosc) {
 		this.id = id;
 		this.nazwa = nazwa;
 		this.autor = autor;
@@ -26,6 +28,8 @@ public class Book {
 		this.strony = strony;
 		this.isbn = isbn;
 		this.cena = cena;
+		this.opis = opis;
+		this.ilosc = ilosc;
 	}
 	
 	

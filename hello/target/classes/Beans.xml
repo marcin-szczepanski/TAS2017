@@ -8,7 +8,9 @@
    <bean id="dataSource" 
       class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
       <property name = "driverClassName" value = "com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-      <property name = "url" value = "jdbc:sqlserver://localhost:1433;databaseName=Ksiegarnia;integratedSecurity=true;"/>
+      <property name = "url" value = "jdbc:sqlserver://localhost:1433;databaseName=ks;integratedSecurity=false;"/>
+      <property name="username" value="name"/>
+      <property name="password" value="WxQ54!8XMa"/>
    </bean>
 
    <bean id = "AuthorDAO" 
@@ -21,8 +23,13 @@
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
    
-    <bean id = "TOP6DAO" 
-      class = "hello.TOP6DAO">
+    <bean id = "BookAuthorDAO" 
+      class = "hello.BookAuthorDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "Book" 
+      class = "hello.BookDAO">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
       
