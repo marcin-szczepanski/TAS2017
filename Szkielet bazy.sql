@@ -1,4 +1,4 @@
--- PROSZÊ O UTWORZENIE WSZYSTKICH TABEL I PROCEDUR, DOPIERO WTEDY MO¯NA WYPE£NIAC TABELE DANYMI( NAJPIERW DANE Z INSERTÓW{te tutaj} POTEM DANE Z PROCEDUR )
+-- PROSZÃŠ O UTWORZENIE WSZYSTKICH TABEL I PROCEDUR, DOPIERO WTEDY MOÂ¯NA WYPEÂ£NIAC TABELE DANYMI( NAJPIERW DANE Z INSERTÃ“W{te tutaj} POTEM DANE Z PROCEDUR )
 
 CREATE DATABASE ks
 drop database ks
@@ -101,22 +101,22 @@ insert into Gatunek values(2,'thriller')
 insert into Gatunek values(3,'sensacja')
 
 insert into Kategoria values(1,'Lektury');
-insert into Kategoria values(2,'Literatura piêkna');
+insert into Kategoria values(2,'Literatura piÃªkna');
 insert into Kategoria values(3,'Literatura faktu');
-insert into Kategoria values(4,'Literatura dzieciêca');
-insert into Kategoria values(5,'Podrêczniki');
-insert into Kategoria values(6,'Encyklopedie i s³owniki');
+insert into Kategoria values(4,'Literatura dzieciÃªca');
+insert into Kategoria values(5,'PodrÃªczniki');
+insert into Kategoria values(6,'Encyklopedie i sÂ³owniki');
 insert into Kategoria values(7,'Komiksy');
 insert into Kategoria values(8,'Poezja');
 insert into Kategoria values(9,'Poradniki');
 insert into Kategoria values(10,'Sport i turystyka');
-insert into Kategoria values(11,'Pozosta³e');
+insert into Kategoria values(11,'PozostaÂ³e');
 
 insert into Autor values(1,'Harlan','Coben')
-insert into Autor values(2,'Remigiusz','Mróz')
+insert into Autor values(2,'Remigiusz','MrÃ³z')
 
-insert into Ksiazka values(1,'Schronienie',1,1,1,3,'2017-09-27',564,9788379767120,17.65,'Przyk³adowy opis',100);
-insert into Ksiazka values(2,'Oskar¿enie',2,2,3,3,'2017-09-27',368,9788365781703,20.80,'Przyk³adowy opis',100);
+insert into Ksiazka values(1,'Schronienie',1,1,1,3,'2017-09-27',564,9788379767120,17.65,'PrzykÂ³adowy opis',100);
+insert into Ksiazka values(2,'OskarÂ¿enie',2,2,3,3,'2017-09-27',368,9788365781703,20.80,'PrzykÂ³adowy opis',100);
 
 insert into Newsletter values(1,'email@admin.pl')
 insert into Newsletter values(2,'email2@admin.pl')
@@ -149,7 +149,7 @@ SELECT * FROM Oceny
 SELECT * FROM Koszyk
 
 
---TU TWORZY SIÊ WIDOK WSZYSTKICH KSI¥¯EK
+--TU TWORZY SIÃŠ WIDOK WSZYSTKICH KSIÂ¥Â¯EK
 
 CREATE OR ALTER VIEW ALLBOOKS(Id,Nazwa,Imie_autora,Nazwisko_autora,Kategoria,Cena)
 as
@@ -157,5 +157,5 @@ SELECT k.id,k.Nazwa,a.Imie,a.Nazwisko,t.Kat,k.Cena
 FROM Ksiazka k
 	JOIN Kategoria t ON k.Kategoria = t.id
 	JOIN Autor a ON k.Autor = a.id
-	JOIN Recenzje r ON k.id = r.id_ks
+	LEFT JOIN Recenzje r ON k.id = r.id_ks
 
