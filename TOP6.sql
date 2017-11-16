@@ -1,9 +1,6 @@
 
---ABY ZNALEZC TOP6 KSI•ØEK TRZEBA WYPISAC TOP 6 OCEN A POTEM W P TLI DO KAØDEJ OCENY ODNALEè∆ KSI•ØK  Z WIDOKU ALLBOOKS
 
-SELECT TOP 6 AVG(ocena) as Ocenaårednia,id_ks
-FROM Oceny
-GROUP BY id_ks
-ORDER BY id_ks DESC
-
-SELECT * FROM ALLBOOKS WHERE id='szukane id'
+SELECT DISTINCT TOP 6  b.*,AVG(o.ocena)
+FROM ALLBOOKS b JOIN Oceny o ON b.id = o.id_ks
+group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena
+ORDER BY AVG(o.ocena) DESC
