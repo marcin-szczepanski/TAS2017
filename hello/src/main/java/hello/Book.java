@@ -15,7 +15,7 @@ public class Book {
 	protected String cena;
 	protected String opis;
 	protected String ocena;
-	protected ArrayList<String> recenzje;
+	protected ArrayList<SimpleReview> recenzje;
 	
 	public Book(String id, String nazwa, String imie, String nazwisko, String wydawnictwo, String gatunek,
 			String kategoria, String rok_wyd, String strony, String isbn, String cena, String ocena) {
@@ -130,7 +130,7 @@ public class Book {
 		this.ocena = ocena;
 	}
 
-	public ArrayList<String> getRecenzje() {
+	public ArrayList<SimpleReview> getRecenzje() {
 		return recenzje;
 	}
 	
@@ -142,7 +142,7 @@ public class Book {
 		this.opis = opis;
 	}
 
-	public void setRecenzje(ArrayList<String> recenzje) {
+	public void setRecenzje(ArrayList<SimpleReview> recenzje) {
 		this.recenzje = recenzje;
 	}
 	
