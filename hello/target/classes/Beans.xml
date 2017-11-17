@@ -28,9 +28,13 @@
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
    
-   <bean id = "Book" 
+   <bean id = "BookDAO" 
       class = "hello.BookDAO">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
       
+   <bean id = "ReviewDAO" 
+      class = "hello.ReviewDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
 </beans>
