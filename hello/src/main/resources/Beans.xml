@@ -37,4 +37,9 @@
       class = "hello.ReviewDAO">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
+   
+   <bean id = "GradeDAO" 
+      class = "hello.GradeDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
 </beans>
