@@ -1,5 +1,7 @@
 package hello;
 
+import java.text.DecimalFormat;
+
 public class BookAuthor {
 	protected String id;
 	protected String nazwa;
@@ -17,7 +19,11 @@ public class BookAuthor {
 		this.nazwisko = n;
 		//this.ocena = o;
 		this.kategoria = k;
-		this.cena = c;
+		//this.cena = c.substring(0,5);
+		String number = c;
+		double amount = Double.parseDouble(number);
+		DecimalFormat formatter = new DecimalFormat("#,###,###,###.00");
+		this.cena = formatter.format(amount);
 	}
 	
 	public String getId() {
