@@ -17,7 +17,7 @@ export class AdvancedSearchComponent implements OnInit {
   answer = {};
   books = null;
 
-  constructor(private searchService:SearchService) { }
+  constructor(private searchService:SearchService) {}
 
   ngOnInit() {
   }

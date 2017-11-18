@@ -15,7 +15,7 @@ export class InfoService {
     'Access-Control-Allow-Credentials': true
 });*/
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   getService(url: string): Promise<any> {
     return this.http
@@ -30,10 +30,10 @@ export class InfoService {
   }
 
   getBooks(addr) {
-this.book = {};
+    this.book = {};
     const url = this.mainUrl + addr;
     const data = this.getService(url)
-    .then(answer => this.addBooks(answer));
+      .then(answer => this.addBooks(answer));
     return this.book;
   }
 
@@ -56,7 +56,7 @@ this.book = {};
 
 sendData(url, body) {
   this.http.post(this.mainUrl + url, JSON.stringify(body)/*, {headers: this.headers}*/)
-  .subscribe();
+    .subscribe();
 }
 
 }

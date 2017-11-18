@@ -17,12 +17,11 @@ export class AboutBookComponent implements OnChanges {
   logged = false;
   url = 'book?id=';
   book = {};
-  user = 1;
+  user = 1; // anonymous
   urlReview = 'review/';
   urlGrade = 'grade/';
 
-  constructor(private infoService: InfoService) {
-  }
+  constructor(private infoService: InfoService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     const idChanges = changes['ident'];
@@ -47,9 +46,9 @@ export class AboutBookComponent implements OnChanges {
       alert('Nie możesz dodać pustej recenzji!');
     } else {
     const toSend = {
-    ks: this.ident,
-    kto: this.user,
-    text: this.review
+      ks: this.ident,
+      kto: this.user,
+      text: this.review
     };
     this.infoService.sendData(this.urlReview, toSend);
     this.getBooks();
@@ -65,9 +64,9 @@ export class AboutBookComponent implements OnChanges {
 
   saveGrade() {
     const toSend = {
-    ks: this.ident,
-    kto: this.user,
-    text: this.grade
+      ks: this.ident,
+      kto: this.user,
+      ocena: this.grade
     };
     console.log(toSend);
     this.infoService.sendData(this.urlGrade, toSend);
