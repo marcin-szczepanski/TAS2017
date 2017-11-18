@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthorController {
 	
-	@CrossOrigin
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/author")
 	public ArrayList<Author> author() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");

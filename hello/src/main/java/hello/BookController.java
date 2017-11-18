@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BookController {
-	@CrossOrigin
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/book")
 	public Book getBook(@RequestParam(value = "id")String id) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");

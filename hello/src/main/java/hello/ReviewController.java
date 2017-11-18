@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @RestController
 public class ReviewController {
 	
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	public void  review(@RequestParam(value = "ks")String ks,@RequestParam(value = "kto")String kto,@RequestParam(value = "text")String text) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
