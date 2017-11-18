@@ -13,7 +13,7 @@
         <h6>{{ book.author }}</h6>
         <h6>Wydawnictwo: {{ book.publishing }}</h6>
         <h6>Rok wydania: {{ book.year }}</h6>
-        <h6>Cena: {{ book.price }}</h6>
+        <h6>Cena: {{ book.price }} zł</h6>
         <h6>Ocena: {{ book.grade }}</h6>
         <h6>Twoja ocena:</h6>
         <div class="row ml-1">
@@ -59,7 +59,9 @@
       <h5 class="text-gray">Recenzje:</h5>
       <div class="reviews" *ngFor="let review of book.reviews">
         <hr />
-        {{ review }}
+Dodał: <b>{{ review.uzytkownik }}</b>
+<br />
+        {{ review.tekst }}
         <br />
       </div>
       <form action="/" method="post" class="mt-4">

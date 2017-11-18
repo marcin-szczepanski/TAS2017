@@ -58,10 +58,10 @@ export class AppComponent {
   saveEmail() {
     if (this.validateEmail(this.email)) {
       console.log(this.email);
-      alert("Dziękujemy za zapisanie się do newslettera!");
+      alert('Dziękujemy za zapisanie się do newslettera!');
     }
     else {
-      alert("Podaj poprawny adres email!");
+      alert('Podaj poprawny adres email!');
     }
   }
 

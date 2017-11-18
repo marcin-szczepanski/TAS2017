@@ -12,6 +12,7 @@ import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { NewestComponent } from './newest/newest.component';
 
 import { SearchService } from './search.service';
+import { InfoService } from './info.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SearchService } from './search.service';
     HttpModule
   ],
   providers: [
-    SearchService
+    SearchService,
+    InfoService
   ],
   bootstrap: [AppComponent]
 })
