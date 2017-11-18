@@ -4,7 +4,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class SearchService {
 
-  books = [
+ /* books = [
     {
       title: "title",
       author: "author",
@@ -55,9 +55,10 @@ export class SearchService {
       author: "author",
       price: "24.99 zł"
     },
-  ];
+  ];*/
 
   answer = {};
+  books = [];
 
   constructor(private http: Http) { }
 
@@ -69,24 +70,29 @@ export class SearchService {
   }
 
   private extractData(res: Response) {
-    this.answer = res.json();;
+    this.answer = res.json();
     return res.json() || {};
   }
 
-  search(query="") {
-    let url = "http://localhost:8080/author";
-    let data = this.getService(url)
-    .then(answer => console.log(this.answer));
-    return this.answer;
-  }
-
-  works() {
-    return "works!";
-  }
-
-  getData(c = "", y = "", pa = "", a = "", t = "", pu = "") {
-    console.log(c+y+pa+a+t+pu);
+  getBooks(addr) {
+    const url = 'http://localhost:8080/' + addr;
+    const data = this.getService(url)
+    .then(answer => this.addBooks(answer));
     return this.books;
+  }
+
+  addBooks(answer) {
+    if (this.books.length !== 0) {
+      this.books = [];
+    }
+    for (let i = 0; i < answer.length; i++) {
+      const book = {};
+      book['id'] = answer[i].id; 
+      book['title'] = answer[i].nazwa;
+      book['author'] = answer[i].imie + ' ' + answer[i].nazwisko;
+      book['price'] = answer[i].cena;
+      this.books.push(book);
+    }
   }
 
 }

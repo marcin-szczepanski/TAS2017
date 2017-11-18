@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +7,25 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 })
 export class AppComponent {
   books = {};
-  category = "";
-  query = "";
-  email = "";
+  category = '';
+  query = '';
+  email = '';
   mode = 0;
-  categorySearch = "";
+  idBook = -1;
+  categorySearch = '';
   answer = {};
 
-  constructor(private http: Http) {
-  
+  constructor() {}
+
+  setMode(data) {
+    this.mode = data;
   }
 
-  getService(url: string): Promise<any> {
+  setIdBook(data) {
+    this.idBook = data;
+  }
+
+  /*getService(url: string): Promise<any> {
     return this.http
         .get(url)
         .toPromise()
@@ -42,10 +48,10 @@ export class AppComponent {
     this.books = this.search(this.category, this.query);
     console.log(this.books);
     console.log(this.category + " " + this.query);
-  }
+  }*/
 
   validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
 
@@ -58,26 +64,5 @@ export class AppComponent {
       alert("Podaj poprawny adres email!");
     }
   }
-
-
-  /*search(callback) {
-    let url = "http://localhost:8080/author";
-    this.http.get(url).subscribe((response: Response)=>{
-      let data = response.json();
-      let books = data;
-      this.books = books;
-      callback(books);
-    })
-  }
-
-  getBooks(callback = (books) => {this.books = books;}) {
-    this.search(callback);
-    return this.books;
-  }
-
-  showBooks() {
-    console.log(this.getBooks());
-  }
-  */
 
 }

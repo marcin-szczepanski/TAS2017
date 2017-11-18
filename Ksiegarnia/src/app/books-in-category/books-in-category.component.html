@@ -4,7 +4,7 @@
     <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded">
     <div>
       <h5 class="text-gray">
-        <a class="noUnderline text-gray link">
+        <a class="noUnderline text-gray link" id="{{ book.id }}" (click)="bookId=$event.target.id; changeMode(); changeBookId()">
           {{ book.title }}
         </a>
       </h5>
