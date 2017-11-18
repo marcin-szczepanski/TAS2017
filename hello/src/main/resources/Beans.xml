@@ -42,4 +42,9 @@
       class = "hello.GradeDAO">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
+   
+   <bean id = "SessionDAO" 
+      class = "hello.SessionDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
 </beans>
