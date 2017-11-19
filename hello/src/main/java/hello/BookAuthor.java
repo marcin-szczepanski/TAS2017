@@ -7,23 +7,23 @@ public class BookAuthor {
 	protected String nazwa;
 	protected String imie;
 	protected String nazwisko;
-	protected String ocena;
 	protected String kategoria;
 	protected String cena;
+	protected String ocena;
 
 	
-	public BookAuthor(String id, String naz, String i, String n, String k, String c) {
+	public BookAuthor(String id, String naz, String i, String n, String k, String c, String o) {
 		this.id=id;
 		this.nazwa = naz;
 		this.imie = i;
 		this.nazwisko = n;
-		//this.ocena = o;
 		this.kategoria = k;
 		//this.cena = c.substring(0,5);
 		String number = c;
 		double amount = Double.parseDouble(number);
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###.00");
 		this.cena = formatter.format(amount);
+		this.ocena = o;
 	}
 	
 	public String getId() {
@@ -63,6 +63,14 @@ public class BookAuthor {
 	}
 	public void setCena(String cena) {
 		this.cena = cena;
+	}
+
+	public String getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(String ocena) {
+		this.ocena = ocena;
 	}
 	
 	

@@ -25,7 +25,10 @@ public class BookAuthorDAO {
    }
    
    public ArrayList<BookAuthor> listByCategory(String category) {
-	      String SQL = "Select DISTINCT * from ALLBOOKS WHERE Kategoria ='"+ category+"'";
+	      String SQL = String.format("SELECT DISTINCT b.*,AVG(o.ocena)as Ocena\n" + 
+	      		"FROM ALLBOOKS b LEFT JOIN Oceny o ON b.id = o.id_ks WHERE b.Kategoria='%s'\n" + 
+	      		"group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena \n" + 
+	      		"ORDER BY b.Id ",category);
 	      ArrayList <BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
 	      return list;
 	   }
