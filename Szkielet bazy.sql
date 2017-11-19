@@ -52,7 +52,7 @@ Kat varchar(50));
 
 create table Ksiazka(
 id int not null primary key,
-Nazwa varchar(20),
+Nazwa varchar(100),
 Autor int references Autor(id),
 Wydawnictwo int references Wydawnictwo(id),
 Gatunek int references Gatunek(id),
