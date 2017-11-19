@@ -56,6 +56,7 @@ export class AboutBookComponent implements OnChanges {
       } else {
         alert('Coś poszło nie tak. Spróbuj ponownie później.');
       }
+      this.getBooks();
     }
   }
 
@@ -77,7 +78,6 @@ export class AboutBookComponent implements OnChanges {
       alert('Coś poszło nie tak. Spróbuj ponownie później.');
     }
     this.getBooks();
-
   }
 
   addToBasket() {
