@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @RestController
 public class SessionController {
 	
-	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/session", method = RequestMethod.POST)
 	public String  review(@RequestParam(value = "login")String login,@RequestParam(value = "password")String password) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
