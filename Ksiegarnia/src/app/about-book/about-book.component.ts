@@ -10,7 +10,7 @@ export class AboutBookComponent implements OnChanges {
 
   @Input() ident;
 
-@Output() basketChanged = new EventEmitter();
+  @Output() basketChanged = new EventEmitter();
 
   review = '';
   grade = 1;
@@ -76,6 +76,7 @@ export class AboutBookComponent implements OnChanges {
     } else {
       alert('Coś poszło nie tak. Spróbuj ponownie później.');
     }
+    this.getBooks();
 
   }
 
@@ -88,7 +89,6 @@ export class AboutBookComponent implements OnChanges {
     const howMuchUpdate = this.howMuch - this.howMuchOld;
     if (this.user === 1) {
       const ob = {id: this.ident, howMany: this.howMuch, price: (this.howMuch * this.book['price']).toFixed(2)};
-      console.log(ob)
       localStorage.setItem('AddToBasket' + `${this.ident}`, JSON.stringify(ob));
       this.basketChanged.emit(howMuchUpdate * this.book['price']);
     }
