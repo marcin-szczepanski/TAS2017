@@ -16,7 +16,7 @@ export class AboutBookComponent implements OnChanges {
   grade = 1;
   graded = false;
   howMuch = 1;
-howMuchOld = 0;
+  howMuchOld = 0;
   logged = false;
   url = 'book?id=';
   book = {};
@@ -80,12 +80,16 @@ howMuchOld = 0;
   }
 
   addToBasket() {
+    const x = localStorage.getItem('AddToBasket' + `${this.ident}`);
+    if (x !== null) {
+      const y = JSON.parse(x);
+      this.howMuchOld = y.howMany;
+    }
     const howMuchUpdate = this.howMuch - this.howMuchOld;
     if (this.user === 1) {
       const ob = {id: this.ident, howMany: this.howMuch, price: (this.howMuch * this.book['price']).toFixed(2)};
       console.log(ob)
       localStorage.setItem('AddToBasket' + `${this.ident}`, JSON.stringify(ob));
-      this.howMuchOld = this.howMuch;
       this.basketChanged.emit(howMuchUpdate * this.book['price']);
     }
     // gdy anonymous - localStorage
