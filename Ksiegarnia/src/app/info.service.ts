@@ -8,13 +8,6 @@ export class InfoService {
   book = {};
   mainUrl = 'http://localhost:8080/';
 
-/*private headers = new Headers({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-    'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-    'Access-Control-Allow-Credentials': true
-});*/
-
   constructor(private http: Http) {}
 
   getService(url: string): Promise<any> {
@@ -46,6 +39,9 @@ export class InfoService {
     this.book['genre'] = answer.gatunek;
     this.book['category'] = answer.kategoria;
     this.book['year'] = answer.rok_wyd.slice(0, 4);
+    if (answer.ocena === null) {
+      answer.ocena = 0;
+    }
     this.book['grade'] = answer.ocena;
     this.book['pages'] = answer.strony;
     this.book['cover'] = 'miękka';
@@ -55,8 +51,8 @@ export class InfoService {
   }
 
 sendData(url, body) {
-  this.http.post(this.mainUrl + url, JSON.stringify(body)/*, {headers: this.headers}*/)
-    .subscribe();
+  this.http.post(this.mainUrl + url + body, '')
+    .subscribe(data => console.log('ok'));
 }
 
 }

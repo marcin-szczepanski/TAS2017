@@ -6,7 +6,7 @@
       </div>
       <div class="basket col-sm-3 col-6">
         <h3><a class="noUnderline text-gray link">Twój koszyk</a></h3>
-        <a class="noUnderline text-blue  link">99,99 zł</a>
+        <a class="noUnderline text-blue  link">{{ basket }} zł</a>
       </div>
       <div class="your-profile col-sm-3 col-6">
         <h3><a class="noUnderline text-gray link">Twoje konto</a></h3>
@@ -90,7 +90,7 @@
       <app-advanced-search *ngSwitchCase="2"></app-advanced-search>
       <app-books-in-search *ngSwitchCase="3"></app-books-in-search>
       <app-books-in-category category="{{ categorySearch }}" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchCase="4"></app-books-in-category>
-      <app-about-book *ngSwitchCase="5"  ident="{{ idBook }}" (load)="getBooks()"></app-about-book>
+      <app-about-book *ngSwitchCase="5"  ident="{{ idBook }}" (load)="getBooks()" (basketChanged)="setBasket($event)"></app-about-book>
       <app-newest (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchDefault></app-newest>
     </section>
     <footer class="paddings margins background-blue mt-4 bradius">

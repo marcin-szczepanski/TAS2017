@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { InfoService } from '../info.service';
 
 @Component({
@@ -10,10 +10,13 @@ export class AboutBookComponent implements OnChanges {
 
   @Input() ident;
 
+@Output() basketChanged = new EventEmitter();
+
   review = '';
   grade = 1;
   graded = false;
   howMuch = 1;
+howMuchOld = 0;
   logged = false;
   url = 'book?id=';
   book = {};
@@ -45,15 +48,10 @@ export class AboutBookComponent implements OnChanges {
     if (this.review.trim() === '') {
       alert('Nie możesz dodać pustej recenzji!');
     } else {
-    const toSend = {
-      ks: this.ident,
-      kto: this.user,
-      text: this.review
-    };
-    this.infoService.sendData(this.urlReview, toSend);
-    this.getBooks();
+      const toSend = '?ks=' + this.ident + '&kto=' + this.user + '&text=' + this.review;
+      this.infoService.sendData(this.urlReview, toSend);
+      this.getBooks();
       alert('Dziękujemy za dodanie recenzji!');
-      console.log(toSend);
     }
   }
 
@@ -63,23 +61,21 @@ export class AboutBookComponent implements OnChanges {
   }
 
   saveGrade() {
-    const toSend = {
-      ks: this.ident,
-      kto: this.user,
-      ocena: this.grade
-    };
-    console.log(toSend);
+    const toSend = '?ks=' + this.ident + '&kto=' + this.user + '&ocena=' + this.grade;
     this.infoService.sendData(this.urlGrade, toSend);
     this.getBooks();
     alert('Dziękujemy za ocenę!');
     localStorage.setItem('WatchedBook' + `${this.ident}`, JSON.stringify({ id: this.ident, grade: this.grade }));
     this.graded = true;
-    console.log(this.grade);
   }
 
   addToBasket() {
-    console.log(this.ident);
-    console.log(this.howMuch);
+    let howMuchUpdate = this.howMuch - this.howMuchOld;;
+    if (this.user === 1) {
+      localStorage.setItem('AddToBasket' + `${this.ident}`, JSON.stringify({ id: this.ident, howMany: this.howMuch, price: (this.howMuch * this.book['price']).toFixed(2)}));
+      this.howMuchOld = this.howMuch;
+      this.basketChanged.emit((howMuchUpdate * this.book['price']).toFixed(2));
+    }
     // gdy anonymous - localStorage
     // gdy logged - wyślij na serwer i usuń z localStorage
   }
