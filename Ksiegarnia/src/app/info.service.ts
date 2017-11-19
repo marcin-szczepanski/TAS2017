@@ -7,6 +7,7 @@ export class InfoService {
   answer = {};
   book = {};
   mainUrl = 'http://localhost:8080/';
+  res = true;
 
   constructor(private http: Http) {}
 
@@ -52,7 +53,16 @@ export class InfoService {
 
 sendData(url, body) {
   this.http.post(this.mainUrl + url + body, '')
-    .subscribe(data => console.log('ok'));
+    .subscribe(data => this.sendResponse(data));
+  return this.res;
+}
+
+sendResponse(data) {
+  if (data.statusText === 'OK') {
+    this.res = true;
+  } else {
+    this.res = false;
+  }
 }
 
 }

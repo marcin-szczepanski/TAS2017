@@ -49,9 +49,13 @@ howMuchOld = 0;
       alert('Nie możesz dodać pustej recenzji!');
     } else {
       const toSend = '?ks=' + this.ident + '&kto=' + this.user + '&text=' + this.review;
-      this.infoService.sendData(this.urlReview, toSend);
-      this.getBooks();
-      alert('Dziękujemy za dodanie recenzji!');
+      const res = this.infoService.sendData(this.urlReview, toSend);
+      if (res === true) {
+        this.getBooks();
+        alert('Dziękujemy za dodanie recenzji!');
+      } else {
+        alert('Coś poszło nie tak. Spróbuj ponownie później.');
+      }
     }
   }
 
@@ -62,22 +66,29 @@ howMuchOld = 0;
 
   saveGrade() {
     const toSend = '?ks=' + this.ident + '&kto=' + this.user + '&ocena=' + this.grade;
-    this.infoService.sendData(this.urlGrade, toSend);
-    this.getBooks();
-    alert('Dziękujemy za ocenę!');
-    localStorage.setItem('WatchedBook' + `${this.ident}`, JSON.stringify({ id: this.ident, grade: this.grade }));
-    this.graded = true;
+    const res = this.infoService.sendData(this.urlGrade, toSend);
+    if (res === true) {
+      this.getBooks();
+      alert('Dziękujemy za ocenę!');
+      const ob = {id: this.ident, grade: this.grade};
+      localStorage.setItem('WatchedBook' + `${this.ident}`, JSON.stringify(ob));
+      this.graded = true;
+    } else {
+      alert('Coś poszło nie tak. Spróbuj ponownie później.');
+    }
+
   }
 
   addToBasket() {
-    let howMuchUpdate = this.howMuch - this.howMuchOld;;
+    const howMuchUpdate = this.howMuch - this.howMuchOld;;
     if (this.user === 1) {
-      localStorage.setItem('AddToBasket' + `${this.ident}`, JSON.stringify({ id: this.ident, howMany: this.howMuch, price: (this.howMuch * this.book['price']).toFixed(2)}));
+      const ob = {id: this.ident, howMany: this.howMuch, price: (this.howMuch * this.book['price']).toFixed(2)};
+      localStorage.setItem('AddToBasket' + `${this.ident}`, JSON.stringify(ob));
       this.howMuchOld = this.howMuch;
       this.basketChanged.emit((howMuchUpdate * this.book['price']).toFixed(2));
     }
     // gdy anonymous - localStorage
-    // gdy logged - wyślij na serwer i usuń z localStorage
+    // gdy zalogowany - wyślij na serwer i usuń z localStorage
   }
 
 }
