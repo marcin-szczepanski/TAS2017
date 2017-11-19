@@ -8,16 +8,16 @@ import { SearchService } from '../search.service'
 })
 export class AdvancedSearchComponent implements OnInit {
 
-  category = "";
-  year = "";
-  pages = "";
-  author = "";
-  title = "";
-  publishing = "";
+  category = '';
+  year = '';
+  pages = '';
+  author = '';
+  title = '';
+  publishing = '';
   answer = {};
   books = null;
 
-  constructor(private searchService:SearchService) { }
+  constructor(private searchService:SearchService) {}
 
   ngOnInit() {
   }
@@ -35,7 +35,7 @@ export class AdvancedSearchComponent implements OnInit {
   listBooks() {
     this.books = this.search(this.category, this.year, this.pages, this.author, this.title, this.publishing);
     console.log(this.books);
-    console.log(this.category + " " + this.year + " " +  this.pages + " " +  this.author + " " +  this.title + " " + this.publishing);
+    console.log(this.category + ' ' + this.year + ' ' +  this.pages + ' ' +  this.author + ' ' +  this.title + ' ' + this.publishing);
   }
 
 }

@@ -4,63 +4,12 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class SearchService {
 
- /* books = [
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-    {
-      title: "title",
-      author: "author",
-      price: "24.99 zł"
-    },
-  ];*/
-
   answer = {};
   books = [];
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    this.books = [];
+  }
 
   getService(url: string): Promise<any> {
     return this.http
@@ -76,8 +25,10 @@ export class SearchService {
 
   getBooks(addr) {
     const url = 'http://localhost:8080/' + addr;
+    this.books = [];
+    this.answer = {};
     const data = this.getService(url)
-    .then(answer => this.addBooks(answer));
+      .then(answer => this.addBooks(answer));
     return this.books;
   }
 
@@ -87,10 +38,11 @@ export class SearchService {
     }
     for (let i = 0; i < answer.length; i++) {
       const book = {};
-      book['id'] = answer[i].id; 
+      book['id'] = answer[i].id;
       book['title'] = answer[i].nazwa;
       book['author'] = answer[i].imie + ' ' + answer[i].nazwisko;
       book['price'] = answer[i].cena;
+      book['grade'] = answer[i].ocena;
       this.books.push(book);
     }
   }

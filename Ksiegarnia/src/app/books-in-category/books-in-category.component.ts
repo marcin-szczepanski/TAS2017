@@ -23,6 +23,7 @@ export class BooksInCategoryComponent implements OnChanges  {
   url = 'books?category=';
 
   constructor(private searchService: SearchService) {
+    this.books = [];
     this.getBooks(this.category);
   }
 

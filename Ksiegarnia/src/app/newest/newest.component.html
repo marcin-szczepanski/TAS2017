@@ -1,5 +1,5 @@
  <div>
-  <h4 class="text-gray mb-4">Najnowsze pozycje</h4>
+  <h4 class="text-gray mb-4">Najwyżej oceniane</h4>
   <div class="row">
     <div *ngFor="let book of books" class="figure d-flex flex-column justify-content-around col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6">
       <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded">
@@ -10,6 +10,7 @@
           </a>
         </h5>
         <h6>{{ book.author }}</h6>
+        <h6>{{ book.grade }}/10</h6>
         <h6>{{ book.price }} zł</h6>
       </div>
     </div>

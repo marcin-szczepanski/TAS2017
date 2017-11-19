@@ -14,8 +14,16 @@ export class AppComponent {
   idBook = -1;
   categorySearch = '';
   answer = {};
+  basket = 0;
 
-  constructor() {}
+  constructor() {
+    const oldbasket = localStorage.getItem('Basket');
+    if (oldbasket !== null) {
+      const oldBasketData = JSON.parse(oldbasket);
+      this.basket = oldBasketData.price;
+    }
+    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
+  }
 
   setMode(data) {
     this.mode = data;
@@ -25,30 +33,11 @@ export class AppComponent {
     this.idBook = data;
   }
 
-  /*getService(url: string): Promise<any> {
-    return this.http
-        .get(url)
-        .toPromise()
-        .then(res => this.extractData(res));
+  setBasket(data) {
+    this.basket += parseFloat(data);
+    const oldBasketData = localStorage.getItem('Basket');
+    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
   }
-
-  private extractData(res: Response) {
-    this.answer = res.json();;
-    return res.json() || {};
-  }
-
-  search(category, query) {
-    let url = "http://localhost:8080/author";
-    let data = this.getService(url)
-    .then(answer => console.log(this.answer));
-    return this.answer;
-  }
-
-  getBooks() {
-    this.books = this.search(this.category, this.query);
-    console.log(this.books);
-    console.log(this.category + " " + this.query);
-  }*/
 
   validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -58,10 +47,9 @@ export class AppComponent {
   saveEmail() {
     if (this.validateEmail(this.email)) {
       console.log(this.email);
-      alert("Dziękujemy za zapisanie się do newslettera!");
-    }
-    else {
-      alert("Podaj poprawny adres email!");
+      alert('Dziękujemy za zapisanie się do newslettera!');
+    } else {
+      alert('Podaj poprawny adres email!');
     }
   }
 

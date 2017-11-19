@@ -7,11 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BooksInSearchComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
   books = [
     {
       title: "title",
@@ -64,5 +59,10 @@ export class BooksInSearchComponent implements OnInit {
       price: "24.99 zł"
     },
   ];
+  
+  constructor() { }
+
+  ngOnInit() {
+  }
 
 }
