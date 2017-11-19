@@ -18,6 +18,7 @@ import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.compo
 
 import { SearchService } from './search.service';
 import { InfoService } from './info.service';
+import { SignInServiceService } from './sign-in/sign-in-service.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { InfoService } from './info.service';
   ],
   providers: [
     SearchService,
-    InfoService
+    InfoService,
+    SignInServiceService
   ],
   bootstrap: [AppComponent]
 })
