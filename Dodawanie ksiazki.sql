@@ -1,5 +1,5 @@
 CREATE OR ALTER PROCEDURE NewBook
-	@Nazwa varchar(20),
+	@Nazwa varchar(100),
 	@ImieA varchar(20),
 	@NazwiskoA varchar(20),
 	@Wydawnictwo varchar(20),
@@ -44,13 +44,18 @@ BEGIN
 
 	IF not exists (SELECT * FROM Ksiazka WHERE Nazwa = @nazwa)
 	INSERT INTO Ksiazka(id,Nazwa,Autor,Wydawnictwo,Gatunek,Kategoria,Rok_wyd,Strony,ISBN,Cena,Opis,Ilosc) VALUES (@id,@Nazwa,@idaut,@idwyd,@idgat,@idkat,@Rok_wyd,@Strony,@ISBN,@Cena,@Opis,@Ilosc)
-	else raiserror('JU� ISTNIEJE',11,1)
+	else raiserror('JU¯ ISTNIEJE',11,1)
 END
 
 
 
-exec NewBook 'Pogromca grzesznik�w','Grzegorz','Kalinowski','Muza','horror','Lektury','2017-11-06',560,'9788328707603',25.19,'Przyk�adowy opis',100
-exec NewBook 'Co� francuskiego','David','Gaboriaud','Pascal','kucharska','Poradniki','2017-11-06',256,'9788381031080',37.53,'Przyk�adowy opis',100
-exec NewBook 'Smakoterapia','Iwona','Zasuwa','Edipresse Ksi��ki','kucharska','Poradniki','2017-11-06',352,'9788381170604',26.57,'Przyk�adowy opis',100
-exec NewBook 'Na kraw�dzi wszystkiego','Jeff','Giles','IUVI','sensacja','Literatura pi�kna','2017-11-06',384,'9788379660384',21.99,'Przyk�adowy opis',100
-exec NewBook 'Swing Time','Zadie','Smith','Znak','romans','Literatura pi�kna','2017-11-06',480,'9788324050130',31.79,'Przyk�adowy opis',100
+exec NewBook 'Pogromca grzeszników','Grzegorz','Kalinowski','Muza','horror','Lektury','2017-11-06',560,'9788328707603',25.19,'Przyk³adowy opis',100
+exec NewBook 'Coœ francuskiego','David','Gaboriaud','Pascal','kucharska','Poradniki','2017-11-06',256,'9788381031080',37.53,'Przyk³adowy opis',100
+exec NewBook 'Smakoterapia','Iwona','Zasuwa','Edipresse Ksi¹¿ki','kucharska','Poradniki','2017-11-06',352,'9788381170604',26.57,'Przyk³adowy opis',100
+exec NewBook 'Na krawêdzi wszystkiego','Jeff','Giles','IUVI','sensacja','Literatura piêkna','2017-11-06',384,'9788379660384',21.99,'Przyk³adowy opis',100
+exec NewBook 'Swing Time','Zadie','Smith','Znak','romans','Literatura piêkna','2017-11-06',480,'9788324050130',31.79,'Przyk³adowy opis',100
+exec NewBook 'Fizyka dla szkol ponadgimnazjalnych','Maria','Fialkowska','ZamKor','podręcznik','Podreczniki','2010-11-06',375,'9788388830105',31.79,'Przykladowy opis',100
+exec NewBook 'Małe życie','Hanya','Yanagihara','WAB','powieść obyczajowa','Literatura piekna','2015-11-06',913,'9788328037342',39.99,'Przykladowy opis',100
+exec NewBook 'Dziewczyna z pociągu','Paula','Hawkings','Świat książki','thriller','Literatura piekna','2015-11-06',327,'9788380314511',35.99,'Przykladowy opis',100
+exec NewBook 'Matematyka 1. Poznać zrozumieć. Klasa I liceum i technikum','Alina','Przychoda','WSiP','podręcznik','Podręczniki','2009-11-06',368,'9788302105517',34.79,'Przykladowy opis',100
+exec NewBook 'HTML i CSS. Zaprojektuj i zbuduj witrynę WWW','Jon','Duckett','Helion','IT','Poradniki','2014-11-06',504,'9788324665204',40.99,'Przykladowy opis',100
