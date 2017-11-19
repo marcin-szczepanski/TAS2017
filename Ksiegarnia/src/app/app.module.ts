@@ -10,6 +10,11 @@ import { BooksInCategoryComponent } from './books-in-category/books-in-category.
 import { BooksInSearchComponent } from './books-in-search/books-in-search.component';
 import { StaticPagesComponent } from './static-pages/static-pages.component';
 import { NewestComponent } from './newest/newest.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { OrderCompComponent } from './order-comp/order-comp.component';
+import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
 
 import { SearchService } from './search.service';
 import { InfoService } from './info.service';
@@ -22,7 +27,12 @@ import { InfoService } from './info.service';
     BooksInCategoryComponent,
     BooksInSearchComponent,
     StaticPagesComponent,
-    NewestComponent
+    NewestComponent,
+    SignUpComponent,
+    SignInComponent,
+    MyProfileComponent,
+    OrderCompComponent,
+    ShoppingBasketComponent
   ],
   imports: [
     BrowserModule,

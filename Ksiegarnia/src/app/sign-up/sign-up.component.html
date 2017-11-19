@@ -1,0 +1,84 @@
+<h4 class="text-gray mb-4 centerMargin">Rejestracja</h4>
+
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 centerMargin">
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" placeholder="Login" class="form-control input-lg" pattern="[a-zA-Z0-9]*" name="login" ngModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="password" placeholder="Hasło" class="form-control input-lg" pattern=".{8,25}" name="haslo" ngModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="email" placeholder="E-mail" class="form-control input-lg" name="email" mgModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]*" placeholder="Imię" class="form-control input-lg" name="imie" ngModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+" placeholder="Nazwisko" class="form-control input-lg" name="nazwisko" ngModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" pattern="(\+[0-9]{2})*[0-9]{9}" placeholder="Telefon" class="form-control input-lg" name="telefon" ngModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" placeholder="Ulica" class="form-control input-lg" name="ulica" ngModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+" placeholder="Miasto" class="form-control input-lg" name="miasto" ngModel required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" pattern="[0-9]{2}\-[0-9]{3}"placeholder="Kod pocztowy" class="form-control input-lg" name="kodPocztowy" ngModel required/>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="row">
+          <button type="submit" class="btn btn-primary centerMargin">Zarejestruj się</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
