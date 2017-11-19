@@ -27,7 +27,12 @@ export class InfoService {
     this.book = {};
     const url = this.mainUrl + addr;
     const data = this.getService(url)
-      .then(answer => this.addBooks(answer));
+      .then(answer => {
+        if (answer.ocena === null) {
+          answer.ocena = 0;
+        }
+        this.addBooks(answer);
+      });
     return this.book;
   }
 
@@ -40,9 +45,6 @@ export class InfoService {
     this.book['genre'] = answer.gatunek;
     this.book['category'] = answer.kategoria;
     this.book['year'] = answer.rok_wyd.slice(0, 4);
-    if (answer.ocena === null) {
-      answer.ocena = 0;
-    }
     this.book['grade'] = answer.ocena;
     this.book['pages'] = answer.strony;
     this.book['cover'] = 'miękka';

@@ -80,12 +80,13 @@ howMuchOld = 0;
   }
 
   addToBasket() {
-    const howMuchUpdate = this.howMuch - this.howMuchOld;;
+    const howMuchUpdate = this.howMuch - this.howMuchOld;
     if (this.user === 1) {
       const ob = {id: this.ident, howMany: this.howMuch, price: (this.howMuch * this.book['price']).toFixed(2)};
+      console.log(ob)
       localStorage.setItem('AddToBasket' + `${this.ident}`, JSON.stringify(ob));
       this.howMuchOld = this.howMuch;
-      this.basketChanged.emit((howMuchUpdate * this.book['price']).toFixed(2));
+      this.basketChanged.emit(howMuchUpdate * this.book['price']);
     }
     // gdy anonymous - localStorage
     // gdy zalogowany - wyślij na serwer i usuń z localStorage
