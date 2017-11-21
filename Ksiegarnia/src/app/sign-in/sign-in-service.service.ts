@@ -13,12 +13,14 @@ export class SignInServiceService {
 
   signIn(url, body) {
     console.log(JSON.stringify(body));
-    this.http.post('http://localhost:8080/session/?login=admin&password=admin', body)
+    console.log(body);
+    this.http.post('http://localhost:8080/session/', body)
     .subscribe(data => this.sendResponse(data));
     return this.res;
   }
 
   sendResponse(data) {
     console.log(data);
+    console.log(data._body);
   }
 }
