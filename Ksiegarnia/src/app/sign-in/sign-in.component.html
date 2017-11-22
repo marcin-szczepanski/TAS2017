@@ -1,5 +1,5 @@
 <h4 class="text-gray mb-4">Logowanie</h4>
-
+<div *ngIf="!loginStatus" class="alert alert-danger">Logowanie nieudane! Nieprawidłowy login lub hasło.</div>
 <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" method="post">
   <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 centerMargin">
