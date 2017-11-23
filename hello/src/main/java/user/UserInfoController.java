@@ -11,24 +11,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import bookauthor.BookAuthor;
-import bookauthor.BookAuthorDAO;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-
 @RestController
 public class UserInfoController {
-	
-
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping("/profile")
 	public ArrayList<UserInfo> showUserInfo(@RequestParam(value = "id")String id) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
-        UserInfoDAO t = (UserInfoDAO)context.getBean("UserInfoDAO");
+        UserInfoDAO u = (UserInfoDAO)context.getBean("UserInfoDAO");
         
-        ArrayList<UserInfo> list = t.showUserInfo(id);
-		return list;
+        ArrayList<UserInfo> useri = u.showUserInfo(id);
+		return useri;
 	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String  createUser(@RequestBody UserInfo user) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	        UserInfoDAO r = (UserInfoDAO)context.getBean("UserInfoDAO");
+	        return r.createUser(user.login, user.haslo, user.email, user.imie, user.nazwisko, user.telefon, user.adres, user.miasto, user.kod);
+		}
+	
 }

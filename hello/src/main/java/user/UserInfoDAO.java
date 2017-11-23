@@ -1,13 +1,8 @@
 package user;
 
 import java.util.ArrayList;
-
 import javax.sql.DataSource;
-
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import bookauthor.BookAuthor;
-import bookauthor.BookAuthorMapper;
 
 public class UserInfoDAO {  
 private DataSource dataSource;
@@ -19,9 +14,15 @@ public void setDataSource(DataSource dataSource) {
 }
 
 public ArrayList<UserInfo> showUserInfo(String id) {
-    String SQL = String.format("SELECT * FROM Uzytkownik WHERE id="+id+"");
-    ArrayList <UserInfo> list = (ArrayList<UserInfo>) jdbcTemplateObject.query(SQL, new UserInfoMapper());
-    return list;
+    String SQL = "SELECT * FROM Uzytkownik WHERE id="+id+"";
+    ArrayList <UserInfo> useri = (ArrayList<UserInfo>) jdbcTemplateObject.query(SQL, new UserInfoMapper());
+    return useri;
  }
 
+public String createUser(String login, String haslo, String email, String imie, String nazwisko, String telefon, String adres, String miasto, String kod) {
+    String SQL = "AddUser '"+login+"', '"+haslo+"','"+email+"','"+imie+"','"+nazwisko+"','"+telefon+"','"+adres+"','"+miasto+"','"+kod+"'";
+ 
+    jdbcTemplateObject.update(SQL);
+    return "Utworzono";
+ }
 }
