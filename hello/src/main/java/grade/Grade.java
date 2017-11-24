@@ -5,6 +5,10 @@ public class Grade {
 	protected String kto;
 	protected String ocena;
 	
+	Grade(){
+		
+	}
+	
 	Grade(String ks, String kto, String ocena){
 		this.ks = ks;
 		this.kto = kto;

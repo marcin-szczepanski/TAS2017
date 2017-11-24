@@ -12,9 +12,9 @@ public class GradeDAO {
 	   this.dataSource = dataSource;
 	   this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
-	public void createGrade(String ks, String kto, String ocena) {
+	public String createGrade(String ks, String kto, String ocena) {
 	    String SQL = "NewGrade "+ks+","+kto+",'"+ocena+"'";
 	    jdbcTemplateObject.update(SQL);
-	    
+	    return "Utworzono";
 	 }
 }
