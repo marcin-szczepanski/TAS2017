@@ -8,20 +8,27 @@ export class SignInServiceService {
   constructor(private http: Http) { }
 
   signIn(url, body) {
-    localStorage.setItem('login', JSON.stringify(body.login));
-    this.http.post('http://localhost:8080/session/', body)
-      .subscribe(data => this.sendResponse(data));
-    console.log('2', this.responseStatus);
+    var promise = new Promise((resolve, reject) => {
+      this.http.post('http://localhost:8080/session/', body)
+      .subscribe(data => {this.sendResponse(data)});
+      let value = 'success';
+      resolve(value);
+
+      // when an error occurred, reject
+      reject(new Error('Something happened!'));
+    });
+    
     return this.responseStatus;
   }
 
   sendResponse(data) {
-    console.log('1', data._body);
+    console.log(data._body);
     if (data._body === 'Złe dane użytkownika') {
       this.responseStatus = false;
-      localStorage.removeItem('name');
+      sessionStorage.removeItem('id');
     } else {
-      localStorage.setItem('name', JSON.stringify(data._body));
+      sessionStorage.setItem('id', JSON.stringify(data._body));
+      sessionStorage.setItem('login', JSON.stringify(data.login));
       this.responseStatus = true;
     }
   }

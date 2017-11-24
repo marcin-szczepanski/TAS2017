@@ -12,14 +12,8 @@ export class SignInComponent implements OnInit {
 
   onSubmit(value: any) {
     const toSend = { login: value.login, password: value.haslo };
-    const responseStatus = this.SignInServiceService.signIn(this.urlSignIn, toSend);
-    console.log('3',responseStatus);
-    if (responseStatus) {
-      this.loginStatus = true;
-      localStorage.setItem('name', JSON.stringify(value.login));
-    } else {
-      this.loginStatus = false;
-    }
+    this.SignInServiceService.signIn(this.urlSignIn, toSend);
+    
   }
 
   ngOnInit() {
