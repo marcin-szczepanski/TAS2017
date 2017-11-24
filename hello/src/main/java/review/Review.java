@@ -5,6 +5,10 @@ public class Review {
 	String kto;
 	String text;
 	
+	Review(){
+		
+	}
+	
 	Review(String ks, String kto, String text){
 		this.ks=ks;
 		this.kto=kto;

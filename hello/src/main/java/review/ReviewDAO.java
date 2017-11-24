@@ -14,10 +14,10 @@ public void setDataSource(DataSource dataSource) {
    this.dataSource = dataSource;
    this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 }
-public void createReview(String ks, String kto, String text) {
+public String createReview(String ks, String kto, String text) {
     String SQL = "NewRec "+ks+","+kto+",'"+text+"'";
     jdbcTemplateObject.update(SQL);
-    
+    return "Utworzono";
  }
 
 }
