@@ -1,18 +1,28 @@
 package session;
 
 public class User {
-		public String login;
-		public String password;
+		protected String id;
+		protected String login;
+		protected String password;
 		protected String name;
 		protected String status;
 		public User() {	
 			
 		}
-		public User(String login, String password, String name, String status) {
+		public User(String id , String login, String password, String name, String status) {
+			this.id=id;
 			this.login = login;
 			this.password = password;
 			this.name = name;
 			this.status = status;
+		}
+		
+		
+		public String getId() {
+			return id;
+		}
+		public void setId(String id) {
+			this.id = id;
 		}
 		public String getLogin() {
 			return login;
