@@ -21,7 +21,19 @@ END
 AddUser 'Noob2017','qwerty123','noob2017@email.com','Gal','Galowy','666666666','Kwiacista 200','Poznan','60-666'
 
 --WYSWIETLENIE DANYCH POTRZEBNYCH DO LOGOWANIA
-SELECT login,haslo FROM Uzytkownik WHERE login='wpisany login' AND haslo='wpisane haslo'
+SELECT id,login,haslo FROM Uzytkownik WHERE login='wpisany login' AND haslo='wpisane haslo'
 
 --WYŚWIETLENIE WSZYSTKICH DANYCH O UŻYTKOWNIKU
 SELECT * FROM Uzytkownik WHERE id=???
+
+
+
+
+--UPDATE INFORMACJI W TABELI UŻYTKOWNIK
+UPDATE Uzytkownik SET 'gdzie'='nowa wartość' WHERE id='id użytkownika'
+
+--PRZYKŁAD UŻYCIA
+UPDATE Uzytkownik SET login='UPDATED' WHERE id=3
+
+--SPRAWDZENIE WYNIKU
+SELECT * FROM Uzytkownik
