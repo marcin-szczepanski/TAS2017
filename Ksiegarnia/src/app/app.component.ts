@@ -15,6 +15,7 @@ export class AppComponent {
   categorySearch = '';
   answer = {};
   basket = 0;
+  id;
 
   constructor() {
     const oldbasket = localStorage.getItem('Basket');
@@ -23,6 +24,7 @@ export class AppComponent {
       this.basket = oldBasketData.price;
     }
     localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
+    this.id = sessionStorage.getItem('id');
   }
 
   setMode(data) {

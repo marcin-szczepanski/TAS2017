@@ -8,16 +8,8 @@ export class SignInServiceService {
   constructor(private http: Http) { }
 
   signIn(url, body) {
-    var promise = new Promise((resolve, reject) => {
-      this.http.post('http://localhost:8080/session/', body)
-      .subscribe(data => {this.sendResponse(data)});
-      let value = 'success';
-      resolve(value);
-
-      // when an error occurred, reject
-      reject(new Error('Something happened!'));
-    });
-    
+    this.http.post('http://localhost:8080/session/', body)
+    .subscribe(data => { this.sendResponse(data)});
     return this.responseStatus;
   }
 
@@ -27,6 +19,7 @@ export class SignInServiceService {
       this.responseStatus = false;
       sessionStorage.removeItem('id');
     } else {
+      sessionStorage.setItem('loginStatus', JSON.stringify(1));
       sessionStorage.setItem('id', JSON.stringify(data._body));
       sessionStorage.setItem('login', JSON.stringify(data.login));
       this.responseStatus = true;

@@ -15,10 +15,10 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { OrderCompComponent } from './order-comp/order-comp.component';
 import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
-
 import { SearchService } from './search.service';
 import { InfoService } from './info.service';
 import { SignInServiceService } from './sign-in/sign-in-service.service';
+import { SignUpServiceService } from './sign-up/sign-up-service.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +43,8 @@ import { SignInServiceService } from './sign-in/sign-in-service.service';
   providers: [
     SearchService,
     InfoService,
-    SignInServiceService
+    SignInServiceService,
+    SignUpServiceService
   ],
   bootstrap: [AppComponent]
 })
