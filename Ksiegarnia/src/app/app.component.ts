@@ -55,4 +55,10 @@ export class AppComponent {
     }
   }
 
+  logOff(){
+    sessionStorage.clear();
+    this.mode = 0;
+    window.location.reload();
+  }
+
 }

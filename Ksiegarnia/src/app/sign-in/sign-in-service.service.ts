@@ -10,6 +10,7 @@ export class SignInServiceService {
   signIn(url, body) {
     this.http.post('http://localhost:8080/session/', body)
     .subscribe(data => { this.sendResponse(data)});
+    sessionStorage.setItem('login', JSON.stringify(body.login));
     return this.responseStatus;
   }
 
@@ -21,8 +22,8 @@ export class SignInServiceService {
     } else {
       sessionStorage.setItem('loginStatus', JSON.stringify(1));
       sessionStorage.setItem('id', JSON.stringify(data._body));
-      sessionStorage.setItem('login', JSON.stringify(data.login));
       this.responseStatus = true;
+      window.location.reload();
     }
   }
 }
