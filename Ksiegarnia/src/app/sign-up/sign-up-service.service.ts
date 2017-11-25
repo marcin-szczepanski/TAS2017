@@ -10,6 +10,7 @@ export class SignUpServiceService {
   signUp(url, body) {
     this.http.post('http://localhost:8080/register/', body)
     .subscribe();
+    console.log(body);
     return this.responseStatus;
   }
 }

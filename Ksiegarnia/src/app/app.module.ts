@@ -19,7 +19,6 @@ import { SearchService } from './search.service';
 import { InfoService } from './info.service';
 import { SignInServiceService } from './sign-in/sign-in-service.service';
 import { SignUpServiceService } from './sign-up/sign-up-service.service';
-import { MyProfileServiceService } from './my-profile/my-profile-service.service';
 
 @NgModule({
   declarations: [
@@ -45,8 +44,7 @@ import { MyProfileServiceService } from './my-profile/my-profile-service.service
     SearchService,
     InfoService,
     SignInServiceService,
-    SignUpServiceService,
-    MyProfileServiceService
+    SignUpServiceService
   ],
   bootstrap: [AppComponent]
 })

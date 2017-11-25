@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MyProfileServiceService } from './my-profile-service.service';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Component({
@@ -19,31 +16,10 @@ export class MyProfileComponent implements OnInit {
   miasto = '';
   kodPocztowy = '';
   results;
-  // loadUserInfo() {
-  //   const subscription = this.MyProfileServiceService.showMyProfile().subscribe(
-  //     function (response) {
-  //       this.results = response.json();
-  //       load(this.results);
-  //     },
-  //     function (error) { },
-  //     function () {
-  //       this.login = this.results[0].id;
-  //       console.log(this);
-  //     }
-
-  //   );
-  //   function load(results) {
-  //     console.log(results[0].id);
-
-  //   }
-  // }
   constructor(private http: Http) { }
-
-
 
   ngOnInit() {
     const url = 'http://localhost:8080/profile?id=' + sessionStorage.getItem('id');
-    console.log(url);
     this.http.get(url).subscribe(data => {
       this.results = data.json();
       this.login = this.results[0].login;
@@ -55,8 +31,5 @@ export class MyProfileComponent implements OnInit {
       this.miasto = this.results[0].miasto;
       this.kodPocztowy = this.results[0].kod;
     });
-    ;
   }
-
-
 }
