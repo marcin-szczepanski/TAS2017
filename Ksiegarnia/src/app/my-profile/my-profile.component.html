@@ -1,40 +1,175 @@
 <div class=" col-md-9 col-lg-9 ">
   <h1>Twój profil</h1>
+  <div *ngIf="statusZmian" class="alert alert-success">Dane zmienione</div>
   <table class="table table-user-information">
     <tbody>
       <tr>
         <td>Login:</td>
         <td>{{login}}</td>
+        <td *ngIf="!statusEdytujLogin">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujLogin()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujLogin" #userForm="ngForm" (ngSubmit)="edytujLogin(userForm.value)">
+          <td *ngIf="statusEdytujLogin">
+            <input type="text" placeholder="Login" class="form-control input-lg" pattern="[a-zA-Z0-9]*" name="login" ngModel required/>
+          </td>
+          <td *ngIf="statusEdytujLogin">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujLogin">
+            <button class="btn btn-primary" (click)="wylaczEdytujLogin()">Anuluj</button>
+          </td>
+        </form>
+      </tr>
+      <tr>
+        <td>Haslo:</td>
+        <td></td>
+        <td *ngIf="!statusEdytujHaslo">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujHaslo()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujHaslo" #userForm="ngForm" (ngSubmit)="edytujHaslo(userForm.value)">
+          <td *ngIf="statusEdytujHaslo">
+            <input type="password" placeholder="Hasło" class="form-control input-lg" pattern=".{8,25}" name="haslo" ngModel required/>
+          </td>
+          <td *ngIf="statusEdytujHaslo">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujLogin">
+            <button class="btn btn-primary" (click)="wylaczEdytujHaslo()">Anuluj</button>
+          </td>
+        </form>
       </tr>
       <tr>
         <td>E-mail:</td>
         <td>{{email}}</td>
+        <td *ngIf="!statusEdytujEmail">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujEmail()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujEmail" #userForm="ngForm" (ngSubmit)="edytujEmail(userForm.value)">
+          <td *ngIf="statusEdytujEmail">
+            <input type="email" placeholder="E-mail" class="form-control input-lg" name="email" ngModel required/>
+          </td>
+          <td *ngIf="statusEdytujEmail">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujEmail">
+            <button class="btn btn-primary" (click)="wylaczEdytujEmail()">Anuluj</button>
+          </td>
+        </form>
       </tr>
       <tr>
         <td>Imię:</td>
         <td>{{imie}}</td>
+        <td *ngIf="!statusEdytujImie">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujImie()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujImie" #userForm="ngForm" (ngSubmit)="edytujImie(userForm.value)">
+          <td *ngIf="statusEdytujImie">
+            <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]*" placeholder="Imię" class="form-control input-lg" name="imie" ngModel
+              required/>
+          </td>
+          <td *ngIf="statusEdytujImie">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujImie">
+            <button class="btn btn-primary" (click)="wylaczEdytujImie()">Anuluj</button>
+          </td>
+        </form>
       </tr>
       <tr>
         <td>Nazwisko:</td>
         <td>{{nazwisko}}</td>
+        <td *ngIf="!statusEdytujNazwisko">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujNazwisko()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujNazwisko" #userForm="ngForm" (ngSubmit)="edytujNazwisko(userForm.value)">
+          <td *ngIf="statusEdytujNazwisko">
+            <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+" placeholder="Nazwisko" class="form-control input-lg" name="nazwisko"
+              ngModel required/>
+          </td>
+          <td *ngIf="statusEdytujNazwisko">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujNazwisko">
+            <button class="btn btn-primary" (click)="wylaczEdytujNazwisko()">Anuluj</button>
+          </td>
+        </form>
       </tr>
       <tr>
         <td>Nr. telefonu:</td>
         <td>{{telefon}}</td>
+        <td *ngIf="!statusEdytujTelefon">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujTelefon()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujTelefon" #userForm="ngForm" (ngSubmit)="edytujTelefon(userForm.value)">
+          <td *ngIf="statusEdytujTelefon">
+            <input type="text" pattern="(\+[0-9]{2})*[0-9]{9}" placeholder="Telefon" class="form-control input-lg" name="telefon" ngModel
+              required/>
+          </td>
+          <td *ngIf="statusEdytujTelefon">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujTelefon">
+            <button class="btn btn-primary" (click)="wylaczEdytujTelefon()">Anuluj</button>
+          </td>
+        </form>
       </tr>
       <tr>
         <td>Ulica:</td>
         <td>{{ulica}}</td>
+        <td *ngIf="!statusEdytujUlice">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujUlice()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujUlice" #userForm="ngForm" (ngSubmit)="edytujUlice(userForm.value)">
+          <td *ngIf="statusEdytujUlice">
+            <input type="text" placeholder="Ulica" class="form-control input-lg" name="ulica" ngModel required/>
+          </td>
+          <td *ngIf="statusEdytujUlice">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujUlice">
+            <button class="btn btn-primary" (click)="wylaczEdytujUlice()">Anuluj</button>
+          </td>
+        </form>
       </tr>
       <tr>
         <td>Miasto:</td>
         <td>{{miasto}}</td>
+        <td *ngIf="!statusEdytujMiasto">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujMiasto()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujMiasto" #userForm="ngForm" (ngSubmit)="edytujMiasto(userForm.value)">
+          <td *ngIf="statusEdytujMiasto">
+            <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+" placeholder="Miasto" class="form-control input-lg" name="miasto"
+              ngModel required/>
+          </td>
+          <td *ngIf="statusEdytujMiasto">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujMiasto">
+            <button class="btn btn-primary" (click)="wylaczEdytujMiasto()">Anuluj</button>
+          </td>
+        </form>
       </tr>
       <tr>
         <td>Kod pocztowy:</td>
         <td>{{kodPocztowy}}</td>
+        <td *ngIf="!statusEdytujKod">
+          <button type="submit" class="btn btn-primary" (click)="wlaczEdytujKod()">Edytuj</button>
+        </td>
+        <form *ngIf="statusEdytujKod" #userForm="ngForm" (ngSubmit)="edytujKod(userForm.value)">
+          <td *ngIf="statusEdytujKod">
+            <input type="text" pattern="[0-9]{2}-[0-9]{3}" placeholder="Kod pocztowy" class="form-control input-lg" name="kod" ngModel
+              required/>
+          </td>
+          <td *ngIf="statusEdytujKod">
+            <button type="submit" class="btn btn-primary">Potwierdź</button>
+          </td>
+          <td *ngIf="statusEdytujKod">
+            <button class="btn btn-primary" (click)="wylaczEdytujKod()">Anuluj</button>
+          </td>
+        </form>
       </tr>
     </tbody>
   </table>
-  <button type="submit" class="btn btn-primary">Edytuj profil</button>
 </div>
