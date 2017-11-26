@@ -14,7 +14,6 @@ export class SignInServiceService {
   }
 
   sendResponse(data) {
-    console.log(data._body);
     if (data._body === 'Złe dane użytkownika') {
       this.responseStatus = false;
       sessionStorage.removeItem('id');

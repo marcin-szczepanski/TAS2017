@@ -1,27 +1,36 @@
+import { window } from 'rxjs/operator/window';
 import { Component, OnInit } from '@angular/core';
-import { SignInServiceService } from './sign-in-service.service';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  loginStatus = true;
-  urlSignIn = 'session/';
-  rerender = false;
-  constructor(private SignInServiceService: SignInServiceService) { }
+  nieudaneLogowanie = false;
+  udaneLogowanie = false;
+
+  results;
+  results2;
+  constructor(private http: Http) { }
 
   onSubmit(value: any) {
-    const toSend = { login: value.login, password: value.haslo };
-    const responseStatus = this.SignInServiceService.signIn(this.urlSignIn, toSend);
-    if (responseStatus) {
-      this.loginStatus = true;
-      localStorage.setItem('name', JSON.stringify(value.login));
-    } else {
-      this.loginStatus = false;
-    }
+    this.http.post('http://localhost:8080/session/', { login: value.login, password: value.haslo }).subscribe(
+      data => {
+        this.results = data.json();
+        if (this.results._body === 'Złe dane użytkownika') {
+          sessionStorage.removeItem('id');
+          this.nieudaneLogowanie = true;
+        } else {
+          sessionStorage.setItem('loginStatus', '1');
+          sessionStorage.setItem('id', this.results);
+          location.reload();
+        }
+      },
+      error => { },
+      () => { this.ngOnInit() }
+    )
   }
-
   ngOnInit() {
   }
 

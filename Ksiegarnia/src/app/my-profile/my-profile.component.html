@@ -14,10 +14,10 @@
             <input type="text" placeholder="Login" class="form-control input-lg" pattern="[a-zA-Z0-9]*" name="login" ngModel required/>
           </td>
           <td *ngIf="statusEdytujLogin">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujLogin">
-            <button class="btn btn-primary" (click)="wylaczEdytujLogin()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujLogin()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -32,10 +32,10 @@
             <input type="password" placeholder="Hasło" class="form-control input-lg" pattern=".{8,25}" name="haslo" ngModel required/>
           </td>
           <td *ngIf="statusEdytujHaslo">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
-          <td *ngIf="statusEdytujLogin">
-            <button class="btn btn-primary" (click)="wylaczEdytujHaslo()">Anuluj</button>
+          <td *ngIf="statusEdytujHaslo">
+            <button class="btn btn-danger" (click)="wylaczEdytujHaslo()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -50,10 +50,10 @@
             <input type="email" placeholder="E-mail" class="form-control input-lg" name="email" ngModel required/>
           </td>
           <td *ngIf="statusEdytujEmail">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujEmail">
-            <button class="btn btn-primary" (click)="wylaczEdytujEmail()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujEmail()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -69,10 +69,10 @@
               required/>
           </td>
           <td *ngIf="statusEdytujImie">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujImie">
-            <button class="btn btn-primary" (click)="wylaczEdytujImie()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujImie()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -88,10 +88,10 @@
               ngModel required/>
           </td>
           <td *ngIf="statusEdytujNazwisko">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujNazwisko">
-            <button class="btn btn-primary" (click)="wylaczEdytujNazwisko()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujNazwisko()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -107,10 +107,10 @@
               required/>
           </td>
           <td *ngIf="statusEdytujTelefon">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujTelefon">
-            <button class="btn btn-primary" (click)="wylaczEdytujTelefon()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujTelefon()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -125,10 +125,10 @@
             <input type="text" placeholder="Ulica" class="form-control input-lg" name="ulica" ngModel required/>
           </td>
           <td *ngIf="statusEdytujUlice">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujUlice">
-            <button class="btn btn-primary" (click)="wylaczEdytujUlice()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujUlice()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -144,10 +144,10 @@
               ngModel required/>
           </td>
           <td *ngIf="statusEdytujMiasto">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujMiasto">
-            <button class="btn btn-primary" (click)="wylaczEdytujMiasto()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujMiasto()">Anuluj</button>
           </td>
         </form>
       </tr>
@@ -163,10 +163,10 @@
               required/>
           </td>
           <td *ngIf="statusEdytujKod">
-            <button type="submit" class="btn btn-primary">Potwierdź</button>
+            <button type="submit" class="btn btn-success">Potwierdź</button>
           </td>
           <td *ngIf="statusEdytujKod">
-            <button class="btn btn-primary" (click)="wylaczEdytujKod()">Anuluj</button>
+            <button class="btn btn-danger" (click)="wylaczEdytujKod()">Anuluj</button>
           </td>
         </form>
       </tr>

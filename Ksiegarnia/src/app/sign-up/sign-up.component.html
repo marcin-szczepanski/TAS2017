@@ -1,6 +1,6 @@
 <h4 class="text-gray mb-4 centerMargin">Rejestracja</h4>
 <div *ngIf="registerStatus" class="alert alert-success">Rejestracja udana!</div>
-<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+<form *ngIf="!registerStatus" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
   <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 centerMargin">
       <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
