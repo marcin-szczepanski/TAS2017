@@ -48,7 +48,7 @@ export class AboutBookComponent implements OnChanges {
     if (this.review.trim() === '') {
       alert('Nie możesz dodać pustej recenzji!');
     } else {
-      const toSend = '?ks=' + this.ident + '&kto=' + this.user + '&text=' + this.review;
+      const toSend = {ks: this.ident, kto: this.user, text: this.review};
       const res = this.infoService.sendData(this.urlReview, toSend);
       if (res === true) {
         this.getBooks();
@@ -66,7 +66,7 @@ export class AboutBookComponent implements OnChanges {
   }
 
   saveGrade() {
-    const toSend = '?ks=' + this.ident + '&kto=' + this.user + '&ocena=' + this.grade;
+    const toSend = {ks: this.ident, kto: this.user, ocena: this.grade};
     const res = this.infoService.sendData(this.urlGrade, toSend);
     if (res === true) {
       this.getBooks();
