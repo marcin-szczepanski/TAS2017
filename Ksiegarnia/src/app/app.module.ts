@@ -17,7 +17,6 @@ import { OrderCompComponent } from './order-comp/order-comp.component';
 import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
 import { SearchService } from './search.service';
 import { InfoService } from './info.service';
-import { SignUpServiceService } from './sign-up/sign-up-service.service';
 
 @NgModule({
   declarations: [
@@ -41,8 +40,7 @@ import { SignUpServiceService } from './sign-up/sign-up-service.service';
   ],
   providers: [
     SearchService,
-    InfoService,
-    SignUpServiceService
+    InfoService
   ],
   bootstrap: [AppComponent]
 })
