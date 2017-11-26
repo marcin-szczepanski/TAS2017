@@ -1,20 +1,23 @@
 <h4 class="text-gray mb-4">Logowanie</h4>
 <div *ngIf="nieudaneLogowanie" class="alert alert-danger">Logowanie nieudane! Nieprawidłowy login lub hasło.</div>
-<div *ngIf="udaneLogowanie" class="alert alert-success">Rejestracja udana!</div>
+<div *ngIf="udaneLogowanie" class = "centerAll">
+  <div class="alert alert-success">Logowanie udane! Za chwilę nastąpi przekierowanie na stronę główną.</div>
+  <div class="loader"></div>
+</div>
 <form *ngIf="!udaneLogowanie" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" method="post">
   <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 centerMargin">
       <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
         <div class="form-group">
           <div>
-            <input type="text" placeholder="Login" class="form-control input-lg " name="login" ngModel />
+            <input type="text" placeholder="Login" class="form-control input-lg " name="login" ngModel required />
           </div>
         </div>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
         <div class="form-group">
           <div>
-            <input type="password" placeholder="Hasło" class="form-control input-lg" name="haslo" ngModel />
+            <input type="password" placeholder="Hasło" class="form-control input-lg" name="haslo" ngModel required/>
           </div>
         </div>
       </div>

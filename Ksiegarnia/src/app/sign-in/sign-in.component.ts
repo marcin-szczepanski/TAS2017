@@ -17,18 +17,26 @@ export class SignInComponent implements OnInit {
   onSubmit(value: any) {
     this.http.post('http://localhost:8080/session/', { login: value.login, password: value.haslo }).subscribe(
       data => {
-        this.results = data.json();
-        if (this.results._body === 'Złe dane użytkownika') {
+        this.results2 = data;
+        if (this.results2._body === 'Złe dane użytkownika') {
           sessionStorage.removeItem('id');
           this.nieudaneLogowanie = true;
         } else {
+          this.results = data.json();
           sessionStorage.setItem('loginStatus', '1');
           sessionStorage.setItem('id', this.results);
-          location.reload();
+          this.nieudaneLogowanie = false;
+          this.udaneLogowanie = true;
+          this.ngOnInit();
+          setTimeout(function () { location.reload() }, 2000);
         }
       },
-      error => { },
-      () => { this.ngOnInit() }
+      error => {
+        sessionStorage.removeItem('id');
+        this.nieudaneLogowanie = true;
+        this.ngOnInit();
+      },
+      () => { this.ngOnInit()}
     )
   }
   ngOnInit() {
