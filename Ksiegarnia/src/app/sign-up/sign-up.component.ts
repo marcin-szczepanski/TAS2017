@@ -6,23 +6,11 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-  urlSignUp = 'session/';
   registerStatus = false;
   invalidRegister = false;
   constructor(private http: Http) { }
 
   onSubmit(value: any) {
-    const toSend = {
-      login: value.login,
-      haslo: value.haslo,
-      email: value.email,
-      imie: value.imie,
-      nazwisko: value.nazwisko,
-      telefon: value.telefon,
-      adres: value.ulica,
-      miasto: value.miasto,
-      kod: value.kodPocztowy
-    };
     this.http.post('http://localhost:8080/register/', {
       login: value.login,
       haslo: value.haslo,
