@@ -23,8 +23,14 @@ export class AboutBookComponent implements OnChanges {
   user = 1; // anonymous
   urlReview = 'review/';
   urlGrade = 'grade/';
+  productsObject = JSON.parse(localStorage.getItem('ProductsInBasket'));
+  deletedBook = 0;
 
-  constructor(private infoService: InfoService) {}
+  constructor(private infoService: InfoService) {
+    if (this.productsObject === null) {
+      this.productsObject = {};
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const idChanges = changes['ident'];
@@ -81,19 +87,38 @@ export class AboutBookComponent implements OnChanges {
   }
 
   addToBasket() {
-    const x = localStorage.getItem('AddToBasket' + `${this.ident}`);
+    const x = localStorage.getItem('ProductsInBasket');
     if (x !== null) {
       const y = JSON.parse(x);
-      this.howMuchOld = y.howMany;
+      if (y[`${this.ident}`] != null) {
+        this.howMuchOld = y[`${this.ident}`].howMany;
+      }
     }
-    const howMuchUpdate = this.howMuch - this.howMuchOld;
+    let howMuchUpdate = this.howMuch - this.howMuchOld;
     if (this.user === 1) {
-      const ob = {id: this.ident, howMany: this.howMuch, price: (this.howMuch * this.book['price']).toFixed(2)};
-      localStorage.setItem('AddToBasket' + `${this.ident}`, JSON.stringify(ob));
+      if (this.howMuch != 0) {
+        this.deletedBook = 0;
+        this.productsObject[`${this.ident}`] = {
+          id: this.ident,
+          howMany: this.howMuch,
+          price: (this.howMuch * this.book['price']).toFixed(2)
+        };
+      } else {
+        if (`${this.ident}` in this.productsObject) {
+          delete this.productsObject[`${this.ident}`];
+        }
+        if (this.deletedBook > 1) {
+          howMuchUpdate = 0;
+        }
+        this.howMuch = 0;
+        this.howMuchOld = 0;
+      }
+      this.deletedBook += 1;
+      localStorage.setItem('ProductsInBasket', JSON.stringify(this.productsObject));
       this.basketChanged.emit(howMuchUpdate * this.book['price']);
     }
     // gdy anonymous - localStorage
-    // gdy zalogowany - wyślij na serwer i usuń z localStorage
+    // gdy zalogowany - wyślij na serwer i usuń z localStorage*/
   }
 
 }
