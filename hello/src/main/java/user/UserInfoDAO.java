@@ -21,7 +21,6 @@ public ArrayList<UserInfo> showUserInfo(String id) {
 
 public String createUser(String login, String haslo, String email, String imie, String nazwisko, String telefon, String adres, String miasto, String kod) {
     String SQL = "AddUser '"+login+"', '"+haslo+"','"+email+"','"+imie+"','"+nazwisko+"','"+telefon+"','"+adres+"','"+miasto+"','"+kod+"'";
- 
     jdbcTemplateObject.update(SQL);
     return "Utworzono";
  }

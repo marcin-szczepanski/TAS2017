@@ -1,4 +1,4 @@
-package user;
+package basket;
 
 import java.util.ArrayList;
 
@@ -12,23 +12,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserInfoController {
-	
+public class BasketController {
+		
 	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping("/profile")
-	public ArrayList<UserInfo> showUserInfo(@RequestParam(value = "id")String id) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-        UserInfoDAO u = (UserInfoDAO)context.getBean("UserInfoDAO");
-        ArrayList<UserInfo> useri = u.showUserInfo(id);
-		return useri;
-	}
-	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String  createUser(@RequestBody UserInfo user) {
+	@RequestMapping(value = "/basket")
+	public ArrayList<Basket>  showBasket(@RequestParam (value = "kto")String kto ) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-	        UserInfoDAO r = (UserInfoDAO)context.getBean("UserInfoDAO");
-	        return r.createUser(user.login, user.haslo, user.email, user.imie, user.nazwisko, user.telefon, user.adres, user.miasto, user.kod);
+	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
+	        ArrayList<Basket> list = r.showBasket(kto);
+	        return list;
 		}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/addbasket",method = RequestMethod.POST)
+	public String  addBasket(@RequestBody Basket basket) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
+	        return r.addBasket(basket.ks, basket.kto);
+		}
 }
