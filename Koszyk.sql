@@ -1,38 +1,39 @@
---KOSZYK, GDY ELEMENTY W KOSZYKU NIE ZOSTA£Y ZATWIERDZONE PRZEZ "KUPUJ" STATUS=1, GDY JU¯ S¥ ZAKUPIONE STATUS=0
+--KOSZYK, GDY ELEMENTY W KOSZYKU NIE ZOSTAÂ£Y ZATWIERDZONE PRZEZ "KUPUJ" STATUS=1, GDY JUÂ¯ SÂ¥ ZAKUPIONE STATUS=0
 CREATE OR ALTER PROCEDURE AddIntoBasket
 	@id_ks int,
-	@id_kto int
+	@id_kto int,
+	@ilosc int
 AS
 BEGIN
 	declare @id int
 	declare @status int
 	set @id = (SELECT max(id)+1 FROM Koszyk)
 	set @status =1
- INSERT INTO Koszyk VALUES (@id,@id_ks,@id_kto,@status)
+ INSERT INTO Koszyk VALUES (@id,@id_ks,@ilosc,@id_kto,@status)
+ UPDATE Ksiazka SET Ilosc=Ilosc-@ilosc WHERE id=@id_ks
 END
 
-AddIntoBasket 3,3
+AddIntoBasket 5,3,3
 
 CREATE OR ALTER PROCEDURE PurchaseBasket
-	@id_b int
+	@id_kto int
 AS
 BEGIN
- declare @ilosc int
- set @ilosc = (SELECT Ilosc FROM Ksiazka WHERE id=@id_b)
- UPDATE Koszyk SET status = 0	WHERE id = @id_b
- UPDATE Ksiazka SET ILosc = @ilosc WHERE id = @id_b
+ UPDATE Koszyk SET status = 0	WHERE id_kto = @id_kto
 END
  
 PurchaseBasket 3
 
---WYŒWIETLANIE AKTUALNEGO KOSZYKA PRZED ZATWIERDZENIEM KUPNA(ABY ZOBACZYC HISTORIE ZMIENIC STATUS NA 0)
-CREATE OR ALTER VIEW BASKET(id_ks,id_kto,Nazwa,Imie_autora,Nazwisko_autora,Kategoria,Cena,Status)
-AS
-SELECT b.id_ks,b.id_kto,k.Nazwa,a.Imie,a.NAzwisko,t.Kat,k.Cena,b.status
-FROM Ksiazka k
-	JOIN Koszyk b ON b.id_ks = k.id
-	JOIN Kategoria t ON k.Kategoria = t.id
-	JOIN Autor a ON k.Autor = a.id
-	JOIN Recenzje r ON k.id = r.id_ks
 
-SELECT DISTINCT * FROM BASKET WHERE id_kto=3 AND status = 1
+--WYÅ’WIETLANIE AKTUALNEGO KOSZYKA PRZED ZATWIERDZENIEM KUPNA(ABY ZOBACZYC HISTORIE ZMIENIC STATUS NA 0)
+
+CREATE OR ALTER VIEW BASKET(id,Kto,Nazwa,Imie_aut,Nazw_aut,Ilosc,Cena,status)
+AS
+SELECT u.id,u.login,k.Nazwa,a.Imie,a.Nazwisko,b.ile,(b.ile*k.Cena),b.status
+FROM Uzytkownik u 
+ JOIN Koszyk b ON b.id_kto=u.id
+ JOIN Ksiazka k ON k.id=b.id_ks
+ JOIN Autor a ON k.Autor = a.id
+
+ SELECT DISTINCT * FROM BASKET WHERE id=3 AND STATUS = 0
+
