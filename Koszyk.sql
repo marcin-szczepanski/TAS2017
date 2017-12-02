@@ -41,3 +41,7 @@ FROM Uzytkownik u
 
  SELECT DISTINCT * FROM BASKET WHERE id=3 AND STATUS = 0
 
+--ZMIANA ILOSCI KSIAZEK W KOSZYKU
+UPDATE Koszyk SET ile ='podaj ile' WHERE id_ks='jaka ksiazka' AND id_kto='Kto dodaje' AND STATUS=1
+--USUWANIE KSIAZKI Z KOSZYKA
+DELETE FROM Koszyk WHERE id_ks='podaj ksiazke' AND id_kto='Kto usuwa' AND STATUS=1
