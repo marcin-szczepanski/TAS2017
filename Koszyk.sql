@@ -13,7 +13,7 @@ BEGIN
 	declare @status int
 	set @id = (SELECT max(id)+1 FROM Koszyk)
 	set @status =1
- INSERT INTO Koszyk VALUES (@id,@id_ks,@ilosc,@id_kto,@status)
+ INSERT INTO Koszyk VALUES (@id,@id_ks,@id_kto,@status,@ilosc)
  UPDATE Ksiazka SET Ilosc=Ilosc-@ilosc WHERE id=@id_ks
 END
 
