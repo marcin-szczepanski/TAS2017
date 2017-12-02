@@ -45,3 +45,4 @@ FROM Uzytkownik u
 UPDATE Koszyk SET ile ='podaj ile' WHERE id_ks='jaka ksiazka' AND id_kto='Kto dodaje' AND STATUS=1
 --USUWANIE KSIAZKI Z KOSZYKA
 DELETE FROM Koszyk WHERE id_ks='podaj ksiazke' AND id_kto='Kto usuwa' AND STATUS=1
+ 
