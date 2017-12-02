@@ -24,10 +24,19 @@ public class BasketController {
 		}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/buy")
+	public String  buyBasket(@RequestParam (value = "kto")String kto) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
+	        return r.buyBasket(kto);     
+		}
+	
+	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/addbasket",method = RequestMethod.POST)
 	public String  addBasket(@RequestBody Basket basket) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
-	        return r.addBasket(basket.ks, basket.kto);
+	        return r.addBasket(basket.id, basket.kto, basket.ilosc);
 		}
 }
