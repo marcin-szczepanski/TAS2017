@@ -16,10 +16,10 @@ public class BasketController {
 		
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/basket")
-	public ArrayList<Basket>  showBasket(@RequestParam (value = "kto")String kto ) {
+	public ArrayList<Basket>  showBasket(@RequestParam (value = "kto")String kto, @RequestParam(value="status")String status) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
-	        ArrayList<Basket> list = r.showBasket(kto);
+	        ArrayList<Basket> list = r.showBasket(kto,status);
 	        return list;
 		}
 	

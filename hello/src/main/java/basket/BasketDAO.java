@@ -20,8 +20,8 @@ public class BasketDAO {
 	    return "Dodano";
 	 }
 		
-	public ArrayList<Basket> showBasket(String kto){
-		String SQL ="SELECT DISTINCT * FROM BASKET WHERE id_kto="+kto+" AND status = 1";
+	public ArrayList<Basket> showBasket(String kto,String status){
+		String SQL ="SELECT DISTINCT * FROM BASKET WHERE id_kto="+kto+" AND status = "+status+"";
 		ArrayList <Basket> b = (ArrayList<Basket>) jdbcTemplateObject.query(SQL, new BasketMapper());
 		return b;
 	}
