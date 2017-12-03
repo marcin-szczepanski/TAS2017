@@ -19,4 +19,15 @@ public class UpdateDAO {
 		jdbcTemplateObject.update(SQL);
 		return "Zaktualizowano";
 	}
+	
+	public String updateBasket(String what, String how, String who) {
+		String SQL = "UPDATE Koszyk SET ile ='"+how+"' WHERE id_ks='"+what+"' AND id_kto='"+who+"' AND STATUS=1";
+		jdbcTemplateObject.update(SQL);
+		return "Zaktualizowano";
+	}
+	public String deleteBasket(String what, String who) {
+		String SQL = "DELETE FROM Koszyk WHERE id_ks='"+what+"' AND id_kto='"+who+"' AND STATUS=1";
+		jdbcTemplateObject.update(SQL);
+		return "Usunieto";
+	}
 }

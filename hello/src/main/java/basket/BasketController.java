@@ -30,13 +30,4 @@ public class BasketController {
 	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
 	        return r.buyBasket(kto);     
 		}
-	
-	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping(value = "/addbasket",method = RequestMethod.POST)
-	public String  addBasket(@RequestBody Basket basket) {
-			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
-	        return r.addBasket(basket.id, basket.kto, basket.ilosc);
-		}
 }
