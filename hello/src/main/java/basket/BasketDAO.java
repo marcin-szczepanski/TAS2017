@@ -42,4 +42,10 @@ public class BasketDAO {
 			return false;
 		}
 	}
+	public Double sum(String id_kto) {
+		String SQL =String.format(" SELECT SUM(Cena) FROM BASKET WHERE id_kto='%s' AND STATUS=1", id_kto);
+		Double b = jdbcTemplateObject.queryForObject(SQL,Double.class);
+		if (b==null) b= 0.0;
+		return b;
+	}
 }

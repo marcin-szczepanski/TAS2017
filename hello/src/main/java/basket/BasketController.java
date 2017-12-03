@@ -33,9 +33,16 @@ public class BasketController {
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(value = "/basket/exist")
-	public Boolean  exist(@RequestParam (value = "kto")String id_ks, @RequestParam(value="kto")String id_kto) {
+	public Boolean  exist(@RequestParam (value = "id_ks")String id_ks, @RequestParam(value="kto")String id_kto) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
 	        return  r.exist(id_ks,id_kto);
-		}
+	}
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/basket/sum")
+	public Double  sum (@RequestParam(value="id_kto")String id_kto) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
+	        return  r.sum(id_kto);
+	}
 }
