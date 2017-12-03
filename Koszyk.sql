@@ -31,9 +31,9 @@ PurchaseBasket 3
 
 --WYŒWIETLANIE AKTUALNEGO KOSZYKA PRZED ZATWIERDZENIEM KUPNA(ABY ZOBACZYC HISTORIE ZMIENIC STATUS NA 0)
 
-CREATE OR ALTER VIEW BASKET(id,Kto,Nazwa,Imie_aut,Nazw_aut,Ilosc,Cena,status)
+CREATE OR ALTER VIEW BASKET(id_kto,id_ks,Kto,Nazwa,Imie_aut,Nazw_aut,Ilosc,Cena,status)
 AS
-SELECT u.id,u.login,k.Nazwa,a.Imie,a.Nazwisko,b.ile,(b.ile*k.Cena),b.status
+SELECT u.id,k.id,u.login,k.Nazwa,a.Imie,a.Nazwisko,b.ile,(b.ile*k.Cena),b.status
 FROM Uzytkownik u 
  JOIN Koszyk b ON b.id_kto=u.id
  JOIN Ksiazka k ON k.id=b.id_ks
