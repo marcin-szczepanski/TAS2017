@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import session.SessionDAO;
+import session.User;
+
 @RestController
 public class BasketController {
 		
@@ -29,5 +32,13 @@ public class BasketController {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
 	        return r.buyBasket(kto);     
+		}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(value = "/basket/exist")
+	public Boolean  exist(@RequestParam (value = "kto")String id_ks, @RequestParam(value="kto")String id_kto) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
+	        return  r.exist(id_ks,id_kto);
 		}
 }
