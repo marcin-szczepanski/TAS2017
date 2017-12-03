@@ -1,7 +1,8 @@
 package basket;
 
 public class Basket {
-	public String id;
+	public String id_kto;
+	public String id_ks;
 	public String kto;
 	public String nazwa;
 	public String imie_autora;
@@ -14,8 +15,9 @@ public class Basket {
 		
 	}
 	
-	Basket(String id, String kto, String nazwa, String ia, String na, String kat, String cena, String stat){
-		this.id = id;
+	Basket(String id_kto,String id_ks, String kto, String nazwa, String ia, String na, String kat, String cena, String stat){
+		this.id_kto = id_kto;
+		this.id_ks = id_ks;
 		this.kto = kto;
 		this.nazwa = nazwa;
 		this.imie_autora = ia;
@@ -25,12 +27,20 @@ public class Basket {
 		this.status = stat;
 	}
 
-	public String getId() {
-		return id;
+	public String getId_kto() {
+		return id_kto;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setId_kto(String id_kto) {
+		this.id_kto = id_kto;
+	}
+
+	public String getId_ks() {
+		return id_ks;
+	}
+
+	public void setId_ks(String id_ks) {
+		this.id_ks = id_ks;
 	}
 
 	public String getKto() {
