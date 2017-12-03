@@ -33,7 +33,7 @@ public class BasketDAO {
 	}
 	
 	public Boolean exist(String id_ks, String id_kto) {
-		String SQL =String.format("SELECT DISTINCT * FROM BASKET WHERE id_ks='%s' AND id_kto='%s' AND STATUS=0", id_ks, id_kto);
+		String SQL =String.format("SELECT DISTINCT * FROM BASKET WHERE id_ks='%s' AND id_kto='%s' AND STATUS=1", id_ks, id_kto);
 		try {
 			Basket b = (Basket)jdbcTemplateObject.queryForObject(SQL, new BasketMapper());
 			return true;
