@@ -9,22 +9,20 @@ import { InfoService } from '../info.service';
 export class AboutBookComponent implements OnChanges {
 
   @Input() ident;
-
-  @Output() basketChanged = new EventEmitter();
+  @Input() user;
+  @Input() logged;
 
   review = '';
   grade = 1;
   graded = false;
   howMuch = 1;
   howMuchOld = 0;
-  logged = false;
-  url = 'book?id=';
   book = {};
-  user = 1; // anonymous
-  urlReview = 'review/';
-  urlGrade = 'grade/';
   productsObject = JSON.parse(localStorage.getItem('ProductsInBasket'));
   deletedBook = 0;
+  isInBskt = false;
+
+  @Output() basketChanged = new EventEmitter();
 
   constructor(private infoService: InfoService) {
     if (this.productsObject === null) {
@@ -40,22 +38,34 @@ export class AboutBookComponent implements OnChanges {
         this.getBooks();
       }
       const idGrade = JSON.parse(localStorage.getItem('WatchedBook' + `${this.ident}`));
-      if (idGrade && this.logged === false) {
-        this.grade = idGrade.grade;
-        this.graded = true;
-      } else {
-        // funkcja do pobierania oceny zalogowanego użytkownika
-        // jeśli jest ocena w bazie to ją ustaw oraz graded=true a jeśli nie nic nie rób
+      if (idGrade) {
+        if (this.logged === false) {
+          this.grade = idGrade.grade;
+          this.graded = true;
+        } else {
+          // na razie nie ma obsługi pobrania oceny zalogowanego użytkownika
+          this.grade = idGrade.grade;
+          this.graded = true;
+          // funkcja do pobierania oceny zalogowanego użytkownika
+          // jeśli jest ocena w bazie to ją ustaw oraz graded=true a jeśli nie nic nie rób
+        }
       }
     }
+  }
+
+  getBooks() {
+    const url = 'book?id=';
+    this.book = {};
+    this.book = this.infoService.getBooks(url + this.ident);
   }
 
   saveReview() {
     if (this.review.trim() === '') {
       alert('Nie możesz dodać pustej recenzji!');
     } else {
+      const url = 'review/';
       const toSend = {ks: this.ident, kto: this.user, text: this.review};
-      const res = this.infoService.sendData(this.urlReview, toSend);
+      const res = this.infoService.sendData(url, toSend);
       if (res === true) {
         this.getBooks();
         alert('Dziękujemy za dodanie recenzji!');
@@ -66,14 +76,10 @@ export class AboutBookComponent implements OnChanges {
     }
   }
 
-  getBooks() {
-    this.book = {};
-    this.book = this.infoService.getBooks(this.url + this.ident);
-  }
-
   saveGrade() {
+    const url = 'grade/';
     const toSend = {ks: this.ident, kto: this.user, ocena: this.grade};
-    const res = this.infoService.sendData(this.urlGrade, toSend);
+    const res = this.infoService.sendData(url, toSend);
     if (res === true) {
       this.getBooks();
       alert('Dziękujemy za ocenę!');
@@ -86,7 +92,8 @@ export class AboutBookComponent implements OnChanges {
     this.getBooks();
   }
 
-  addToBasket() {
+  // Metody koszyka
+  Basket() {
     const x = localStorage.getItem('ProductsInBasket');
     if (x !== null) {
       const y = JSON.parse(x);
@@ -94,31 +101,93 @@ export class AboutBookComponent implements OnChanges {
         this.howMuchOld = y[`${this.ident}`].howMany;
       }
     }
-    let howMuchUpdate = this.howMuch - this.howMuchOld;
-    if (this.user === 1) {
-      if (this.howMuch != 0) {
-        this.deletedBook = 0;
-        this.productsObject[`${this.ident}`] = {
-          id: this.ident,
-          howMany: this.howMuch,
-          price: (this.howMuch * this.book['price']).toFixed(2)
-        };
-      } else {
-        if (`${this.ident}` in this.productsObject) {
-          delete this.productsObject[`${this.ident}`];
-        }
-        if (this.deletedBook > 1) {
-          howMuchUpdate = 0;
-        }
-        this.howMuch = 0;
-        this.howMuchOld = 0;
-      }
-      this.deletedBook += 1;
-      localStorage.setItem('ProductsInBasket', JSON.stringify(this.productsObject));
-      this.basketChanged.emit(howMuchUpdate * this.book['price']);
+    if (this.user == 1) { // obsługa koszyka użytkownika niezalogowanego
+      this.basketAnonymous();
+    } else { // użytkownik zalogowany
+      this.basketLogged();
     }
-    // gdy anonymous - localStorage
-    // gdy zalogowany - wyślij na serwer i usuń z localStorage*/
+  }
+
+  basketAnonymous() {
+    let howMuchUpdate = this.howMuch - this.howMuchOld;
+    if (this.howMuch != 0) {
+      this.deletedBook = 0;
+      this.productsObject[`${this.ident}`] = {
+        id: this.ident,
+        howMany: this.howMuch,
+        price: (this.howMuch * this.book['price']).toFixed(2)
+      };
+    } else {
+      if (`${this.ident}` in this.productsObject) {
+        delete this.productsObject[`${this.ident}`];
+      }
+      if (this.deletedBook > 1) {
+        howMuchUpdate = 0;
+      }
+      this.howMuch = 0;
+      this.howMuchOld = 0;
+    }
+    this.deletedBook += 1;
+    localStorage.setItem('ProductsInBasket', JSON.stringify(this.productsObject));
+    this.basketChanged.emit(howMuchUpdate * this.book['price']);
+  }
+
+  basketLogged() {
+    this.isInBasket();
+    if (this.isInBskt) {
+      if (this.howMuch == 0) {
+        const data = {what: this.ident, who: this.user};
+        this.deleteFromBasket(data);
+      } else {
+        const data = {what: this.ident, how: this.howMuch, who: this.user};
+        this.updateInBasket(data);
+      }
+    } else {
+      const data = {what: this.ident, how: this.howMuch, who: this.user};
+      this.addToBasket(data);
+    }
+  }
+
+  // Metody obsługujące koszyk użytkownika zalogowanego
+  addToBasket(toSend) {
+    const url = '/addbasket';
+    const res = this.infoService.sendData(url, toSend);
+    if (res === true) {
+      this.sumaKoszyka();
+    } else {
+      alert('Coś poszło nie tak. Spróbuj ponownie później.');
+    }
+  }
+
+  deleteFromBasket(toSend) {
+    const url = '/deletebasket';
+    const res = this.infoService.sendData(url, toSend);
+    if (res === true) {
+      this.sumaKoszyka();
+    } else {
+      alert('Coś poszło nie tak. Spróbuj ponownie później.');
+    }
+  }
+
+  updateInBasket(toSend) {
+    const url = '/updatebasket';
+    const res = this.infoService.sendData(url, toSend);
+    if (res === true) {
+      this.sumaKoszyka();
+    } else {
+      alert('Coś poszło nie tak. Spróbuj ponownie później.');
+    }
+  }
+
+  isInBasket() {
+    this.isInBskt = false;
+    const url = 'basket/exist?id_kto=' + this.user + '&id_ks=' + this.ident;
+    this.isInBskt = this.infoService.ifExists(url);
+  }
+
+  sumaKoszyka() {
+    const url = '/basket/sum?id_kto=' + this.user;
+    this.basketChanged.emit(this.infoService.getSuma(url));
   }
 
 }

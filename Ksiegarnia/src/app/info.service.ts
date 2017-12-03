@@ -6,8 +6,10 @@ export class InfoService {
 
   answer = {};
   book = {};
+  suma = 0;
   mainUrl = 'http://localhost:8080/';
   res = true;
+  exist = false;
 
   constructor(private http: Http) {}
 
@@ -53,18 +55,43 @@ export class InfoService {
     this.book['reviews'] = answer.recenzje;
   }
 
-sendData(url, body) {
-  this.http.post(this.mainUrl + url, body)
-    .subscribe(data => this.sendResponse(data));
-  return this.res;
-}
-
-sendResponse(data) {
-  if (data.statusText === 'OK') {
-    this.res = true;
-  } else {
-    this.res = false;
+  sendData(url, body) {
+    this.http.post(this.mainUrl + url, body)
+      .subscribe(data => this.sendResponse(data));
+    return this.res;
   }
-}
+
+  sendResponse(data) {
+    if (data.status == 200) {
+      this.res = true;
+    } else {
+      this.res = false;
+    }
+  }
+
+  getSuma(addr) {
+    const url = this.mainUrl + addr;
+    this.http.get(url)
+      .subscribe(data => this.setSuma(data.json()));
+    console.log(this.suma); // problem z asynchronicznością
+    return this.suma;
+  }
+
+  setSuma(answer) {
+    this.suma = answer;
+  }
+
+  ifExists(addr) {
+    this.exist = false;
+    const url = this.mainUrl + addr;
+    this.http.get(url)
+      .subscribe(data => this.setExists(data.json()));
+    console.log(this.exist) // problem z asynchronicznością
+    return this.exist;
+  }
+
+  setExists(data) {
+    this.exist = data;
+  }
 
 }
