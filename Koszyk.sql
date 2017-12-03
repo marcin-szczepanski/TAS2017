@@ -47,3 +47,5 @@ UPDATE Koszyk SET ile ='podaj ile' WHERE id_ks='jaka ksiazka' AND id_kto='Kto do
 DELETE FROM Koszyk WHERE id_ks='podaj ksiazke' AND id_kto='Kto usuwa' AND STATUS=1
  --SPRAWDZANIE CZY KSIĄŻKA JEST W KOSZYKU
  SELECT DISTINCT * FROM BASKET WHERE id_ks='podaj ksiazke' AND id_kto='czyj koszyk' AND STATUS =1
+--WYŚWIETLENIE SUMY KWOTY W KOSZYKU
+ SELECT SUM(Cena) FROM BASKET WHERE id_kto='kto' AND STATUS=1
