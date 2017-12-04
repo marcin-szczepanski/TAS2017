@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+@CrossOrigin
 @RestController
 public class SessionController {
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping(value = "/session", method = RequestMethod.POST)
 	public String  createSession(@RequestBody User user) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");

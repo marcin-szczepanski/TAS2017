@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-
+@CrossOrigin
 @RestController
 public class BookAuthorController {
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping("/top6")
 	public ArrayList<BookAuthor> top6() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
@@ -25,7 +25,7 @@ public class BookAuthorController {
 		return top6;
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping("/books")
 	public ArrayList<BookAuthor> searchByCategory(@RequestParam(value = "category")String category) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");

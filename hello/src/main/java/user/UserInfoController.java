@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 public class UserInfoController {
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping("/profile")
 	public ArrayList<UserInfo> showUserInfo(@RequestParam(value = "id")String id) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
@@ -23,7 +24,7 @@ public class UserInfoController {
 		return useri;
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String  createUser(@RequestBody UserInfo user) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");

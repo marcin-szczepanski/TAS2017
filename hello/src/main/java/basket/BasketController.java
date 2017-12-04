@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
 public class BasketController {
 		
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping(value = "/basket")
 	public ArrayList<Basket>  showBasket(@RequestParam (value = "kto")String kto, @RequestParam(value="status")String status) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
@@ -23,7 +24,7 @@ public class BasketController {
 	        return list;
 		}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping(value = "/buy")
 	public String  buyBasket(@RequestParam (value = "kto")String kto) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
@@ -31,14 +32,14 @@ public class BasketController {
 	        return r.buyBasket(kto);     
 		}
 
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping(value = "/basket/exist")
 	public Boolean  exist(@RequestParam (value = "id_kto")String id_kto, @RequestParam(value="id_ks")String id_ks) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
 	        return  r.exist(id_ks,id_kto);
 	}
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping(value = "/basket/sum")
 	public Double  sum (@RequestParam(value="id_kto")String id_kto) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");

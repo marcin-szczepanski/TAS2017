@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+@CrossOrigin
 @RestController
 public class ReviewController {
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	public String  review(@RequestBody Review review) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
