@@ -9,12 +9,16 @@ CREATE OR ALTER PROCEDURE AddIntoBasket
 	@ilosc int
 AS
 BEGIN
-	declare @id int
-	declare @status int
-	set @id = (SELECT max(id)+1 FROM Koszyk)
-	set @status =1
- INSERT INTO Koszyk VALUES (@id,@id_ks,@id_kto,@status,@ilosc)
- UPDATE Ksiazka SET Ilosc=Ilosc-@ilosc WHERE id=@id_ks
+IF @ilosc <= (SELECT ilosc FROM Ksiazka WHERE id = @id_ks)
+	BEGIN
+		declare @id int
+		declare @status int
+		set @id = (SELECT max(id)+1 FROM Koszyk)
+		set @status =1
+ 	INSERT INTO Koszyk VALUES (@id,@id_ks,@id_kto,@status,@ilosc)
+	UPDATE Ksiazka SET Ilosc=Ilosc-@ilosc WHERE id=@id_ks
+	END
+	ELSE PRINT 'NIE MA TYLU KSIAZEK W MAGAZYNIE'
 END
 
 AddIntoBasket 5,3,3
@@ -42,9 +46,32 @@ FROM Uzytkownik u
  SELECT DISTINCT * FROM BASKET WHERE id=3 AND STATUS = 0
 
 --ZMIANA ILOSCI KSIAZEK W KOSZYKU
-UPDATE Koszyk SET ile ='podaj ile' WHERE id_ks='jaka ksiazka' AND id_kto='Kto dodaje' AND STATUS=1
+ CREATE OR ALTER PROCEDURE MODIFYBASKET
+ @id_kto int,
+ @id_ks int,
+ @ilosc int
+ AS
+ BEGIN
+	UPDATE Koszyk SET ile=ile-@ilosc WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1
+	UPDATE Ksiazka SET Ilosc=Ilosc+@ilosc WHERE id=@id_ks
+ END
+
+ MODIFYBASKET kto,ksiazka,ile_zmienia
+
 --USUWANIE KSIAZKI Z KOSZYKA
-DELETE FROM Koszyk WHERE id_ks='podaj ksiazke' AND id_kto='Kto usuwa' AND STATUS=1
+CREATE OR ALTER PROCEDURE DELETEFROMBASKET
+@id_kto int,
+@id_ks int
+AS
+BEGIN
+DECLARE @ilosc int
+SET @ilosc =(SELECT ile FROM Koszyk WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1)
+UPDATE Ksiazka SET Ilosc=Ilosc+@ilosc WHERE id=@id_ks
+DELETE FROM Koszyk WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1
+END
+
+DELETEFROMBASKET kto,ksiazka
+
  --SPRAWDZANIE CZY KSIĄŻKA JEST W KOSZYKU
  SELECT DISTINCT * FROM BASKET WHERE id_ks='podaj ksiazke' AND id_kto='czyj koszyk' AND STATUS =1
 --WYŚWIETLENIE SUMY KWOTY W KOSZYKU
