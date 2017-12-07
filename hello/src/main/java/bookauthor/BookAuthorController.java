@@ -39,7 +39,8 @@ public class BookAuthorController {
 	@RequestMapping("/books/search")
 	public ArrayList<BookAuthor> advancedSearch(
 			@RequestParam(value = "title", required=false)String title,
-			@RequestParam(value = "author", required=false)String author,
+			@RequestParam(value = "author_first", required=false)String authorFirstName,
+			@RequestParam(value = "author_last", required=false)String authorLastName,
 			@RequestParam(value = "category", required=false)String category,
 			@RequestParam(value = "publisher", required=false)String publisher,
 			@RequestParam(value = "year", required=false)String year,
@@ -55,7 +56,7 @@ public class BookAuthorController {
         	pagesMin=pagesMax;
         	pagesMax=temp;
         }
-        return t.advancedSearch(title, author, category, publisher, year, pagesMin, pagesMax);
+        return t.advancedSearch(title, authorFirstName, authorLastName, category, publisher, year, pagesMin, pagesMax);
 	}
 	
 	@RequestMapping("/books/keyWord")

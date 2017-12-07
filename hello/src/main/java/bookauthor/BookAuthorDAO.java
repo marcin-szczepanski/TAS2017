@@ -30,15 +30,18 @@ public class BookAuthorDAO {
 		return list;
 	}
 
-	public ArrayList<BookAuthor> advancedSearch(String title, String author, String category, String publisher,
+	public ArrayList<BookAuthor> advancedSearch(String title, String authorFirstName, String authorLastName, String category, String publisher,
 			String year, String pagesMin, String pagesMax) {
 		String SQL = "SELECT DISTINCT Id, Nazwa, Imie_autora, Nazwisko_autora,kategoria, Cena, Ocena from FULLINFO";
 		String details = "";
 		if (title != null && !title.trim().isEmpty()) {
 			details = String.format("%sNazwa='%s' ", details, title);
 		}
-		if (author != null && !author.trim().isEmpty()) {
-			details = String.format("%sNazwisko_autora='%s' ", details, author);
+		if (authorFirstName != null && !authorFirstName.trim().isEmpty()) {
+			details = String.format("%sImie_autora='%s' ", details, authorFirstName);
+		}
+		if (authorLastName != null && !authorLastName.trim().isEmpty()) {
+			details = String.format("%sNazwisko_autora='%s' ", details, authorLastName);
 		}
 		if (category != null && !category.trim().isEmpty()) {
 			details = String.format("%sKategoria='%s' ", details, category);
