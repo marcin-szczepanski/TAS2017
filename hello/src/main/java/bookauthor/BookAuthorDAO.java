@@ -50,7 +50,7 @@ public class BookAuthorDAO {
 			details = String.format("%sWydawnictwo='%s' ", details, publisher);
 		}
 		if (year != null && !year.trim().isEmpty()) {
-			details = String.format("%sRok_wyd='%s' ", details, year);
+			details = String.format("%sYEAR(Rok_wyd)='%s' ", details, year);
 		}
 		if (pagesMin != null && !pagesMin.trim().isEmpty()) {
 			details = String.format("%sStrony>'%s' ", details, pagesMin);
