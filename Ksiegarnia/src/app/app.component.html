@@ -18,29 +18,29 @@
       </div>
     </header>
     <div class="background">
-    <form action="/" method="post" class="paddings margins bg-primary bradius-top">
+    <form action="/" method="post" class="paddings margins bg-primary bradius-top" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+      <label for="category">Wybierz kategorię:</label>
       <div class="form-row align-items-center">
         <div class="col-md-3 col-sm-3 min">
-          <select (change)="category = $event.target.value" name="category" class="form-control">
-            <option label="-- wybierz kategorię --"></option>
-            <option>Lektury</option>
-            <option>Literatura piękna</option>
-            <option>Literatura faktu</option>
-            <option>Literatura dziecięca</option>
-            <option>Podręczniki</option>
-            <option>Encyklopedie i słowniki</option>
-            <option>Komiksy</option>
-            <option>Poezja</option>
-            <option>Poradniki</option>
-            <option>Sport i turystyka</option>
-            <option>Pozostałe</option>
+          <select ngModel id="category" name="category" class="form-control">
+            <option value="Lektury">Lektury</option>
+            <option value="Literatura piękna">Literatura piękna</option>
+            <option value="Literatura faktu">Literatura faktu</option>
+            <option value="Literatura dziecięca">Literatura dziecięca</option>
+            <option value="Podręczniki">Podręczniki</option>
+            <option value="Encyklopedie i słowniki">Encyklopedie i słowniki</option>
+            <option value="Komiksy">Komiksy</option>
+            <option value="Poezja">Poezja</option>
+            <option value="Poradniki">Poradniki</option>
+            <option value="Sport i turystyka">Sport i turystyka</option>
+            <option value="Pozostałe">Pozostałe</option>
           </select>
         </div>
         <div class="col-md-5 col-sm-5 min">
-          <input type="text" class="form-control" name="keywords" (keyup)="query = $event.target.value" placeholder="Wpisz słowa kluczowe" />
+          <input type="text" class="form-control" name="keywords" ngModel placeholder="Wpisz słowa kluczowe" />
         </div>
         <div class="col-md-3 col-sm-3 min">
-          <button class="btn btn-primary background-light-blue" (click)="getBooks(); mode = 3">Szukaj</button>
+          <button class="btn btn-primary background-light-blue" (click)="mode = 3" type="submit">Szukaj</button>
         </div>
         <a class="text-white mt-2 link" (click)="mode = 2">Wyszukiwanie zaawansowane</a>
       </div>
@@ -88,9 +88,8 @@
     <section class="adres text-light-gray paddings margins"></section>
     <section class="paddings margins bradius mb-4 bg-white" [ngSwitch]="mode">
       <app-static-pages *ngSwitchCase="1"></app-static-pages>
-      <app-advanced-search *ngSwitchCase="2"></app-advanced-search>
-      <app-books-in-search *ngSwitchCase="3"></app-books-in-search>
-      <app-books-in-category *ngSwitchCase="4"></app-books-in-category>
+      <app-advanced-search (queryChanged)="setQuery($event)" (modeChangedA)="setMode($event)" *ngSwitchCase="2"></app-advanced-search>
+      <app-books-in-search query="{{ querySearch }}" (modeChangedS)="setMode($event)" (bookIdChangedS)="setIdBook($event)" *ngSwitchCase="3"></app-books-in-search>
       <app-sign-in *ngSwitchCase="10"></app-sign-in>
       <app-sign-up *ngSwitchCase="6"></app-sign-up>
       <app-order-comp *ngSwitchCase="7"></app-order-comp>

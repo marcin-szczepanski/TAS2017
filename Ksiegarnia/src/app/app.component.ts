@@ -18,6 +18,7 @@ export class AppComponent {
   query = '';
   email = '';
   categorySearch = '';
+  querySearch = '';
   id;
 
   constructor(private infoService: InfoService) {
@@ -32,6 +33,25 @@ export class AppComponent {
     }
     localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
     this.id = sessionStorage.getItem('id');
+  }
+
+  onSubmit(value: any) {
+    console.log(value.keywords);
+    console.log(value.category);
+    /* querySearch = 'keyWord?';
+    if (value.category !== '') {
+      if (this.querySearch !== 'keyWord?') {
+        this.querySearch += '&';
+      }
+      this.querySearch += 'category=' + value.category.trim().replace(' ', '+');
+    }
+    if (value.keywords !== '') {
+      if (this.querySearch !== 'keyWord?') {
+        this.querySearch += '&';
+      }
+      this.querySearch += 'category=' + value.keywords.trim().replace(' ', '+');
+    }*/
+    this.mode = 3;
   }
 
   userLogged() {
@@ -52,6 +72,10 @@ export class AppComponent {
 
   setIdBook(data) {
     this.idBook = data;
+  }
+
+  setQuery(data) {
+    this.querySearch = data;
   }
 
   setBasket(data) {

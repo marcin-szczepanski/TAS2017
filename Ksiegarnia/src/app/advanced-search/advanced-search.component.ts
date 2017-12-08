@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../search.service'
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'app-advanced-search',
@@ -8,34 +7,88 @@ import { SearchService } from '../search.service'
 })
 export class AdvancedSearchComponent implements OnInit {
 
-  category = '';
-  year = '';
-  pages = '';
-  author = '';
-  title = '';
-  publishing = '';
-  answer = {};
-  books = null;
+  @Output() queryChanged = new EventEmitter();
+  @Output() modeChangedA = new EventEmitter();
 
-  constructor(private searchService:SearchService) {}
+  query = 'search?';
+
+  constructor() {
+    this.query = 'search?';
+  }
+
+  onSubmit(value: any) {
+    this.setQuery(value);
+  }
+
+  setQuery(value) {
+    if (value.title !== '') {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'title=' + value.title.trim().replace(' ', '+');
+    }
+    if (value.author_first !== '') {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'author_first=' + value.author_first.trim().replace(' ', '+');
+    }
+    if (value.author_last !== '') {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'author_last=' + value.author_last.trim().replace(' ', '+');
+    }
+    if (value.category !== '') {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'category=' + value.category.trim().replace(' ', '+');
+    }
+    if (value.publisher !== '') {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'publisher=' + value.publisher.trim().replace(' ', '+');
+    }
+    if (value.year !== '') {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'year=' + value.year.trim().replace(' ', '+');
+    }
+    if (value.pagesMin != 0) {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'pagesMin=' + value.pagesMin.toString().trim().replace(' ', '+');
+    }
+    if (value.pagesMax != 0) {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'pagesMax=' + value.pagesMax.toString().trim().replace(' ', '+');
+    }
+    /*if (value.isbn !== '') {
+      if (this.query !== 'search?') {
+        this.query += '&';
+      }
+      this.query += 'isbn=' + value.isbn.trim().replace(' ', '+');
+    }*/
+    this.changeQuery();
+    this.changeMode();
+  }
 
   ngOnInit() {
+    this.query = 'search?';
   }
 
-  search(category, year, pages, author, title, publishing) {
-    /* let url = "http://localhost:8080/author";
-    let data = this.getService(url)
-    .then(answer => console.log(this.answer));
-    return this.answer; */
-   // console.log(this.searchService.works());
-    //this.searchService.getData(category, year, pages, author, title, publishing);
-    return {};
+  changeQuery() {
+    this.queryChanged.emit(this.query);
   }
 
-  listBooks() {
-    this.books = this.search(this.category, this.year, this.pages, this.author, this.title, this.publishing);
-    console.log(this.books);
-    console.log(this.category + ' ' + this.year + ' ' +  this.pages + ' ' +  this.author + ' ' +  this.title + ' ' + this.publishing);
+  changeMode() {
+    this.modeChangedA.emit(3);
   }
 
 }
