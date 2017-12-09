@@ -36,22 +36,16 @@ export class AppComponent {
   }
 
   onSubmit(value: any) {
-    console.log(value.keywords);
-    console.log(value.category);
-    /* querySearch = 'keyWord?';
-    if (value.category !== '') {
-      if (this.querySearch !== 'keyWord?') {
-        this.querySearch += '&';
-      }
-      this.querySearch += 'category=' + value.category.trim().replace(' ', '+');
-    }
+    this.querySearch = 'keyword?';
     if (value.keywords !== '') {
-      if (this.querySearch !== 'keyWord?') {
-        this.querySearch += '&';
+      this.querySearch += 'query=' + value.keywords.trim().replace(' ', '+');
+      if (value.category !== '') {
+        this.querySearch += '&category=' + value.category.trim().replace(' ', '+');
       }
-      this.querySearch += 'category=' + value.keywords.trim().replace(' ', '+');
-    }*/
-    this.mode = 3;
+      this.mode = 3;
+    } else {
+      alert('Wpisz słowa kluczowe!');
+    }
   }
 
   userLogged() {

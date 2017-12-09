@@ -69,12 +69,12 @@ export class AdvancedSearchComponent implements OnInit {
       }
       this.query += 'pagesMax=' + value.pagesMax.toString().trim().replace(' ', '+');
     }
-    /*if (value.isbn !== '') {
+    if (value.isbn !== '') {
       if (this.query !== 'search?') {
         this.query += '&';
       }
       this.query += 'isbn=' + value.isbn.trim().replace(' ', '+');
-    }*/
+    }
     this.changeQuery();
     this.changeMode();
   }

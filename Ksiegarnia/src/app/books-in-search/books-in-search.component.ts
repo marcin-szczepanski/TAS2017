@@ -46,8 +46,8 @@ export class BooksInSearchComponent implements OnChanges {
 
   getBooks(query) {
     this.books = [];
-    if (this.query != undefined) {
-      if ((this.query != 'search?') && (this.query != 'keyWord?')) {
+    if ((this.query != undefined) && (this.query != '')) {
+      if ((this.query != 'search?') && (this.query != 'keyword?')) {
         this.books = this.searchService.getBooks(this.url + query);
       }
     }
