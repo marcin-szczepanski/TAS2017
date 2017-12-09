@@ -1,8 +1,11 @@
 package bookauthor;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
+import static java.util.Comparator.comparing;
 
 public class BookAuthorDAO {
 	private DataSource dataSource;
@@ -30,8 +33,8 @@ public class BookAuthorDAO {
 		return list;
 	}
 
-	public ArrayList<BookAuthor> advancedSearch(String title, String authorFirstName, String authorLastName, String category, String publisher,
-			String year, String pagesMin, String pagesMax) {
+	public ArrayList<BookAuthor> advancedSearch(String title, String authorFirstName, String authorLastName,
+			String category, String publisher, String year, String pagesMin, String pagesMax, String isbn) {
 		String SQL = "SELECT DISTINCT Id, Nazwa, Imie_autora, Nazwisko_autora,kategoria, Cena, Ocena from FULLINFO";
 		String details = "";
 		if (title != null && !title.trim().isEmpty()) {
@@ -58,18 +61,31 @@ public class BookAuthorDAO {
 		if (pagesMax != null && !pagesMax.trim().isEmpty()) {
 			details = String.format("%sStrony<'%s' ", details, pagesMax);
 		}
+		if (isbn != null && !isbn.trim().isEmpty()) {
+			details = String.format("%sisbn='%s' ", details, isbn);
+		}
 		if (!details.trim().isEmpty()) {
 			details = details.replaceAll("('[^']+') (\\S+[=<>])", "$1 AND $2");
 			details = String.format(" WHERE %s", details);
 			SQL = SQL + details;
 		}
-		//System.out.println(SQL);
 		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
 		return list;
 	}
 
 	public ArrayList<BookAuthor> searchByKeyWord(String query, String category) {
-		// sql
-		return null;
+		String SQL = "SELECT f.id, f.Nazwa, f.Imie_autora, f. Nazwisko_autora, f.kategoria, f.cena, f.ocena, f.gatunek, f.isbn, k.Opis from FullINFO f JOIN Ksiazka k on f.id=k.id";
+		if (category != null && !category.trim().isEmpty()) {
+			SQL = String.format("%s WHERE Kategoria='%s' ", SQL, category);
+		}
+		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new KeyWordMapper(query));
+		ArrayList<BookAuthor> books = new ArrayList<BookAuthor>();
+		for (BookAuthor x : list) {
+			if (x != null)
+				books.add(x);
+		}
+		Collections.sort(books, comparing(BookAuthor::getAccuracy));
+		Collections.reverse(books);
+		return books;
 	}
 }

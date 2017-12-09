@@ -45,7 +45,8 @@ public class BookAuthorController {
 			@RequestParam(value = "publisher", required=false)String publisher,
 			@RequestParam(value = "year", required=false)String year,
 			@RequestParam(value = "pagesMin", required=false)String pagesMin,
-			@RequestParam(value = "pagesMax", required=false)String pagesMax){
+			@RequestParam(value = "pagesMax", required=false)String pagesMax,
+			@RequestParam(value = "isbn", required=false)String isbn){
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
         BookAuthorDAO t = (BookAuthorDAO)context.getBean("BookAuthorDAO");
@@ -56,10 +57,10 @@ public class BookAuthorController {
         	pagesMin=pagesMax;
         	pagesMax=temp;
         }
-        return t.advancedSearch(title, authorFirstName, authorLastName, category, publisher, year, pagesMin, pagesMax);
+        return t.advancedSearch(title, authorFirstName, authorLastName, category, publisher, year, pagesMin, pagesMax,isbn);
 	}
 	
-	@RequestMapping("/books/keyWord")
+	@RequestMapping("/books/keyword")
 	public ArrayList<BookAuthor> keyWordSearch(
 			@RequestParam(value = "query") String query,
 			@RequestParam(value = "category", required=false)String category){
