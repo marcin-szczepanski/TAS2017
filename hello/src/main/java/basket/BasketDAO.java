@@ -15,10 +15,19 @@ public class BasketDAO {
 	}
 
 	public String addBasket(String id, String kto, String ilosc) {
-	    String SQL = "AddIntoBasket "+id+","+kto+","+ilosc+"";
-	    jdbcTemplateObject.update(SQL);
-	    return "Dodano";
-	 }
+		String SQLch ="SELECT DISTINCT * FROM BASKET WHERE id_ks='"+id+"' AND id_kto='"+kto+"' AND STATUS=1";
+		try {
+			Basket b = (Basket)jdbcTemplateObject.queryForObject(SQLch, new BasketMapper());
+			String SQL = "AddIntoBasket "+id+","+kto+","+ilosc+"";
+			jdbcTemplateObject.update(SQL);
+			return "Dodano";
+			}
+		catch(Exception handlerException) {
+			return "Nie wystarczajaca ilosc ksiazek";
+		}
+	}
+		
+
 		
 	public ArrayList<Basket> showBasket(String kto,String status){
 		String SQL ="SELECT DISTINCT * FROM BASKET WHERE id_kto="+kto+" AND status = "+status+"";
