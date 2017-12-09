@@ -1,5 +1,7 @@
 package basket;
 
+import java.text.DecimalFormat;
+
 public class Basket {
 	public String id_kto;
 	public String id_ks;
@@ -23,7 +25,10 @@ public class Basket {
 		this.imie_autora = ia;
 		this.nazwisko_autora = na;
 		this.ilosc = kat;
-		this.cena = cena;
+		String number = cena;
+		double amount = Double.parseDouble(number);
+		DecimalFormat formatter = new DecimalFormat("#,###,###,###.00");
+		this.cena = formatter.format(amount);
 		this.status = stat;
 	}
 
