@@ -76,7 +76,7 @@ public class BookAuthorDAO {
 	public ArrayList<BookAuthor> searchByKeyWord(String query, String category) {
 		String SQL = "SELECT f.id, f.Nazwa, f.Imie_autora, f. Nazwisko_autora, f.kategoria, f.cena, f.ocena, f.gatunek, f.isbn, k.Opis from FullINFO f JOIN Ksiazka k on f.id=k.id";
 		if (category != null && !category.trim().isEmpty()) {
-			SQL = String.format("%s WHERE Kategoria='%s' ", SQL, category);
+			SQL = String.format("%s WHERE f.kategoria='%s' ", SQL, category);
 		}
 		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new KeyWordMapper(query));
 		ArrayList<BookAuthor> books = new ArrayList<BookAuthor>();
