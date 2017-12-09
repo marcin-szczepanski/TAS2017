@@ -64,32 +64,27 @@ export class AboutBookComponent implements OnChanges {
       alert('Nie możesz dodać pustej recenzji!');
     } else {
       const url = 'review/';
-      const toSend = {ks: this.ident, kto: this.user, text: this.review};
-      const res = this.infoService.sendData(url, toSend);
-      if (res === true) {
-        this.getBooks();
-        alert('Dziękujemy za dodanie recenzji!');
-      } else {
-        alert('Coś poszło nie tak. Spróbuj ponownie później.');
-      }
-      this.getBooks();
+      const toSend = { ks: this.ident, kto: this.user, text: this.review };
+      this.infoService.sendData(url, toSend)
+        .subscribe(data => this.getBooks());
     }
   }
 
   saveGrade() {
     const url = 'grade/';
-    const toSend = {ks: this.ident, kto: this.user, ocena: this.grade};
-    const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.getBooks();
-      alert('Dziękujemy za ocenę!');
-      const ob = {id: this.ident, grade: this.grade};
-      localStorage.setItem('WatchedBook' + `${this.ident}`, JSON.stringify(ob));
-      this.graded = true;
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
-    this.getBooks();
+    const toSend = { ks: this.ident, kto: this.user, ocena: this.grade };
+    this.infoService.sendData(url, toSend)
+      .subscribe(
+      data => {
+        this.getBooks();
+        alert('Dziękujemy za ocenę!');
+        const ob = { id: this.ident, grade: this.grade };
+        localStorage.setItem('WatchedBook' + `${this.ident}`, JSON.stringify(ob));
+        this.graded = true;
+        this.getBooks();
+      }
+      );
+
   }
 
   // Metody koszyka
@@ -136,14 +131,14 @@ export class AboutBookComponent implements OnChanges {
     this.isInBasket();
     if (this.isInBskt) {
       if (this.howMuch == 0) {
-        const data = {what: this.ident, who: this.user};
+        const data = { what: this.ident, who: this.user };
         this.deleteFromBasket(data);
       } else {
-        const data = {what: this.ident, how: this.howMuch, who: this.user};
+        const data = { what: this.ident, how: this.howMuch, who: this.user };
         this.updateInBasket(data);
       }
     } else {
-      const data = {what: this.ident, how: this.howMuch, who: this.user};
+      const data = { what: this.ident, how: this.howMuch, who: this.user };
       this.addToBasket(data);
     }
   }
@@ -151,32 +146,27 @@ export class AboutBookComponent implements OnChanges {
   // Metody obsługujące koszyk użytkownika zalogowanego
   addToBasket(toSend) {
     const url = '/addbasket';
-    const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.sumaKoszyka();
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
+    this.infoService.sendData(url, toSend)
+      .subscribe(data => {
+        this.sumaKoszyka();
+      })
   }
 
   deleteFromBasket(toSend) {
     const url = '/deletebasket';
-    const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.sumaKoszyka();
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
+    this.infoService.sendData(url, toSend)
+      .subscribe(data => {
+        this.sumaKoszyka();
+      })
   }
 
   updateInBasket(toSend) {
     const url = '/updatebasket';
     const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.sumaKoszyka();
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
+    this.infoService.sendData(url, toSend)
+      .subscribe(data => {
+        this.sumaKoszyka();
+      })
   }
 
   isInBasket() {

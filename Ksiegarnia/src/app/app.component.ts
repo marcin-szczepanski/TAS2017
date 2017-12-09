@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InfoService } from './info.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class AppComponent {
         this.basket = 0.00;
       }
     }
-    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
+    localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
     this.id = sessionStorage.getItem('id');
   }
 
@@ -39,7 +39,6 @@ export class AppComponent {
     if (x !== null) {
       this.user = JSON.parse(x);
       this.logged = true;
-      this.addFromLocalStorage();
     } else {
       this.user = 1;
       this.logged = false;
@@ -65,7 +64,7 @@ export class AppComponent {
       this.basket = 0.00;
     }
     const oldBasketData = localStorage.getItem('Basket');
-    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
+    localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
   }
 
   validateEmail(email) {
@@ -82,34 +81,37 @@ export class AppComponent {
     }
   }
 
-  logOff(){
+  logOff() {
     sessionStorage.clear();
+    localStorage.clear();
     this.mode = 0;
     this.user = 1;
     this.logged = false;
     this.basket = parseFloat('0');
-    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
+    localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
     window.location.reload();
   }
 
   addToBasketMain(toSend) {
     const url = '/addbasket';
-    const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.basket = (this.infoService.getSuma('basket/sum?id_kto=' + this.user));
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
+    this.infoService.sendData(url, toSend)
+      .subscribe();
+    this.infoService.getBasketSum().subscribe(data => {
+      this.basket = data.json();
+      localStorage.setItem('basket', this.basket.toString());
+    });
   }
 
   updateInBasketmain(toSend) {
     const url = '/updatebasket';
-    const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.basket = (this.infoService.getSuma('basket/sum?id_kto=' + this.user));
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
+    this.infoService.sendData(url, toSend)
+      .subscribe();
+    this.infoService.getBasketSum().subscribe(data => {
+      this.basket = data.json();
+      localStorage.setItem('basket', this.basket.toString());
+      console.log(this.basket)
+    });
+
   }
 
   addFromLocalStorage() {
@@ -118,12 +120,12 @@ export class AppComponent {
       const y = JSON.parse(x);
       for (let property in y) {
         if (y.hasOwnProperty(property)) {
-            let data = {what: y[property].id, how: y[property].howMany, who: this.user}
-            if (this.infoService.ifExists('basket/exist?id_kto=' + this.user + '&id_ks=' + y[property].id)) {
-              this.updateInBasketmain(data);
-            } else {
-              this.addToBasketMain(data);
-            }
+          let data = { what: y[property].id, how: y[property].howMany, who: this.user }
+          if (this.infoService.ifExists('basket/exist?id_kto=' + this.user + '&id_ks=' + y[property].id)) {
+            this.updateInBasketmain(data);
+          } else {
+            this.addToBasketMain(data);
+          }
         }
       }
       localStorage.removeItem('ProductsInBasket');

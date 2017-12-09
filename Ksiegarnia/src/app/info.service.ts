@@ -11,7 +11,7 @@ export class InfoService {
   res = true;
   exist = false;
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   getService(url: string): Promise<any> {
     return this.http
@@ -56,24 +56,15 @@ export class InfoService {
   }
 
   sendData(url, body) {
-    this.http.post(this.mainUrl + url, body)
-      .subscribe(data => this.sendResponse(data));
-    return this.res;
+    return this.http.post(this.mainUrl + url, body);
   }
 
-  sendResponse(data) {
-    if (data.status == 200) {
-      this.res = true;
-    } else {
-      this.res = false;
-    }
-  }
 
   getSuma(addr) {
     const url = this.mainUrl + addr;
     this.http.get(url)
       .subscribe(data => this.setSuma(data.json()));
-    console.log(this.suma); // problem z asynchronicznością
+    console.log(this.suma); 
     return this.suma;
   }
 
@@ -86,7 +77,7 @@ export class InfoService {
     const url = this.mainUrl + addr;
     this.http.get(url)
       .subscribe(data => this.setExists(data.json()));
-    console.log(this.exist) // problem z asynchronicznością
+    console.log(this.exist)
     return this.exist;
   }
 
@@ -94,4 +85,16 @@ export class InfoService {
     this.exist = data;
   }
 
+  deleteFromBasket(id) {
+    return this.http.post(this.mainUrl + '/deletebasket', { what: id, who: sessionStorage.getItem('id') })
+
+  }
+
+  getBasketItems() {
+    return this.http.get(this.mainUrl + 'basket?kto=' + sessionStorage.getItem('id') + '&status=1');
+  }
+
+  getBasketSum() {
+    return this.http.get(this.mainUrl + 'basket/sum?id_kto=' + sessionStorage.getItem('id'));
+  }
 }

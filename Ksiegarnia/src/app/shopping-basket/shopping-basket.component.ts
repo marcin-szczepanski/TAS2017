@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { InfoService } from '../info.service';
 
 @Component({
   selector: 'app-shopping-basket',
@@ -6,62 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shopping-basket.component.css']
 })
 export class ShoppingBasketComponent implements OnInit {
-
-  zamowienie = [
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-    {
-      title: 'title',
-      author: 'author',
-      price: 24.99
-    },
-  ];
-
+  url = 'http://localhost:8080/';
+  zamowienie = [];
+  suma = 0;
   doZaplaty = 0;
-  constructor() { }
+  constructor(private infoService: InfoService) { }
+
+  deleteFromBasket(e) {
+    this.infoService.deleteFromBasket(e.target.id).subscribe(
+      data => {
+        this.ngOnInit();
+      }
+    );
+
+
+  }
+
   ngOnInit() {
+    if (sessionStorage.getItem('id') !== null) {
+      this.infoService.getBasketItems().subscribe(data => {
+        this.zamowienie = data.json();
+      });
+      this.infoService.getBasketSum().subscribe(data => {
+        this.suma = data.json();
+        localStorage.setItem('basket', this.suma.toString());
+      });
+    }
+    else {
+    }
   }
 }
+
