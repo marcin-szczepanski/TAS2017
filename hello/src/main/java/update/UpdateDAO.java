@@ -22,8 +22,13 @@ public class UpdateDAO {
 	
 	public String updateBasket(String what, String how, String who) {
 		String SQL = "MODIFYBASKET "+who+","+what+","+how+"";
+		try{
 		jdbcTemplateObject.update(SQL);
 		return "Zaktualizowano";
+		}
+		catch(Exception a) {
+			return a.getMessage();
+		}
 	}
 	public String deleteBasket(String what, String who) {
 		String SQL = "DELETEFROMBASKET "+who+","+what+"";

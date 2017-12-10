@@ -1,5 +1,8 @@
 package basket;
 
+import java.sql.SQLException;
+import java.sql.SQLWarning;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,14 +22,24 @@ public class BasketDAO {
 		try {
 			Basket b = (Basket)jdbcTemplateObject.queryForObject(SQLch, new BasketMapper());
 			String SQL = "DECLARE @a int;SET @a = (SELECT Ilosc FROM BASKET WHERE id_kto = "+kto+" AND id_ks="+id+" AND STATUS = 1) + "+ilosc+";EXEC MODIFYBASKET "+kto+","+id+",@a";
+			try{
 			jdbcTemplateObject.update(SQL);
 			return "Ksiazka istnieje -zmieniam wartosc";
 			}
+			catch(Exception a) {
+				return a.getMessage();
+			}
+			}
 		catch(Exception handlerException) {
 			String SQL = "AddIntoBasket "+id+","+kto+","+ilosc+"";
-			jdbcTemplateObject.update(SQL);
-			return "Dodano";
-		}
+			try{
+				jdbcTemplateObject.update(SQL);
+				return "Dodano";
+				}
+			catch(Exception e) {
+			return e.getMessage();
+			}
+			}
 	}
 		
 
