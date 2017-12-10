@@ -18,9 +18,9 @@ public class BasketDAO {
 		String SQLch ="SELECT DISTINCT * FROM BASKET WHERE id_ks='"+id+"' AND id_kto='"+kto+"' AND STATUS=1";
 		try {
 			Basket b = (Basket)jdbcTemplateObject.queryForObject(SQLch, new BasketMapper());
-			String SQL = "MODIFYBASKET "+kto+","+id+","+ilosc+"";
+			String SQL = "DECLARE @a int;SET @a = (SELECT Ilosc FROM BASKET WHERE id_kto = "+kto+" AND id_ks="+id+" AND STATUS = 1) + "+ilosc+";EXEC MODIFYBASKET "+kto+","+id+",@a";
 			jdbcTemplateObject.update(SQL);
-			return "Ksiazka istnieje";
+			return "Ksiazka istnieje -zmieniam wartosc";
 			}
 		catch(Exception handlerException) {
 			String SQL = "AddIntoBasket "+id+","+kto+","+ilosc+"";
