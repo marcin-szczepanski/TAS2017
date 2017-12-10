@@ -9,6 +9,8 @@ CREATE OR ALTER PROCEDURE AddIntoBasket
 	@ilosc int
 AS
 BEGIN
+IF NOT EXISTS (SELECT DISTINCT * FROM BASKET WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS =1)
+BEGIN
 IF @ilosc <= (SELECT ilosc FROM Ksiazka WHERE id = @id_ks)
 	BEGIN
 		declare @id int
@@ -19,6 +21,8 @@ IF @ilosc <= (SELECT ilosc FROM Ksiazka WHERE id = @id_ks)
 	UPDATE Ksiazka SET Ilosc=Ilosc-@ilosc WHERE id=@id_ks
 	END
 	ELSE PRINT 'NIE MA TYLU KSIAZEK W MAGAZYNIE'
+END
+ELSE PRINT 'KSIAZKA JUZ JEST'
 END
 
 AddIntoBasket 5,3,3
