@@ -52,8 +52,18 @@ FROM Uzytkownik u
  @ilosc int
  AS
  BEGIN
-	UPDATE Koszyk SET ile=ile-@ilosc WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1
-	UPDATE Ksiazka SET Ilosc=Ilosc+@ilosc WHERE id=@id_ks
+ declare @stanb int
+ set @stanb = (SELECT ile FROM Koszyk WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1)
+ 	IF @ilosc >= @stanb
+	BEGIN
+		UPDATE Koszyk SET ile=@ilosc WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1
+		UPDATE Ksiazka SET Ilosc=Ilosc-(@ilosc-@stanb) WHERE id=@id_ks
+	END
+	ELSE
+	BEGIN
+		UPDATE Koszyk SET ile=@ilosc WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1
+		UPDATE Ksiazka SET Ilosc=Ilosc-(@ilosc-@stanb) WHERE id=@id_ks	
+	END
  END
 
  MODIFYBASKET kto,ksiazka,ile_zmienia
