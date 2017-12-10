@@ -54,6 +54,8 @@ FROM Uzytkownik u
  BEGIN
  declare @stanb int
  set @stanb = (SELECT ile FROM Koszyk WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1)
+ IF @ilosc <= (SELECT ilosc FROM Ksiazka WHERE id = @id_ks)
+ BEGIN
  	IF @ilosc >= @stanb
 	BEGIN
 		UPDATE Koszyk SET ile=@ilosc WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1
@@ -64,6 +66,8 @@ FROM Uzytkownik u
 		UPDATE Koszyk SET ile=@ilosc WHERE id_ks=@id_ks AND id_kto=@id_kto AND STATUS=1
 		UPDATE Ksiazka SET Ilosc=Ilosc-(@ilosc-@stanb) WHERE id=@id_ks	
 	END
+ END
+ ELSE PRINT 'NIE MA TYLU KSIAZEK W MAGAZYNIE'
  END
 
  MODIFYBASKET kto,ksiazka,ile_zmienia
