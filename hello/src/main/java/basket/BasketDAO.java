@@ -18,12 +18,14 @@ public class BasketDAO {
 		String SQLch ="SELECT DISTINCT * FROM BASKET WHERE id_ks='"+id+"' AND id_kto='"+kto+"' AND STATUS=1";
 		try {
 			Basket b = (Basket)jdbcTemplateObject.queryForObject(SQLch, new BasketMapper());
+			String SQL = "MODIFYBASKET "+id+","+kto+","+ilosc+"";
+			jdbcTemplateObject.update(SQL);
+			return "Ksiazka istnije -Zmieniłem ilosc";
+			}
+		catch(Exception handlerException) {
 			String SQL = "AddIntoBasket "+id+","+kto+","+ilosc+"";
 			jdbcTemplateObject.update(SQL);
 			return "Dodano";
-			}
-		catch(Exception handlerException) {
-			return "Nie wystarczajaca ilosc ksiazek";
 		}
 	}
 		
