@@ -6,7 +6,7 @@ import { InfoService } from './info.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   logged = false;
   user = 1;
   mode = 0;
@@ -30,7 +30,6 @@ export class AppComponent {
         this.basket = 0.00;
       }
     }
-    localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
     this.id = sessionStorage.getItem('id');
   }
 
@@ -52,20 +51,6 @@ export class AppComponent {
   setIdBook(data) {
     this.idBook = data;
   }
-
-  // setBasket(data) {
-  //   this.userLogged();
-  //   if (this.logged === false) {
-  //     this.basket += parseFloat(data);
-  //   } else {
-  //     this.basket = parseFloat(data);
-  //   }
-  //   if (this.basket < 0) {
-  //     this.basket = 0.00;
-  //   }
-  //   const oldBasketData = localStorage.getItem('Basket');
-  //   localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
-  // }
 
   validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -92,51 +77,24 @@ export class AppComponent {
     window.location.reload();
   }
 
-  handleOrderMode(mode){
+  handleOrderMode(mode) {
     this.mode = mode;
   }
 
   handleOrderSum(sum) {
     this.basket = sum;
   }
-  // addToBasketMain(toSend) {
-  //   const url = '/addbasket';
-  //   this.infoService.sendData(url, toSend)
-  //     .subscribe();
-  //   this.infoService.getBasketSum().subscribe(data => {
-  //     this.basket = data.json();
-  //     localStorage.setItem('basket', this.basket.toString());
-  //   });
-  // }
 
-  // updateInBasketmain(toSend) {
-  //   const url = '/updatebasket';
-  //   this.infoService.sendData(url, toSend)
-  //     .subscribe();
-  //   this.infoService.getBasketSum().subscribe(data => {
-  //     this.basket = data.json();
-  //     localStorage.setItem('basket', this.basket.toString());
-  //     console.log(this.basket)
-  //   });
-
-  // }
-
-  // addFromLocalStorage() {
-  //   const x = localStorage.getItem('ProductsInBasket');
-  //   if (x !== null) {
-  //     const y = JSON.parse(x);
-  //     for (let property in y) {
-  //       if (y.hasOwnProperty(property)) {
-  //         let data = { what: y[property].id, how: y[property].howMany, who: this.user }
-  //         if (this.infoService.ifExists('basket/exist?id_kto=' + this.user + '&id_ks=' + y[property].id)) {
-  //           this.updateInBasketmain(data);
-  //         } else {
-  //           this.addToBasketMain(data);
-  //         }
-  //       }
-  //     }
-  //     localStorage.removeItem('ProductsInBasket');
-  //   }
-  // }
-
+  ngOnInit() {
+    if (this.logged) {
+      const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
+        this.basket = data.json();
+        localStorage.setItem('basket', this.basket.toString());
+      });
+    } else {
+      if (parseInt(localStorage.getItem('basket')) > 0) {
+        this.basket = parseInt(localStorage.getItem('basket'));
+      }
+    }
+  }
 }

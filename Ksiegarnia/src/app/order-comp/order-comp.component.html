@@ -1,21 +1,27 @@
 <div class=" col-md-9 col-lg-9 ">
   <h4 class="text-gray mb-4">Zamówienie</h4>
   <br>
-  <h5>Adres zamówienia:</h5>
-  <div>{{imie}} {{nazwisko}}
-    <br> ul. {{ulica}}
-    <br> {{kodPocztowy}} {{miasto}}
+  <div *ngIf="!finalized">
+    <h5>Adres zamówienia:</h5>
+    <div>{{imie}} {{nazwisko}}
+      <br> ul. {{ulica}}
+      <br> {{kodPocztowy}} {{miasto}}
+    </div>
+    <br>
+    <h5>Zamówione książki:</h5>
+    <ul class="list-group">
+      <li *ngFor="let book of zamowienie" class="list-group-item justify-content-between">
+        "{{book.nazwa}}" {{book.imie_autora}} {{book.nazwisko_autora}}
+        <span class="badge badge-default badge-pill">{{book.ilosc}} szt.</span>
+      </li>
+    </ul>
+    <br>
+    <h5>Suma:</h5>
+    {{sum}} zł
+    <br>
+    <button type="submit" class="btn btn-success" (click)="finalizeOrder()">Kup</button>
   </div>
-  <br>
-  <h5>Zamówione książki:</h5>
-  <br>
-  <ul class="list-group">
-    <li *ngFor="let book of zamowienie" class="list-group-item justify-content-between">
-      "{{book.nazwa}}" {{book.imie_autora}} {{book.nazwisko_autora}}
-      <span class="badge badge-default badge-pill">{{book.ilosc}} szt.</span>
-    </li>
-  </ul>
-  <br>
-  <h5>Suma:</h5>
-  {{sum}} zł
+  <div *ngIf="finalized" class="alert alert-success">
+    Zamówienie zostało przyjęte do realizacji.
+  </div>
 </div>

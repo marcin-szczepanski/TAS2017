@@ -111,8 +111,10 @@ export class InfoService {
   }
 
   addToBasket(id, value) {
-    const body = { what: id, how: value, who: sessionStorage.getItem('id') };
-    console.log(body);
-    return this.http.post(this.mainUrl + 'addbasket', body);
+    return this.http.post(this.mainUrl + 'addbasket', { what: id, who: sessionStorage.getItem('id'), how: value });
+  }
+
+  finalizeOrder() {
+    return this.http.get(this.mainUrl + 'buy?kto=' + sessionStorage.getItem('id'));
   }
 }

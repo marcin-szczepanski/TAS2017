@@ -97,7 +97,7 @@
       <app-shopping-basket *ngSwitchCase="8" (orderMode)="handleOrderMode($event)" (orderSum)="handleOrderSum($event)"></app-shopping-basket>
       <app-my-profile *ngSwitchCase="9"></app-my-profile>
       <app-books-in-category category="{{ categorySearch }}" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchCase="4"></app-books-in-category>
-      <app-about-book *ngSwitchCase="5"  ident="{{ idBook }}" user="{{ user }}" logged="{{ logged }}" (load)="getBooks()" (basketChanged)="setBasket($event)"></app-about-book>
+      <app-about-book *ngSwitchCase="5"  ident="{{ idBook }}" user="{{ user }}" logged="{{ logged }}" (load)="getBooks()" (orderSum)="handleOrderSum($event)"></app-about-book>
       <app-newest (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchDefault></app-newest>
     </section>
     <footer class="paddings margins background-blue mt-4 bradius">

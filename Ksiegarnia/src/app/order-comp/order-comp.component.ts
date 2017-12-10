@@ -1,3 +1,4 @@
+import { finalize } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { InfoService } from '../info.service';
 
@@ -14,6 +15,7 @@ export class OrderCompComponent implements OnInit {
   kodPocztowy;
   zamowienie;
   sum;
+  finalized = 0;
 
   constructor(private infoService: InfoService) { }
 
@@ -22,7 +24,7 @@ export class OrderCompComponent implements OnInit {
     this.getOrderFromService();
   }
 
-  getUserInfoFromService(){
+  getUserInfoFromService() {
     const getUserInfo = this.infoService.getUserInfo().subscribe(data => {
       const results = data.json();
       this.imie = results[0].imie;
@@ -33,7 +35,7 @@ export class OrderCompComponent implements OnInit {
     });
   }
 
-  getOrderFromService(){
+  getOrderFromService() {
     const getBasketItems = this.infoService.getBasketItemsLogged().subscribe(data => {
       this.zamowienie = data.json();
     });
@@ -41,6 +43,12 @@ export class OrderCompComponent implements OnInit {
       this.sum = data.json();
       localStorage.setItem('basket', this.sum.toString());
     });
+  }
+
+  finalizeOrder() {
+    const finalizeOrderService = this.infoService.finalizeOrder().subscribe(data => {
+      this.finalized = 1;
+    })
   }
 
 }

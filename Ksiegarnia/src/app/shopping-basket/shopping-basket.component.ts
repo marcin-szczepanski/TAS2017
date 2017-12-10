@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { InfoService } from '../info.service';
 
@@ -8,11 +8,12 @@ import { InfoService } from '../info.service';
   styleUrls: ['./shopping-basket.component.css']
 })
 export class ShoppingBasketComponent implements OnInit {
-  @Output() orderMode= new EventEmitter();
+  @Output() orderMode = new EventEmitter();
   @Output() orderSum = new EventEmitter();
   newMode = 7;
   url = 'http://localhost:8080/';
   zamowienie = [];
+  zamowienieDlugosc = 0;
   sum = 0;
   constructor(private infoService: InfoService) { }
 
@@ -30,7 +31,7 @@ export class ShoppingBasketComponent implements OnInit {
 
   editNumberOfCopies(value: any, id_ks, ilosc) {
     const getBookInfo = this.infoService.getBookInfo(id_ks).subscribe(
-      data =>{}
+      data => { }
     )
     if (value.numberOfCopies === 0) {
       this.deleteFromBasket(id_ks);
@@ -47,6 +48,7 @@ export class ShoppingBasketComponent implements OnInit {
     if (sessionStorage.getItem('id') !== null && sessionStorage.getItem('id') !== undefined) {
       const getBasketItems = this.infoService.getBasketItemsLogged().subscribe(data => {
         this.zamowienie = data.json();
+        this.zamowienieDlugosc = this.zamowienie.length;
       });
       const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
         this.sum = data.json();
@@ -57,7 +59,7 @@ export class ShoppingBasketComponent implements OnInit {
     }
   }
 
-  goToOrder(){
+  goToOrder() {
     this.orderMode.emit(this.newMode);
   }
 }

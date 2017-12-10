@@ -11,7 +11,7 @@ export class AboutBookComponent implements OnChanges {
   @Input() ident;
   @Input() user;
   @Input() logged;
-
+  @Output() orderSum = new EventEmitter();
   review = '';
   grade = 1;
   graded = false;
@@ -20,9 +20,8 @@ export class AboutBookComponent implements OnChanges {
   book = {};
   productsObject = JSON.parse(localStorage.getItem('ProductsInBasket'));
   deletedBook = 0;
-  isInBskt = false;
+  sum = 0;
 
-  @Output() basketChanged = new EventEmitter();
 
   constructor(private infoService: InfoService) {
     if (this.productsObject === null) {
@@ -86,15 +85,58 @@ export class AboutBookComponent implements OnChanges {
       );
 
   }
-
+  // basket start
   addToBasket(value: any, id) {
-    const addToBasketService = this.infoService.addToBasket(id, value.numberOfCopies).subscribe(
+    if (sessionStorage.getItem('id') !== null && sessionStorage.getItem('id') !== undefined) {
+      this.addToBasketLogged(value.numberOfCopies, id);
+      const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
+        this.sum = data.json();
+        localStorage.setItem('basket', this.sum.toString());
+        this.orderSum.emit(this.sum);
+      });
+    } else {
+      this.addToBasketAnonymous(value.numberOfCopies, id);
+    }
+  }
+
+  addToBasketLogged(numberOfCopies, id) {
+    const addToBasketService = this.infoService.addToBasket(id, numberOfCopies).subscribe(
       data => {
         console.log(data);
+        const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
+          this.sum = data.json();
+          localStorage.setItem('basket', this.sum.toString());
+          this.orderSum.emit(this.sum);
+        });
       }
     );
   }
 
+  addToBasketAnonymous(numberOfCopies, id) {
+    let basketAnonimous = [];
+    let exist = 0;
+    let indexOfExist = null;
+    if (localStorage.getItem('ProductsInBasket')) {
+      basketAnonimous = JSON.parse(localStorage.getItem('ProductsInBasket'));
+    };
+    basketAnonimous.forEach((i, index) => {
+      if (i.id === id) {
+        exist = 1;
+        indexOfExist = index;
+        console.log(indexOfExist);
+      }
+    });
+    if (exist !== 1) {
+      basketAnonimous.push({ id: id, num: numberOfCopies });
+    } else {
+      basketAnonimous[indexOfExist].num += numberOfCopies;
+    }
+    localStorage.setItem('ProductsInBasket', JSON.stringify(basketAnonimous));
+    console.log(basketAnonimous);
+  }
+
+  basketSumAnonymous() {
+  }
   // Metody koszyka
   // Basket() {
   //   const x = localStorage.getItem('ProductsInBasket');
