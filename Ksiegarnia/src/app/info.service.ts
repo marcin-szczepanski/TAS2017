@@ -64,7 +64,7 @@ export class InfoService {
     const url = this.mainUrl + addr;
     this.http.get(url)
       .subscribe(data => this.setSuma(data.json()));
-    console.log(this.suma); 
+    console.log(this.suma);
     return this.suma;
   }
 
@@ -85,16 +85,34 @@ export class InfoService {
     this.exist = data;
   }
 
-  deleteFromBasket(id) {
-    return this.http.post(this.mainUrl + '/deletebasket', { what: id, who: sessionStorage.getItem('id') })
+  deleteFromBasketLogged(id) {
+    return this.http.post(this.mainUrl + 'deletebasket', { what: id, who: sessionStorage.getItem('id') })
 
   }
 
-  getBasketItems() {
+  getBasketItemsLogged() {
     return this.http.get(this.mainUrl + 'basket?kto=' + sessionStorage.getItem('id') + '&status=1');
   }
 
-  getBasketSum() {
+  getBasketSumLogged() {
     return this.http.get(this.mainUrl + 'basket/sum?id_kto=' + sessionStorage.getItem('id'));
+  }
+
+  editBasketItemLogged(id, value) {
+    return this.http.post(this.mainUrl + 'updatebasket', { what: id, who: sessionStorage.getItem('id'), how: value });
+  }
+
+  getBookInfo(id) {
+    return this.http.get(this.mainUrl + 'book?id=' + id);
+  }
+
+  getUserInfo() {
+    return this.http.get(this.mainUrl + 'profile?id=' + sessionStorage.getItem('id'));
+  }
+
+  addToBasket(id, value) {
+    const body = { what: id, how: value, who: sessionStorage.getItem('id') };
+    console.log(body);
+    return this.http.post(this.mainUrl + 'addbasket', body);
   }
 }

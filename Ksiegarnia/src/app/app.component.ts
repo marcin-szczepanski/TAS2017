@@ -53,19 +53,19 @@ export class AppComponent {
     this.idBook = data;
   }
 
-  setBasket(data) {
-    this.userLogged();
-    if (this.logged === false) {
-      this.basket += parseFloat(data);
-    } else {
-      this.basket = parseFloat(data);
-    }
-    if (this.basket < 0) {
-      this.basket = 0.00;
-    }
-    const oldBasketData = localStorage.getItem('Basket');
-    localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
-  }
+  // setBasket(data) {
+  //   this.userLogged();
+  //   if (this.logged === false) {
+  //     this.basket += parseFloat(data);
+  //   } else {
+  //     this.basket = parseFloat(data);
+  //   }
+  //   if (this.basket < 0) {
+  //     this.basket = 0.00;
+  //   }
+  //   const oldBasketData = localStorage.getItem('Basket');
+  //   localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
+  // }
 
   validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -92,44 +92,51 @@ export class AppComponent {
     window.location.reload();
   }
 
-  addToBasketMain(toSend) {
-    const url = '/addbasket';
-    this.infoService.sendData(url, toSend)
-      .subscribe();
-    this.infoService.getBasketSum().subscribe(data => {
-      this.basket = data.json();
-      localStorage.setItem('basket', this.basket.toString());
-    });
+  handleOrderMode(mode){
+    this.mode = mode;
   }
 
-  updateInBasketmain(toSend) {
-    const url = '/updatebasket';
-    this.infoService.sendData(url, toSend)
-      .subscribe();
-    this.infoService.getBasketSum().subscribe(data => {
-      this.basket = data.json();
-      localStorage.setItem('basket', this.basket.toString());
-      console.log(this.basket)
-    });
-
+  handleOrderSum(sum) {
+    this.basket = sum;
   }
+  // addToBasketMain(toSend) {
+  //   const url = '/addbasket';
+  //   this.infoService.sendData(url, toSend)
+  //     .subscribe();
+  //   this.infoService.getBasketSum().subscribe(data => {
+  //     this.basket = data.json();
+  //     localStorage.setItem('basket', this.basket.toString());
+  //   });
+  // }
 
-  addFromLocalStorage() {
-    const x = localStorage.getItem('ProductsInBasket');
-    if (x !== null) {
-      const y = JSON.parse(x);
-      for (let property in y) {
-        if (y.hasOwnProperty(property)) {
-          let data = { what: y[property].id, how: y[property].howMany, who: this.user }
-          if (this.infoService.ifExists('basket/exist?id_kto=' + this.user + '&id_ks=' + y[property].id)) {
-            this.updateInBasketmain(data);
-          } else {
-            this.addToBasketMain(data);
-          }
-        }
-      }
-      localStorage.removeItem('ProductsInBasket');
-    }
-  }
+  // updateInBasketmain(toSend) {
+  //   const url = '/updatebasket';
+  //   this.infoService.sendData(url, toSend)
+  //     .subscribe();
+  //   this.infoService.getBasketSum().subscribe(data => {
+  //     this.basket = data.json();
+  //     localStorage.setItem('basket', this.basket.toString());
+  //     console.log(this.basket)
+  //   });
+
+  // }
+
+  // addFromLocalStorage() {
+  //   const x = localStorage.getItem('ProductsInBasket');
+  //   if (x !== null) {
+  //     const y = JSON.parse(x);
+  //     for (let property in y) {
+  //       if (y.hasOwnProperty(property)) {
+  //         let data = { what: y[property].id, how: y[property].howMany, who: this.user }
+  //         if (this.infoService.ifExists('basket/exist?id_kto=' + this.user + '&id_ks=' + y[property].id)) {
+  //           this.updateInBasketmain(data);
+  //         } else {
+  //           this.addToBasketMain(data);
+  //         }
+  //       }
+  //     }
+  //     localStorage.removeItem('ProductsInBasket');
+  //   }
+  // }
 
 }

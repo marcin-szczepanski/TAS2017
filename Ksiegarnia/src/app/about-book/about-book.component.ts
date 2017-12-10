@@ -87,97 +87,105 @@ export class AboutBookComponent implements OnChanges {
 
   }
 
+  addToBasket(value: any, id) {
+    const addToBasketService = this.infoService.addToBasket(id, value.numberOfCopies).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+  }
+
   // Metody koszyka
-  Basket() {
-    const x = localStorage.getItem('ProductsInBasket');
-    if (x !== null) {
-      const y = JSON.parse(x);
-      if (y[`${this.ident}`] != null) {
-        this.howMuchOld = y[`${this.ident}`].howMany;
-      }
-    }
-    if (this.user == 1) { // obsługa koszyka użytkownika niezalogowanego
-      this.basketAnonymous();
-    } else { // użytkownik zalogowany
-      this.basketLogged();
-    }
-  }
+  // Basket() {
+  //   const x = localStorage.getItem('ProductsInBasket');
+  //   if (x !== null) {
+  //     const y = JSON.parse(x);
+  //     if (y[`${this.ident}`] != null) {
+  //       this.howMuchOld = y[`${this.ident}`].howMany;
+  //     }
+  //   }
+  //   if (this.user == 1) { // obsługa koszyka użytkownika niezalogowanego
+  //     this.basketAnonymous();
+  //   } else { // użytkownik zalogowany
+  //     this.basketLogged();
+  //   }
+  // }
 
-  basketAnonymous() {
-    let howMuchUpdate = this.howMuch - this.howMuchOld;
-    if (this.howMuch != 0) {
-      this.deletedBook = 0;
-      this.productsObject[`${this.ident}`] = {
-        id: this.ident,
-        howMany: this.howMuch,
-        price: (this.howMuch * this.book['price']).toFixed(2)
-      };
-    } else {
-      if (`${this.ident}` in this.productsObject) {
-        delete this.productsObject[`${this.ident}`];
-      }
-      if (this.deletedBook > 1) {
-        howMuchUpdate = 0;
-      }
-      this.howMuch = 0;
-      this.howMuchOld = 0;
-    }
-    this.deletedBook += 1;
-    localStorage.setItem('ProductsInBasket', JSON.stringify(this.productsObject));
-    this.basketChanged.emit(howMuchUpdate * this.book['price']);
-  }
+  // basketAnonymous() {
+  //   let howMuchUpdate = this.howMuch - this.howMuchOld;
+  //   if (this.howMuch != 0) {
+  //     this.deletedBook = 0;
+  //     this.productsObject[`${this.ident}`] = {
+  //       id: this.ident,
+  //       howMany: this.howMuch,
+  //       price: (this.howMuch * this.book['price']).toFixed(2)
+  //     };
+  //   } else {
+  //     if (`${this.ident}` in this.productsObject) {
+  //       delete this.productsObject[`${this.ident}`];
+  //     }
+  //     if (this.deletedBook > 1) {
+  //       howMuchUpdate = 0;
+  //     }
+  //     this.howMuch = 0;
+  //     this.howMuchOld = 0;
+  //   }
+  //   this.deletedBook += 1;
+  //   localStorage.setItem('ProductsInBasket', JSON.stringify(this.productsObject));
+  //   this.basketChanged.emit(howMuchUpdate * this.book['price']);
+  // }
 
-  basketLogged() {
-    this.isInBasket();
-    if (this.isInBskt) {
-      if (this.howMuch == 0) {
-        const data = { what: this.ident, who: this.user };
-        this.deleteFromBasket(data);
-      } else {
-        const data = { what: this.ident, how: this.howMuch, who: this.user };
-        this.updateInBasket(data);
-      }
-    } else {
-      const data = { what: this.ident, how: this.howMuch, who: this.user };
-      this.addToBasket(data);
-    }
-  }
+  // basketLogged() {
+  //   this.isInBasket();
+  //   if (this.isInBskt) {
+  //     if (this.howMuch == 0) {
+  //       const data = { what: this.ident, who: this.user };
+  //       this.deleteFromBasket(data);
+  //     } else {
+  //       const data = { what: this.ident, how: this.howMuch, who: this.user };
+  //       this.updateInBasket(data);
+  //     }
+  //   } else {
+  //     const data = { what: this.ident, how: this.howMuch, who: this.user };
+  //     this.addToBasket(data);
+  //   }
+  // }
 
-  // Metody obsługujące koszyk użytkownika zalogowanego
-  addToBasket(toSend) {
-    const url = '/addbasket';
-    this.infoService.sendData(url, toSend)
-      .subscribe(data => {
-        this.sumaKoszyka();
-      })
-  }
+  // // Metody obsługujące koszyk użytkownika zalogowanego
+  // addToBasket(toSend) {
+  //   const url = '/addbasket';
+  //   this.infoService.sendData(url, toSend)
+  //     .subscribe(data => {
+  //       this.sumaKoszyka();
+  //     })
+  // }
 
-  deleteFromBasket(toSend) {
-    const url = '/deletebasket';
-    this.infoService.sendData(url, toSend)
-      .subscribe(data => {
-        this.sumaKoszyka();
-      })
-  }
+  // deleteFromBasket(toSend) {
+  //   const url = '/deletebasket';
+  //   this.infoService.sendData(url, toSend)
+  //     .subscribe(data => {
+  //       this.sumaKoszyka();
+  //     })
+  // }
 
-  updateInBasket(toSend) {
-    const url = '/updatebasket';
-    const res = this.infoService.sendData(url, toSend);
-    this.infoService.sendData(url, toSend)
-      .subscribe(data => {
-        this.sumaKoszyka();
-      })
-  }
+  // updateInBasket(toSend) {
+  //   const url = '/updatebasket';
+  //   const res = this.infoService.sendData(url, toSend);
+  //   this.infoService.sendData(url, toSend)
+  //     .subscribe(data => {
+  //       this.sumaKoszyka();
+  //     })
+  // }
 
-  isInBasket() {
-    this.isInBskt = false;
-    const url = 'basket/exist?id_kto=' + this.user + '&id_ks=' + this.ident;
-    this.isInBskt = this.infoService.ifExists(url);
-  }
+  // isInBasket() {
+  //   this.isInBskt = false;
+  //   const url = 'basket/exist?id_kto=' + this.user + '&id_ks=' + this.ident;
+  //   this.isInBskt = this.infoService.ifExists(url);
+  // }
 
-  sumaKoszyka() {
-    const url = '/basket/sum?id_kto=' + this.user;
-    this.basketChanged.emit(this.infoService.getSuma(url));
-  }
+  // sumaKoszyka() {
+  //   const url = '/basket/sum?id_kto=' + this.user;
+  //   this.basketChanged.emit(this.infoService.getSuma(url));
+  // }
 
 }
