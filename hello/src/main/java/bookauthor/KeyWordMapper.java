@@ -32,15 +32,8 @@ public class KeyWordMapper implements RowMapper<BookAuthor> {
 				accuracy += 20;
 			if (rs.getString(8).matches(p))
 				accuracy += 10;
-
-			Pattern pattern = Pattern.compile(p);
-			Matcher matcher = pattern.matcher(rs.getString(10));
-			if (matcher.matches()) {
-				if (Character.isUpperCase(matcher.group(1).charAt(0)))
-					accuracy += 5;
-				else
-					accuracy += 1;
-			}
+			if (rs.getString(10).matches(p))
+				accuracy += 2;
 		}
 		if (accuracy > 2) {
 			BookAuthor n = new BookAuthor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
