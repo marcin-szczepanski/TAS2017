@@ -21,6 +21,7 @@ export class AboutBookComponent implements OnChanges {
   productsObject = JSON.parse(localStorage.getItem('ProductsInBasket'));
   deletedBook = 0;
   sum = 0;
+  errorTooManyBooks = 0;
 
 
   constructor(private infoService: InfoService) {
@@ -102,12 +103,17 @@ export class AboutBookComponent implements OnChanges {
   addToBasketLogged(numberOfCopies, id) {
     const addToBasketService = this.infoService.addToBasket(id, numberOfCopies).subscribe(
       data => {
-        console.log(data);
-        const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
-          this.sum = data.json();
-          localStorage.setItem('basket', this.sum.toString());
-          this.orderSum.emit(this.sum);
-        });
+        console.log(data.json());
+        if (data.json() === true) {
+          const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data2 => {
+            this.sum = data2.json();
+            localStorage.setItem('basket', this.sum.toString());
+            this.orderSum.emit(this.sum);
+            this.errorTooManyBooks = 0;
+          });
+        } else {
+          this.errorTooManyBooks = 1;
+        }
       }
     );
   }

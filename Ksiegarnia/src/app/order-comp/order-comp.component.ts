@@ -1,5 +1,5 @@
 import { finalize } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { InfoService } from '../info.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { InfoService } from '../info.service';
   styleUrls: ['./order-comp.component.css']
 })
 export class OrderCompComponent implements OnInit {
+  @Output() orderSum = new EventEmitter();
   imie;
   nazwisko;
   ulica;
@@ -48,6 +49,8 @@ export class OrderCompComponent implements OnInit {
   finalizeOrder() {
     const finalizeOrderService = this.infoService.finalizeOrder().subscribe(data => {
       this.finalized = 1;
+      this.sum = 0;
+      this.orderSum.emit(this.sum);
     })
   }
 

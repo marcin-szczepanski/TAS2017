@@ -1,9 +1,10 @@
 <h4 class="text-gray mb-4">Koszyk</h4>
+<div *ngIf="errorTooManyBooks" class="alert alert-danger"> Niewystarczająca ilość książek. Wprowadź mniejszą ilość.</div>
 <div class="row">
   <ul class="list-group">
     <li *ngFor="let book of zamowienie" class="list-group-item">
       <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded removeMargin">
-      <a class="noUnderline text-gray link">{{book.nazwa}}</a>
+      <a class="noUnderline text-gray link" (click)="changeMode(); changeBookId(book.id_ks)">{{book.nazwa}}</a>
       <p class="removeMargin">{{book.imie_autora}} {{book.nazwisko_autora}}</p>
       <p class="removeMargin">{{book.ilosc}} szt.</p>
       <p class="removeMargin">{{book.cena}} zł</p>

@@ -93,8 +93,8 @@
       <app-books-in-category *ngSwitchCase="4"></app-books-in-category>
       <app-sign-in *ngSwitchCase="10"></app-sign-in>
       <app-sign-up *ngSwitchCase="6"></app-sign-up>
-      <app-order-comp *ngSwitchCase="7"></app-order-comp>
-      <app-shopping-basket *ngSwitchCase="8" (orderMode)="handleOrderMode($event)" (orderSum)="handleOrderSum($event)"></app-shopping-basket>
+      <app-order-comp *ngSwitchCase="7" (orderSum)="handleOrderSum($event)"></app-order-comp>
+      <app-shopping-basket *ngSwitchCase="8" (orderMode)="handleOrderMode($event)" (orderSum)="handleOrderSum($event)" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)"></app-shopping-basket>
       <app-my-profile *ngSwitchCase="9"></app-my-profile>
       <app-books-in-category category="{{ categorySearch }}" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchCase="4"></app-books-in-category>
       <app-about-book *ngSwitchCase="5"  ident="{{ idBook }}" user="{{ user }}" logged="{{ logged }}" (load)="getBooks()" (orderSum)="handleOrderSum($event)"></app-about-book>

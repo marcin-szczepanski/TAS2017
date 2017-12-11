@@ -10,11 +10,13 @@ import { InfoService } from '../info.service';
 export class ShoppingBasketComponent implements OnInit {
   @Output() orderMode = new EventEmitter();
   @Output() orderSum = new EventEmitter();
-  newMode = 7;
+  @Output() modeChanged = new EventEmitter();
+  @Output() bookIdChanged = new EventEmitter();
   url = 'http://localhost:8080/';
   zamowienie = [];
   zamowienieDlugosc = 0;
   sum = 0;
+  errorTooManyBooks = 0;
   constructor(private infoService: InfoService) { }
 
   ngOnInit() {
@@ -38,7 +40,12 @@ export class ShoppingBasketComponent implements OnInit {
     } else {
       const editNumberOfCopiesSub = this.infoService.editBasketItemLogged(id_ks, value.numberOfCopies).subscribe(
         data => {
-          this.getBasketContent();
+          if (data.json() === true) {
+            this.getBasketContent();
+            this.errorTooManyBooks = 0;
+          } else {
+            this.errorTooManyBooks = 1;
+          }
         }
       );
     }
@@ -60,7 +67,15 @@ export class ShoppingBasketComponent implements OnInit {
   }
 
   goToOrder() {
-    this.orderMode.emit(this.newMode);
+    this.orderMode.emit(7);
+  }
+
+  changeMode($event) {
+    this.modeChanged.emit(5);
+  }
+
+  changeBookId(id_ks) {
+    this.bookIdChanged.emit(id_ks);
   }
 }
 
