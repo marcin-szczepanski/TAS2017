@@ -1,5 +1,5 @@
 import { window } from 'rxjs/operator/window';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Component({
   selector: 'app-sign-in',
@@ -9,9 +9,12 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 export class SignInComponent implements OnInit {
   nieudaneLogowanie = false;
   udaneLogowanie = false;
+  @Output() orderSum = new EventEmitter();
+  @Output() loginStatus = new EventEmitter();
 
   results;
   results2;
+  sum = 0;
   constructor(private http: Http) { }
 
   onSubmit(value: any) {
@@ -27,6 +30,12 @@ export class SignInComponent implements OnInit {
           sessionStorage.setItem('id', this.results);
           this.nieudaneLogowanie = false;
           this.udaneLogowanie = true;
+          const getBasketSum = this.http.get('http://localhost:8080/basket/sum?id_kto=' + sessionStorage.getItem('id')).subscribe(data2 => {
+            this.sum = data2.json();
+            localStorage.setItem('basket', this.sum.toString());
+            this.orderSum.emit(this.sum);
+          });
+          this.loginStatus.emit(1);
           this.ngOnInit();
           setTimeout(function () { location.reload() }, 2000);
         }
@@ -36,7 +45,7 @@ export class SignInComponent implements OnInit {
         this.nieudaneLogowanie = true;
         this.ngOnInit();
       },
-      () => { this.ngOnInit()}
+      () => { this.ngOnInit() }
     )
   }
   ngOnInit() {

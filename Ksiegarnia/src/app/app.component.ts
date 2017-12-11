@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   logged = false;
   user = 1;
   mode = 0;
-  basket = 0;
+  basket = 0.00;
   idBook = -1;
   books = {};
   answer = {};
@@ -20,18 +20,7 @@ export class AppComponent implements OnInit {
   categorySearch = '';
   id;
 
-  constructor(private infoService: InfoService) {
-    this.userLogged();
-    const oldbasket = localStorage.getItem('Basket');
-    if (oldbasket !== null) {
-      const oldBasketData = JSON.parse(oldbasket);
-      this.basket = oldBasketData.price;
-      if (this.basket < 0) {
-        this.basket = 0.00;
-      }
-    }
-    this.id = sessionStorage.getItem('id');
-  }
+  constructor(private infoService: InfoService) { }
 
   userLogged() {
     let x = sessionStorage.getItem('id');
@@ -73,7 +62,8 @@ export class AppComponent implements OnInit {
     this.user = 1;
     this.logged = false;
     this.basket = parseFloat('0');
-    localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
+    localStorage.setItem('Basket', '0');
+    localStorage.setItem('loginStatus', '0');
     window.location.reload();
   }
 
@@ -85,15 +75,24 @@ export class AppComponent implements OnInit {
     this.basket = sum;
   }
 
+  handleLoginStatus(loginStatus) {
+    this.logged = loginStatus;
+  }
+
   ngOnInit() {
+    this.userLogged();
+    this.id = sessionStorage.getItem('id');
     if (this.logged) {
       const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
         this.basket = data.json();
+        console.log(data.json());
         localStorage.setItem('basket', this.basket.toString());
       });
     } else {
-      if (parseInt(localStorage.getItem('basket')) > 0) {
-        this.basket = parseInt(localStorage.getItem('basket'));
+      if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {
+        this.basket = JSON.parse(localStorage.getItem('Basket'));
+      } else {
+        this.basket = 0;
       }
     }
   }

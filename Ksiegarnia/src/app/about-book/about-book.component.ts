@@ -87,7 +87,7 @@ export class AboutBookComponent implements OnChanges {
 
   }
   // basket start
-  addToBasket(value: any, id) {
+  addToBasket(value: any, id, price) {
     if (sessionStorage.getItem('id') !== null && sessionStorage.getItem('id') !== undefined) {
       this.addToBasketLogged(value.numberOfCopies, id);
       const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
@@ -96,14 +96,13 @@ export class AboutBookComponent implements OnChanges {
         this.orderSum.emit(this.sum);
       });
     } else {
-      this.addToBasketAnonymous(value.numberOfCopies, id);
+      this.addToBasketAnonymous(value.numberOfCopies, id, price);
     }
   }
 
   addToBasketLogged(numberOfCopies, id) {
     const addToBasketService = this.infoService.addToBasket(id, numberOfCopies).subscribe(
       data => {
-        console.log(data.json());
         if (data.json() === true) {
           const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data2 => {
             this.sum = data2.json();
@@ -118,7 +117,8 @@ export class AboutBookComponent implements OnChanges {
     );
   }
 
-  addToBasketAnonymous(numberOfCopies, id) {
+  addToBasketAnonymous(numberOfCopies, id, price) {
+    // dodawanie do koszyka
     let basketAnonimous = [];
     let exist = 0;
     let indexOfExist = null;
@@ -129,7 +129,6 @@ export class AboutBookComponent implements OnChanges {
       if (i.id === id) {
         exist = 1;
         indexOfExist = index;
-        console.log(indexOfExist);
       }
     });
     if (exist !== 1) {
@@ -138,10 +137,19 @@ export class AboutBookComponent implements OnChanges {
       basketAnonimous[indexOfExist].num += numberOfCopies;
     }
     localStorage.setItem('ProductsInBasket', JSON.stringify(basketAnonimous));
-    console.log(basketAnonimous);
-  }
-
-  basketSumAnonymous() {
+    // sumowanie wartosci zamowienia
+    if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {
+      let sumAnonymous = JSON.parse(localStorage.getItem('Basket'));
+      sumAnonymous += (parseFloat(price) * parseFloat(numberOfCopies));
+      this.orderSum.emit(sumAnonymous);
+      localStorage.setItem('Basket', sumAnonymous);
+    } else {
+      localStorage.setItem('Basket', JSON.stringify(0));
+      let sumAnonymous = JSON.parse(localStorage.getItem('Basket'));
+      sumAnonymous += (price * numberOfCopies);
+      this.orderSum.emit(sumAnonymous);
+      localStorage.setItem('Basket', sumAnonymous);
+    }
   }
   // Metody koszyka
   // Basket() {

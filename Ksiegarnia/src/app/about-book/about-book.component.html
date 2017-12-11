@@ -41,7 +41,7 @@
         <h6>Okładka: {{ book.cover }}</h6>
         <h6>ISBN: {{ book.isbn }}</h6>
         <br />
-        <form #userForm="ngForm" (ngSubmit)="addToBasket(userForm.value, book.id)">
+        <form #userForm="ngForm" (ngSubmit)="addToBasket(userForm.value, book.id, book.price)">
           Wprowadź ilość:
           <input type="number" min="1" value="1" name="numberOfCopies" ngModel required />
           <button type="submit " class="btn btn-primary mt-4 ">Dodaj do koszyka</button>
