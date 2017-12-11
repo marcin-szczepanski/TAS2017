@@ -85,7 +85,6 @@ export class AppComponent implements OnInit {
     if (this.logged) {
       const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
         this.basket = data.json();
-        console.log(data.json());
         localStorage.setItem('basket', this.basket.toString());
       });
     } else {

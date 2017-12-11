@@ -150,6 +150,7 @@ export class AboutBookComponent implements OnChanges {
       this.orderSum.emit(sumAnonymous);
       localStorage.setItem('Basket', sumAnonymous);
     }
+    exist = 0;
   }
   // Metody koszyka
   // Basket() {
