@@ -20,9 +20,9 @@ IF @ilosc <= (SELECT ilosc FROM Ksiazka WHERE id = @id_ks)
  	INSERT INTO Koszyk VALUES (@id,@id_ks,@id_kto,@status,@ilosc)
 	UPDATE Ksiazka SET Ilosc=Ilosc-@ilosc WHERE id=@id_ks
 	END
-	ELSE PRINT 'NIE MA TYLU KSIAZEK W MAGAZYNIE'
+	ELSE RISERROR ('NIE MA TYLU KSIAZEK W MAGAZYNIE',16,1)
 END
-ELSE PRINT 'KSIAZKA JUZ JEST'
+ELSE RAISERROR ('KSIAZKA JUZ JEST',16,1)
 END
 
 AddIntoBasket 5,3,3
@@ -71,7 +71,7 @@ FROM Uzytkownik u
 		UPDATE Ksiazka SET Ilosc=Ilosc-(@ilosc-@stanb) WHERE id=@id_ks	
 	END
  END
- ELSE PRINT 'NIE MA TYLU KSIAZEK W MAGAZYNIE'
+ ELSE RAISERROR ('NIE MA TYLU KSIAZEK W MAGAZYNIE',16,1)
  END
 
  MODIFYBASKET kto,ksiazka,ile_zmienia
