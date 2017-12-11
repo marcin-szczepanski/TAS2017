@@ -28,7 +28,7 @@ public class UpdateController {
 	
 
 	@RequestMapping(value = "/updatebasket", method = RequestMethod.POST)
-	public String updateBasket(@RequestBody Update update) {
+	public boolean updateBasket(@RequestBody Update update) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		UpdateDAO u = (UpdateDAO)context.getBean("UpdateDAO");
 		return u.updateBasket(update.what, update.how, update.who);
@@ -44,7 +44,7 @@ public class UpdateController {
 	
 
 	@RequestMapping(value = "/addbasket",method = RequestMethod.POST)
-	public String  addBasket(@RequestBody Update basket) {
+	public boolean  addBasket(@RequestBody Update basket) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 	        BasketDAO r = (BasketDAO)context.getBean("BasketDAO");
 	        return r.addBasket(basket.what, basket.who, basket.how);

@@ -20,14 +20,15 @@ public class UpdateDAO {
 		return "Zaktualizowano";
 	}
 	
-	public String updateBasket(String what, String how, String who) {
+	public boolean updateBasket(String what, String how, String who) {
 		String SQL = "MODIFYBASKET "+who+","+what+","+how+"";
 		try{
 		jdbcTemplateObject.update(SQL);
-		return "Zaktualizowano";
+		return true;
 		}
 		catch(Exception a) {
-			return a.getMessage();
+			String b = a.getMessage();
+			return false;
 		}
 	}
 	public String deleteBasket(String what, String who) {

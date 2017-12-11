@@ -17,27 +17,31 @@ public class BasketDAO {
 	   this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
-	public String addBasket(String id, String kto, String ilosc) {
+	public boolean addBasket(String id, String kto, String ilosc) {
 		String SQLch ="SELECT DISTINCT * FROM BASKET WHERE id_ks='"+id+"' AND id_kto='"+kto+"' AND STATUS=1";
 		try {
 			Basket b = (Basket)jdbcTemplateObject.queryForObject(SQLch, new BasketMapper());
 			String SQL = "DECLARE @a int;SET @a = (SELECT Ilosc FROM BASKET WHERE id_kto = "+kto+" AND id_ks="+id+" AND STATUS = 1) + "+ilosc+";EXEC MODIFYBASKET "+kto+","+id+",@a";
 			try{
 			jdbcTemplateObject.update(SQL);
-			return "Ksiazka istnieje -zmieniam wartosc";
+			//return "Ksiazka istnieje -zmieniam wartosc";
+			return true;
 			}
 			catch(Exception a) {
-				return a.getMessage();
+				String d = a.getMessage();
+				return false;
 			}
 			}
 		catch(Exception handlerException) {
 			String SQL = "AddIntoBasket "+id+","+kto+","+ilosc+"";
 			try{
 				jdbcTemplateObject.update(SQL);
-				return "Dodano";
+				//return "Dodano";
+				return true;
 				}
 			catch(Exception e) {
-			return e.getMessage();
+			String f = e.getMessage();
+			return false;
 			}
 			}
 	}
