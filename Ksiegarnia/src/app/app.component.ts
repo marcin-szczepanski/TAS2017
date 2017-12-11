@@ -63,7 +63,6 @@ export class AppComponent implements OnInit {
     this.logged = false;
     this.basket = parseFloat('0');
     localStorage.setItem('Basket', '0');
-    localStorage.setItem('loginStatus', '0');
     window.location.reload();
   }
 
@@ -85,7 +84,7 @@ export class AppComponent implements OnInit {
     if (this.logged) {
       const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
         this.basket = data.json();
-        localStorage.setItem('basket', this.basket.toString());
+        localStorage.setItem('Basket', this.basket.toString());
       });
     } else {
       if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {

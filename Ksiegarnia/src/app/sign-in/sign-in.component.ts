@@ -26,13 +26,12 @@ export class SignInComponent implements OnInit {
           this.nieudaneLogowanie = true;
         } else {
           this.results = data.json();
-          sessionStorage.setItem('loginStatus', '1');
           sessionStorage.setItem('id', this.results);
           this.nieudaneLogowanie = false;
           this.udaneLogowanie = true;
           const getBasketSum = this.http.get('http://localhost:8080/basket/sum?id_kto=' + sessionStorage.getItem('id')).subscribe(data2 => {
             this.sum = data2.json();
-            localStorage.setItem('basket', this.sum.toString());
+            localStorage.setItem('Basket', this.sum.toString());
             this.orderSum.emit(this.sum);
           });
           this.loginStatus.emit(1);

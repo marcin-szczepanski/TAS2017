@@ -59,32 +59,6 @@ export class InfoService {
     return this.http.post(this.mainUrl + url, body);
   }
 
-
-  getSuma(addr) {
-    const url = this.mainUrl + addr;
-    this.http.get(url)
-      .subscribe(data => this.setSuma(data.json()));
-    console.log(this.suma);
-    return this.suma;
-  }
-
-  setSuma(answer) {
-    this.suma = answer;
-  }
-
-  ifExists(addr) {
-    this.exist = false;
-    const url = this.mainUrl + addr;
-    this.http.get(url)
-      .subscribe(data => this.setExists(data.json()));
-    console.log(this.exist)
-    return this.exist;
-  }
-
-  setExists(data) {
-    this.exist = data;
-  }
-
   deleteFromBasketLogged(id) {
     return this.http.post(this.mainUrl + 'deletebasket', { what: id, who: sessionStorage.getItem('id') })
 

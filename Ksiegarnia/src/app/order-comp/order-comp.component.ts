@@ -42,7 +42,7 @@ export class OrderCompComponent implements OnInit {
     });
     const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
       this.sum = data.json();
-      localStorage.setItem('basket', this.sum.toString());
+      localStorage.setItem('Basket', this.sum.toString());
     });
   }
 
