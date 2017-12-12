@@ -61,7 +61,6 @@ export class InfoService {
 
   deleteFromBasketLogged(id) {
     return this.http.post(this.mainUrl + 'deletebasket', { what: id, who: sessionStorage.getItem('id') })
-
   }
 
   getBasketItemsLogged() {
@@ -90,5 +89,9 @@ export class InfoService {
 
   finalizeOrder() {
     return this.http.get(this.mainUrl + 'buy?kto=' + sessionStorage.getItem('id'));
+  }
+
+  signIn(body) {
+    return this.http.post(this.mainUrl + 'session/', body);
   }
 }
