@@ -11,15 +11,20 @@ import { InfoService } from '../info.service';
 export class SignInComponent implements OnInit {
   nieudaneLogowanie = false;
   udaneLogowanie = false;
+  errorAddToBasket = false;
   @Output() orderSum = new EventEmitter();
   @Output() loginStatus = new EventEmitter();
+  @Output() modeLogged = new EventEmitter();
+  @Output() signInWithError = new EventEmitter();
 
   results;
   results2;
   sum = 0;
+  orderLen = 0;
   constructor(private infoService: InfoService) { }
 
   onSubmit(value: any) {
+    this.orderLen = 0;
     const signIn = this.infoService.signIn({ login: value.login, password: value.haslo }).subscribe(data => {
       this.results2 = data;
       if (this.results2._body === 'Złe dane użytkownika') {
@@ -32,18 +37,43 @@ export class SignInComponent implements OnInit {
         this.udaneLogowanie = true;
         if (localStorage.getItem('ProductsInBasket') !== undefined && localStorage.getItem('ProductsInBasket') !== null) {
           const orderTMP = JSON.parse(localStorage.getItem('ProductsInBasket'));
-          orderTMP.forEach(item => {
-            const addToBasket = this.infoService.addToBasket(item.id, item.num).subscribe();
+          const orderTMPLen = orderTMP.length;
+          orderTMP.forEach((item) => {
+            const addToBasket = this.infoService.addToBasket(item.id, item.num).subscribe(
+              d => {
+                console.log(d.json(), item);
+                if (!d.json()) {
+                  this.errorAddToBasket = true;
+                }
+                const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data2 => {
+                  this.sum = data2.json();
+                  localStorage.setItem('Basket', this.sum.toString());
+                  this.orderSum.emit(this.sum);
+                },
+                  error => { },
+                  () => {
+                  });
+                this.orderLen++;
+                console.log(this.orderLen, orderTMPLen, item);
+                if (this.orderLen === orderTMPLen) {
+                  localStorage.removeItem('ProductsInBasket');
+                  if (this.errorAddToBasket) {
+                    this.signInWithError.emit();
+                    this.loginStatus.emit(1);
+                  } else {
+                    this.loginStatus.emit(1);
+                    this.modeLogged.emit(0);
+                  }
+                }
+              },
+              error => { },
+              () => {
+              });
           });
+        } else {
+          this.loginStatus.emit(1);
+          this.modeLogged.emit(0);
         }
-        const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data2 => {
-          this.sum = data2.json();
-          localStorage.setItem('Basket', this.sum.toString());
-          this.orderSum.emit(this.sum);
-        });
-        this.loginStatus.emit(1);
-        this.ngOnInit();
-        setTimeout(function () { location.reload(); }, 3000);
       }
     },
       error => {
@@ -51,7 +81,8 @@ export class SignInComponent implements OnInit {
         this.nieudaneLogowanie = true;
         this.ngOnInit();
       },
-      () => { }
+      () => {
+      }
     );
   }
   ngOnInit() {

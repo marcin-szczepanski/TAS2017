@@ -13,7 +13,7 @@
         <div class="hgroup row">
           <h6><a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="mode = 10" *ngIf="!id">Logowanie</a></h6>
           <h6><a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="logOff()" *ngIf="id">Wyloguj</a></h6>
-          <h6><a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link"(click)="mode = 6" *ngIf="!id">Rejestracja</a></h6>
+          <h6><a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="mode = 6" *ngIf="!id">Rejestracja</a></h6>
         </div>
       </div>
     </header>
@@ -91,7 +91,7 @@
       <app-advanced-search *ngSwitchCase="2"></app-advanced-search>
       <app-books-in-search *ngSwitchCase="3"></app-books-in-search>
       <app-books-in-category *ngSwitchCase="4"></app-books-in-category>
-      <app-sign-in *ngSwitchCase="10" (orderSum)="handleOrderSum($event)" (loginStatus)="handleLoginStatus($event)"></app-sign-in>
+      <app-sign-in *ngSwitchCase="10" (orderSum)="handleOrderSum($event)" (loginStatus)="handleLoginStatus($event)" (modeLogged)="setMode($event); ngOnInit()" (signInWithError)="ngOnInit()"></app-sign-in>
       <app-sign-up *ngSwitchCase="6"></app-sign-up>
       <app-order-comp *ngSwitchCase="7" (orderSum)="handleOrderSum($event)"></app-order-comp>
       <app-shopping-basket *ngSwitchCase="8" (orderMode)="handleOrderMode($event)" (orderSum)="handleOrderSum($event)" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" [logged]="logged"></app-shopping-basket>
