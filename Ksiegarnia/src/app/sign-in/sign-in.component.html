@@ -2,7 +2,7 @@
 <div *ngIf="nieudaneLogowanie" class="alert alert-danger">Logowanie nieudane! Nieprawidłowy login lub hasło.</div>
 <div *ngIf="udaneLogowanie" class="centerAll">
   <div class="alert alert-success">Logowanie udane!</div>
-  <div *ngIf="errorAddToBasket" class="alert alert-danger">Niekótóre książki zostały usunięte z twojego koszyka. Produkt może być już niedostępny lub jego ilość jest mniejsza niż ta, którą miałeś w koszyku.</div>
+  <div *ngIf="errorAddToBasket" class="alert alert-danger">Niektóre książki zostały usunięte z twojego koszyka. Produkt może być już niedostępny lub jego ilość jest mniejsza niż ta, którą miałeś w koszyku.</div>
 </div>
 <form *ngIf="!udaneLogowanie" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" method="post">
   <div class="row">

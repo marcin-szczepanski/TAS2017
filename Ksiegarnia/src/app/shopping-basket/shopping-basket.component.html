@@ -22,5 +22,5 @@
   <h5>
     Razem: {{sum.toFixed(2)}} zł.
   </h5>
-  <button *ngIf = "zamowienieDlugosc" type="submit" class="btn btn-primary" (click)="goToOrder()">Złóż zamówienie</button>
+  <button *ngIf = "zamowienieDlugosc && logged" type="submit" class="btn btn-primary" (click)="goToOrder()">Złóż zamówienie</button>
 </div>
