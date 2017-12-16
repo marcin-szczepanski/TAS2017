@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   logged = false;
   user = 1;
   mode = 0;
-  basket = 0.00;
+  basket = parseFloat('0');
   idBook = -1;
   books = {};
   answer = {};
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
       if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {
         this.basket = JSON.parse(localStorage.getItem('Basket'));
       } else {
-        this.basket = 0;
+        this.basket = parseFloat('0');
       }
     }
   }
