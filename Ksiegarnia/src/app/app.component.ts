@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   }
 
   handleOrderSum(sum) {
-    this.basket = sum;
+    this.basket = parseFloat(sum.toFixed(2));
   }
 
   handleLoginStatus(loginStatus) {
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
       });
     } else {
       if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {
-        this.basket = JSON.parse(localStorage.getItem('Basket'));
+        this.basket = parseFloat(JSON.parse(localStorage.getItem('Basket')).toFixed());
       } else {
         this.basket = parseFloat('0');
       }
