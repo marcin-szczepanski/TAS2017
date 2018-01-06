@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InfoService } from './info.service';
 
 @Component({
@@ -6,11 +6,11 @@ import { InfoService } from './info.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   logged = false;
   user = 1;
   mode = 0;
-  basket = 0;
+  basket = parseFloat('0');
   idBook = -1;
   books = {};
   answer = {};
@@ -22,19 +22,7 @@ export class AppComponent {
   id;
   admin = true;
 
-  constructor(private infoService: InfoService) {
-    this.userLogged();
-    const oldbasket = localStorage.getItem('Basket');
-    if (oldbasket !== null) {
-      const oldBasketData = JSON.parse(oldbasket);
-      this.basket = oldBasketData.price;
-      if (this.basket < 0) {
-        this.basket = 0.00;
-      }
-    }
-    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
-    this.id = sessionStorage.getItem('id');
-  }
+  constructor(private infoService: InfoService) { }
 
   onSubmit(value: any) {
     this.querySearch = 'keyword?';
@@ -54,7 +42,6 @@ export class AppComponent {
     if (x !== null) {
       this.user = JSON.parse(x);
       this.logged = true;
-      this.addFromLocalStorage();
     } else {
       this.user = 1;
       this.logged = false;
@@ -101,52 +88,43 @@ export class AppComponent {
     }
   }
 
-  logOff(){
+  logOff() {
     sessionStorage.clear();
+    localStorage.clear();
     this.mode = 0;
     this.user = 1;
     this.logged = false;
     this.basket = parseFloat('0');
-    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
+    localStorage.setItem('Basket', '0');
     window.location.reload();
   }
 
-  addToBasketMain(toSend) {
-    const url = '/addbasket';
-    const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.basket = (this.infoService.getSuma('basket/sum?id_kto=' + this.user));
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
+  handleOrderMode(mode) {
+    this.mode = mode;
   }
 
-  updateInBasketmain(toSend) {
-    const url = '/updatebasket';
-    const res = this.infoService.sendData(url, toSend);
-    if (res === true) {
-      this.basket = (this.infoService.getSuma('basket/sum?id_kto=' + this.user));
-    } else {
-      alert('Coś poszło nie tak. Spróbuj ponownie później.');
-    }
+  handleOrderSum(sum) {
+    this.basket = parseFloat(sum.toFixed(2));
   }
 
-  addFromLocalStorage() {
-    const x = localStorage.getItem('ProductsInBasket');
-    if (x !== null) {
-      const y = JSON.parse(x);
-      for (let property in y) {
-        if (y.hasOwnProperty(property)) {
-            let data = {what: y[property].id, how: y[property].howMany, who: this.user}
-            if (this.infoService.ifExists('basket/exist?id_kto=' + this.user + '&id_ks=' + y[property].id)) {
-              this.updateInBasketmain(data);
-            } else {
-              this.addToBasketMain(data);
-            }
-        }
+  handleLoginStatus(loginStatus) {
+    this.logged = loginStatus;
+  }
+
+  ngOnInit() {
+    this.userLogged();
+    this.id = sessionStorage.getItem('id');
+    if (this.logged) {
+      const getBasketSum = this.infoService.getBasketSumLogged().subscribe(data => {
+        this.basket = data.json();
+        localStorage.setItem('Basket', this.basket.toString());
+      });
+    } else {
+      if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {
+        this.basket = parseFloat(JSON.parse(localStorage.getItem('Basket')).toFixed());
+      } else {
+        this.basket = parseFloat('0');
       }
-      localStorage.removeItem('ProductsInBasket');
     }
   }
-
 }

@@ -1,8 +1,9 @@
 <div>
+  <div *ngIf="errorTooManyBooks" class="alert alert-danger"> Niewystarczająca ilość książek. Wprowadź mniejszą ilość.</div>
   <div class="about-book row">
     <div class="row">
       <div class="figure d-flex flex-column justify-content-around col-xl-4 col-lg-4 col-md-4 col-sm-5 col-5 mt-4">
-          <img src="../assets/images/empty.png" class="figure-img rounded" style="width: 200px; height: 200px;">
+        <img src="../assets/images/empty.png" class="figure-img rounded" style="width: 200px; height: 200px;">
       </div>
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mt-4">
         <h5 class="text-gray">
@@ -40,12 +41,11 @@
         <h6>Okładka: {{ book.cover }}</h6>
         <h6>ISBN: {{ book.isbn }}</h6>
         <br />
-        <label>
+        <form #userForm="ngForm" (ngSubmit)="addToBasket(userForm.value, book.id, book.price)">
           Wprowadź ilość:
-          <input type="number" min="0" value="1" (change)="howMuch = $event.target.value"/>
-        </label>
-        <br />
-        <button type="submit" class="btn btn-primary mt-4" (click)="Basket()">Dodaj do koszyka</button>
+          <input type="number" min="1" value="1" name="numberOfCopies" ngModel required />
+          <button type="submit " class="btn btn-primary mt-4 ">Dodaj do koszyka</button>
+        </form>
       </div>
     </div>
   </div>
@@ -56,18 +56,17 @@
       </div>
   </div>
   <div class="mt-4 pt-4">
-      <h5 class="text-gray">Recenzje:</h5>
-      <div class="reviews" *ngFor="let review of book.reviews">
-        <hr />
-Dodał: <b>{{ review.uzytkownik }}</b>
-<br />
-        {{ review.tekst }}
-        <br />
-      </div>
-      <form action="/" method="post" class="mt-4">
-        <h5 class="text-gray mb-4">Dodaj swoją recenzję:</h5>
-        <textarea class="form-control mt-2" rows="10" name="review" placeholder="Wpisz swoją recenzję" (keyup)="review = $event.target.value"></textarea>
-        <button type="submit" class="btn btn-primary mt-4" (click)="saveReview()">Dodaj recenzję</button>
-      </form>
+    <h5 class="text-gray">Recenzje:</h5>
+    <div class="reviews" *ngFor="let review of book.reviews">
+      <hr /> Dodał:
+      <b>{{ review.uzytkownik }}</b>
+      <br /> {{ review.tekst }}
+      <br />
+    </div>
+    <form action="/" method="post" class="mt-4">
+      <h5 class="text-gray mb-4">Dodaj swoją recenzję:</h5>
+      <textarea class="form-control mt-2" rows="10" name="review" placeholder="Wpisz swoją recenzję" (keyup)="review = $event.target.value"></textarea>
+      <button type="submit" class="btn btn-primary mt-4" (click)="saveReview()">Dodaj recenzję</button>
+    </form>
   </div>
 </div>

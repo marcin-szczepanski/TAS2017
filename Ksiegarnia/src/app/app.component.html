@@ -6,7 +6,7 @@
       </div>
       <div class="basket col-sm-3 col-6">
         <h3><a class="noUnderline text-gray link" (click)="mode = 8">Twój koszyk</a></h3>
-        <a class="noUnderline text-blue  link" (click)="mode = 7">{{ basket.toFixed(2) }} zł</a>
+        <a class="noUnderline text-blue  link" (click)="mode = 8">{{ basket }} zł</a>
       </div>
       <div class="your-profile col-sm-3 col-6">
         <h3><a class="noUnderline text-gray link"(click)="mode = 9" *ngIf="id">Twoje konto</a></h3>
@@ -90,15 +90,15 @@
     <section class="adres text-light-gray paddings margins"></section>
     <section class="paddings margins bradius mb-4 bg-white" [ngSwitch]="mode">
       <app-static-pages *ngSwitchCase="1"></app-static-pages>
+      <app-sign-in *ngSwitchCase="10" (orderSum)="handleOrderSum($event)" (loginStatus)="handleLoginStatus($event)" (modeLogged)="setMode($event); ngOnInit()" (signInWithError)="ngOnInit()"></app-sign-in>
       <app-advanced-search (queryChanged)="setQuery($event)" (modeChangedA)="setMode($event)" *ngSwitchCase="2"></app-advanced-search>
       <app-books-in-search query="{{ querySearch }}" (modeChangedS)="setMode($event)" (bookIdChangedS)="setIdBook($event)" *ngSwitchCase="3"></app-books-in-search>
-      <app-sign-in *ngSwitchCase="10"></app-sign-in>
       <app-sign-up *ngSwitchCase="6"></app-sign-up>
-      <app-order-comp *ngSwitchCase="7"></app-order-comp>
-      <app-shopping-basket *ngSwitchCase="8"></app-shopping-basket>
+      <app-order-comp *ngSwitchCase="7" (orderSum)="handleOrderSum($event)"></app-order-comp>
+      <app-shopping-basket *ngSwitchCase="8" (orderMode)="handleOrderMode($event)" (orderSum)="handleOrderSum($event)" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" [logged]="logged"></app-shopping-basket>
       <app-my-profile *ngSwitchCase="9"></app-my-profile>
       <app-books-in-category category="{{ categorySearch }}" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchCase="4"></app-books-in-category>
-      <app-about-book *ngSwitchCase="5"  ident="{{ idBook }}" user="{{ user }}" logged="{{ logged }}" (load)="getBooks()" (basketChanged)="setBasket($event)"></app-about-book>
+      <app-about-book *ngSwitchCase="5"  ident="{{ idBook }}" user="{{ user }}" logged="{{ logged }}" (load)="getBooks()" (orderSum)="handleOrderSum($event)"></app-about-book>
       <app-newest (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchDefault></app-newest>
       <app-admin-books *ngSwitchCase="20"></app-admin-books>
     </section>

@@ -12,7 +12,7 @@ export class InfoService {
   exist = false;
   books = [];
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
 
   getService(url: string): Promise<any> {
     return this.http
@@ -59,44 +59,44 @@ export class InfoService {
   }
 
   sendData(url, body) {
-    this.http.post(this.mainUrl + url, body)
-      .subscribe(data => this.sendResponse(data));
-    return this.res;
+    return this.http.post(this.mainUrl + url, body);
   }
 
-  sendResponse(data) {
-    if (data.status == 200) {
-      this.res = true;
-    } else {
-      this.res = false;
-    }
+  deleteFromBasketLogged(id) {
+    return this.http.post(this.mainUrl + 'deletebasket', { what: id, who: sessionStorage.getItem('id') })
   }
 
-  getSuma(addr) {
-    const url = this.mainUrl + addr;
-    this.http.get(url)
-      .subscribe(data => this.setSuma(data.json()));
-    console.log(this.suma); // problem z asynchronicznością
-    return this.suma;
+  getBasketItemsLogged() {
+    return this.http.get(this.mainUrl + 'basket?kto=' + sessionStorage.getItem('id') + '&status=1');
   }
 
-  setSuma(answer) {
-    this.suma = answer;
+  getBasketSumLogged() {
+    return this.http.get(this.mainUrl + 'basket/sum?id_kto=' + sessionStorage.getItem('id'));
   }
 
-  ifExists(addr) {
-    this.exist = false;
-    const url = this.mainUrl + addr;
-    this.http.get(url)
-      .subscribe(data => this.setExists(data.json()));
-    console.log(this.exist) // problem z asynchronicznością
-    return this.exist;
+  editBasketItemLogged(id, value) {
+    return this.http.post(this.mainUrl + 'updatebasket', { what: id, who: sessionStorage.getItem('id'), how: value });
   }
 
-  setExists(data) {
-    this.exist = data;
+  getBookInfo(id) {
+    return this.http.get(this.mainUrl + 'book?id=' + id);
   }
 
+  getUserInfo() {
+    return this.http.get(this.mainUrl + 'profile?id=' + sessionStorage.getItem('id'));
+  }
+
+  addToBasket(id, value) {
+    return this.http.post(this.mainUrl + 'addbasket', { what: id, who: sessionStorage.getItem('id'), how: value });
+  }
+
+  finalizeOrder() {
+    return this.http.get(this.mainUrl + 'buy?kto=' + sessionStorage.getItem('id'));
+  }
+
+  signIn(body) {
+    return this.http.post(this.mainUrl + 'session/', body);
+  }
   // Panel admina
   
   getAllBooks(addr) {
@@ -137,5 +137,4 @@ export class InfoService {
     const isOk = this.sendData(url, body);
     return isOk;
   }
-
 }
