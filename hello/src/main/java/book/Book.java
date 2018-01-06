@@ -15,10 +15,13 @@ public class Book {
 	protected String cena;
 	protected String opis;
 	protected String ocena;
+	protected String ilosc;
+
 	protected ArrayList<SimpleReview> recenzje;
 	
+	//getbooks
 	public Book(String id, String nazwa, String imie, String nazwisko, String wydawnictwo, String gatunek,
-			String kategoria, String rok_wyd, String strony, String isbn, String cena, String ocena) {
+			String kategoria, String rok_wyd, String strony, String isbn, String cena, String ocena, String ilosc, String opis) {
 		super();
 		this.id = id;
 		this.nazwa = nazwa;
@@ -32,8 +35,48 @@ public class Book {
 		this.isbn = isbn;
 		this.cena = cena;
 		this.ocena = ocena;
+		this.ilosc=ilosc;
+		this.opis=opis;
 	}
 
+	//edit
+	public Book(String id, String nazwa, String imie, String nazwisko, String cena, String wydawnictwo, String gatunek,
+			String kategoria, String rok_wyd, String strony, String isbn, String opis, String ilosc) {
+		super();
+		this.id = id;
+		this.nazwa = nazwa;
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.wydawnictwo = wydawnictwo;
+		this.gatunek = gatunek;
+		this.kategoria = kategoria;
+		this.rok_wyd = rok_wyd;
+		this.strony = strony;
+		this.isbn = isbn;
+		this.cena = cena;
+		this.ilosc=ilosc;
+		this.opis=opis;
+	}
+	//add
+	public Book(String nazwa, String imie, String nazwisko, String cena, String wydawnictwo, String gatunek,
+			String kategoria, String rok_wyd, String strony, String isbn, String opis, String ilosc) {
+		super();
+		this.nazwa = nazwa;
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.wydawnictwo = wydawnictwo;
+		this.gatunek = gatunek;
+		this.kategoria = kategoria;
+		this.rok_wyd = rok_wyd;
+		this.strony = strony;
+		this.isbn = isbn;
+		this.cena = cena;
+		this.ilosc=ilosc;
+		this.opis=opis;
+	}
+	
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -146,5 +189,11 @@ public class Book {
 		this.recenzje = recenzje;
 	}
 	
-	
+	public String getIlosc() {
+		return ilosc;
+	}
+
+	public void setIlosc(String ilosc) {
+		this.ilosc = ilosc;
+	}
 }

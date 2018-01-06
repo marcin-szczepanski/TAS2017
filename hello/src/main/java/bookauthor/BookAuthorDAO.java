@@ -25,6 +25,7 @@ public class BookAuthorDAO {
 	}
 
 	public ArrayList<BookAuthor> listByCategory(String category) {
+		
 		String SQL = String.format("SELECT DISTINCT b.*,AVG(o.ocena)as Ocena\n"
 				+ "FROM ALLBOOKS b LEFT JOIN Oceny o ON b.id = o.id_ks WHERE b.Kategoria='%s'\n"
 				+ "group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena \n" + "ORDER BY b.Id ",
@@ -87,5 +88,13 @@ public class BookAuthorDAO {
 		Collections.sort(books, comparing(BookAuthor::getAccuracy));
 		Collections.reverse(books);
 		return books;
+	}
+
+	public ArrayList<BookAuthor> getAllBooks() {
+		String SQL = String.format("SELECT DISTINCT b.*,AVG(o.ocena)as Ocena\n"
+				+ "FROM ALLBOOKS b LEFT JOIN Oceny o ON b.id = o.id_ks "
+				+ "group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena \n" + "ORDER BY b.Id ");
+		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
+		return list;
 	}
 }

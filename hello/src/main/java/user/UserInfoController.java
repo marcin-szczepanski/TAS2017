@@ -32,4 +32,18 @@ public class UserInfoController {
 	        return r.createUser(user.login, user.haslo, user.email, user.imie, user.nazwisko, user.telefon, user.adres, user.miasto, user.kod);
 		}
 	
+	@RequestMapping(value = "/user/privilages")
+	public Boolean  isAdmin(@RequestParam(value = "id")String id) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	        UserInfoDAO r = (UserInfoDAO)context.getBean("UserInfoDAO");
+	        return r.isAdmin(id);
+		}
+	
+	@RequestMapping(value = "/user/delete")
+	public Boolean  deleteUser(@RequestParam(value = "id")String id) {
+			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	        UserInfoDAO r = (UserInfoDAO)context.getBean("UserInfoDAO");
+	        return r.deleteUser(id);
+		}
+	
 }
