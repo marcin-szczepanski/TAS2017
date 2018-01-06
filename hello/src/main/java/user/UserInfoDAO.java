@@ -36,7 +36,7 @@ public class UserInfoDAO {
 	}
 
 	public Boolean deleteUser(String id) {
-		String SQL = "Delete FROM Uzytkownik where id=" + id;
+		String SQL = "exec DELETEUSER " + id;
 		try {
 			jdbcTemplateObject.update(SQL);
 			return true;

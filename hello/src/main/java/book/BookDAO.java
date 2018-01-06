@@ -30,7 +30,7 @@ public class BookDAO {
 	   }
 
 public Boolean deleteBook(String id) {
-	String SQL = "Delete FROM Ksiazka where id=" + id;
+	String SQL = "exec DELETEBOOK " + id;
 	try {
 		jdbcTemplateObject.update(SQL);
 		return true;
