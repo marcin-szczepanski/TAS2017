@@ -20,6 +20,7 @@ export class AppComponent {
   categorySearch = '';
   querySearch = '';
   id;
+  admin = true;
 
   constructor(private infoService: InfoService) {
     this.userLogged();

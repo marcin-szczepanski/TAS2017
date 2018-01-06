@@ -1,0 +1,254 @@
+<h4 class="text-gray mb-4">Zarządzaj książkami</h4>
+<div class="row">
+    <form action="/" method="post" class="paddings margins bradius-top" #usrFrm="ngForm" (ngSubmit)="pokaz()">
+        <fieldset>
+            <legend>Pokaż wszystkie książki</legend>
+            <button class="btn btn-primary background-light-blue" type="submit">Pokaż!</button>
+        </fieldset>
+    </form>
+    <form action="/" method="post" class="paddings margins bradius-top" #userForm="ngForm" (ngSubmit)="add()">
+        <fieldset>
+            <legend>Dodaj książkę</legend>
+            <button class="btn btn-primary background-light-blue" type="submit">Dodaj!</button>
+        </fieldset>
+    </form>
+</div>
+<div class="row">
+    <form action="/" method="post" class="paddings margins bradius-top" #user="ngForm" (ngSubmit)="edit(user.value)">
+        <fieldset>
+            <legend>Edytuj książkę</legend>
+            <label>
+                Podaj identyfikator książki:
+                <input type="text" class="form-control" name="ident" #ident ngModel />
+            </label>
+            <button class="btn btn-primary background-light-blue" type="submit">Edytuj!</button>
+        </fieldset>
+    </form>
+    <form action="/" method="post" class="paddings margins bradius-top" #usr="ngForm" (ngSubmit)="delete(usr.value)">
+        <fieldset>
+            <legend>Usuń książkę</legend>
+            <label>
+                Podaj identyfikator książki:
+                <input type="text" class="form-control" name="id" ngModel />
+            </label>
+            <button class="btn btn-primary background-light-blue" type="submit">Usuń!</button>
+        </fieldset>
+    </form>
+</div>
+<section class="paddings margins bradius mb-4 bg-white" [ngSwitch]="mode">
+    <div *ngSwitchCase="1">
+        <h2>Dodawanie książki</h2>
+        <form action="/" method="post" class="paddings margins bradius-top" #form="ngForm" (ngSubmit)="dodawanie(form.value)">
+            <div class="form-row align-items-center">
+                    <div class="col-md-4 col-sm-4 min">
+                        <div class="mb-2">
+                            <label>
+                                Tytuł książki
+                                <input type="text" class="form-control" name="nazwa" ngModel placeholder="Wpisz tytuł" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Imię autora
+                                <input type="text" class="form-control" name="imie" ngModel placeholder="Wpisz imię autora" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Nazwisko autora
+                                <input type="text" class="form-control" name="nazwisko" ngModel placeholder="Wpisz nazwisko autora" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Cena w zł
+                                <input type="text" class="form-control" name="cena" ngModel placeholder="Wpisz cenę w zł" required />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 min">
+                        <div class="mb-2">
+                            <label>
+                                Wydawnictwo
+                                <input type="text" class="form-control" name="wydawnictwo" ngModel placeholder="Wpisz wydawnictwo" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Gatunek
+                                <input type="text" class="form-control" name="gatunek" ngModel placeholder="Wpisz gatunek" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Kategoria
+                                <select ngModel name="kategoria" id="kategoria" class="form-control mb-2" required>
+                                    <option value="Lektury">Lektury</option>
+                                    <option value="Literatura piękna">Literatura piękna</option>
+                                    <option value="Literatura faktu">Literatura faktu</option>
+                                    <option value="Literatura dziecięca">Literatura dziecięca</option>
+                                    <option value="Podręczniki">Podręczniki</option>
+                                    <option value="Encyklopedie i słowniki">Encyklopedie i słowniki</option>
+                                    <option value="Komiksy">Komiksy</option>
+                                    <option value="Poezja">Poezja</option>
+                                    <option value="Poradniki">Poradniki</option>
+                                    <option value="Sport i turystyka">Sport i turystyka</option>
+                                    <option value="Pozostałe">Pozostałe</option>
+                                    </select>
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Rok wydania
+                                <input type="number" class="form-control" name="rok_wyd" ngModel placeholder="Wpisz rok wydania" required />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 min">
+                        <div class="mb-2">
+                            <label>
+                                Ilość stron
+                                <input type="number" class="form-control" name="strony" ngModel placeholder="Wpisz ilość stron" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Kod ISBN
+                                <input type="text" class="form-control" name="isbn" ngModel placeholder="Wpisz kod ISBN" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Ilość w magazynie
+                                <input type="number" min="0" class="form-control" name="ilosc" ngModel placeholder="Wpisz ilość" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Opis
+                                <textarea class="form-control" name="opis" ngModel placeholder="Wpisz opis" required></textarea>
+                            </label>
+                        </div>
+                    </div>
+            </div>    
+            <button class="btn btn-primary background-light-blue" type="submit">Zapisz!</button>
+        </form>
+    </div>
+    <div *ngSwitchCase="2">
+        <h2>Edytowanie książki</h2>
+        <form action="/" method="post" class="paddings margins bradius-top" #frm="ngForm" (ngSubmit)="edytowanie(frm.value)">
+            <div class="form-row align-items-center">
+                    <div class="col-md-4 col-sm-4 min">
+                        <div class="mb-2">
+                            <label>
+                                Tytuł książki
+                                <input type="text" class="form-control" name="nazwa" [(ngModel)]="editbook.tytul" placeholder="Wpisz tytuł" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Imię autora
+                                <input type="text" class="form-control" name="imie" [(ngModel)]="editbook.imie" placeholder="Wpisz imię autora" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Nazwisko autora
+                                <input type="text" class="form-control" name="nazwisko" [(ngModel)]="editbook.nazwisko" placeholder="Wpisz nazwisko autora" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Cena w zł
+                                <input type="text" class="form-control" name="cena" [(ngModel)]="editbook.price" placeholder="Wpisz cenę w zł" required />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 min">
+                        <div class="mb-2">
+                            <label>
+                                Wydawnictwo
+                                <input type="text" class="form-control" name="wydawnictwo" [(ngModel)]="editbook.wydawnictwo" placeholder="Wpisz wydawnictwo" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Gatunek
+                                <input type="text" class="form-control" name="gatunek" [(ngModel)]="editbook.gatunek" placeholder="Wpisz gatunek" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Kategoria
+                                <select name="kategoria" id="kategoria" [(ngModel)]="editbook.kategoria" class="form-control mb-2" required>
+                                    <option value="Lektury">Lektury</option>
+                                    <option value="Literatura piękna">Literatura piękna</option>
+                                    <option value="Literatura faktu">Literatura faktu</option>
+                                    <option value="Literatura dziecięca">Literatura dziecięca</option>
+                                    <option value="Podręczniki">Podręczniki</option>
+                                    <option value="Encyklopedie i słowniki">Encyklopedie i słowniki</option>
+                                    <option value="Komiksy">Komiksy</option>
+                                    <option value="Poezja">Poezja</option>
+                                    <option value="Poradniki">Poradniki</option>
+                                    <option value="Sport i turystyka">Sport i turystyka</option>
+                                    <option value="Pozostałe">Pozostałe</option>
+                                    </select>
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Rok wydania
+                                <input type="number" class="form-control" name="rok_wyd" [(ngModel)]="editbook.rok_wyd" placeholder="Wpisz rok wydania" required />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 min">
+                        <div class="mb-2">
+                            <label>
+                                Ilość stron
+                                <input type="number" class="form-control" name="strony" [(ngModel)]="editbook.strony" placeholder="Wpisz ilość stron" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Kod ISBN
+                                <input type="text" class="form-control" name="isbn" [(ngModel)]="editbook.isbn" placeholder="Wpisz kod ISBN" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Ilość w magazynie
+                                <input type="number" min="0" class="form-control" name="ilosc" [(ngModel)]="editbook.ilosc" placeholder="Wpisz ilość" required />
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label>
+                                Opis
+                                <textarea class="form-control" name="opis" [(ngModel)]="editbook.opis" placeholder="Wpisz opis" required></textarea>
+                            </label>
+                        </div>
+                    </div>
+            </div>    
+            <button class="btn btn-primary background-light-blue" type="submit">Zapisz!</button>
+        </form>
+    </div>
+    <div *ngSwitchCase="3">
+        <h2>Lista książek w bazie</h2>
+        <div *ngFor="let book of books">
+            <div>
+                <hr />
+                <span>Identyfikator: </span>
+                <span><b>{{ book.id }}</b></span>
+                <br />
+                <span>Tytuł: </span>
+                <span><b>{{ book.nazwa }}</b></span>
+                <br />
+                <span>Autor: </span>
+                <span><b>{{ book.imie }} {{ book.nazwisko }}</b></span>
+                <button class="btn btn-primary background-light-blue" (click)="edit(book)" type="submit">Edytuj!</button>
+                <button class="btn btn-primary background-light-blue" (click)="delete(book)" type="submit">Usuń!</button>
+            </div>
+        </div>
+    </div>
+    <div *ngSwitchDefault></div>
+</section>

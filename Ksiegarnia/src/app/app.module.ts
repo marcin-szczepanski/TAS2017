@@ -17,6 +17,7 @@ import { OrderCompComponent } from './order-comp/order-comp.component';
 import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.component';
 import { SearchService } from './search.service';
 import { InfoService } from './info.service';
+import { AdminBooksComponent } from './admin-books/admin-books.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { InfoService } from './info.service';
     SignInComponent,
     MyProfileComponent,
     OrderCompComponent,
-    ShoppingBasketComponent
+    ShoppingBasketComponent,
+    AdminBooksComponent
   ],
   imports: [
     BrowserModule,

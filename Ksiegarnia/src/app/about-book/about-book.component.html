@@ -7,12 +7,12 @@
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mt-4">
         <h5 class="text-gray">
           <a class="noUnderline text-gray">
-            {{ book.title }}
+            {{ book.tytul }}
           </a>
         </h5>
-        <h6>{{ book.author }}</h6>
-        <h6>Wydawnictwo: {{ book.publishing }}</h6>
-        <h6>Rok wydania: {{ book.year }}</h6>
+        <h6>{{ book.imie }} {{ book.nazwisko }}</h6>
+        <h6>Wydawnictwo: {{ book.wydawnictwo }}</h6>
+        <h6>Rok wydania: {{ book.rok_wyd }}</h6>
         <h6>Cena: {{ book.price }} zł</h6>
         <h6>Ocena: {{ book.grade }}/10</h6>
         <h6>Twoja ocena:</h6>
@@ -35,8 +35,8 @@
       </div>
       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 mt-4">
         <h5 class="text-gray">Szczegóły</h5>
-        <h6>Ilość stron: {{ book.pages }}</h6>
-        <h6>Kategoria: {{ book.category }}</h6>
+        <h6>Ilość stron: {{ book.strony }}</h6>
+        <h6>Kategoria: {{ book.kategoria }}</h6>
         <h6>Okładka: {{ book.cover }}</h6>
         <h6>ISBN: {{ book.isbn }}</h6>
         <br />
@@ -52,7 +52,7 @@
   <div class="mt-4 pt-4 mb-4">
       <h5 class="text-gray">Opis książki</h5>
       <div class="description">
-        {{ book.description }}
+        {{ book.opis }}
       </div>
   </div>
   <div class="mt-4 pt-4">

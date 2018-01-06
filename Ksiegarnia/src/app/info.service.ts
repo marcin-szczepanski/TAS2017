@@ -10,6 +10,7 @@ export class InfoService {
   mainUrl = 'http://localhost:8080/';
   res = true;
   exist = false;
+  books = [];
 
   constructor(private http: Http) {}
 
@@ -40,19 +41,21 @@ export class InfoService {
 
   addBooks(answer) {
     this.book['id'] = answer.id;
-    this.book['title'] = answer.nazwa;
-    this.book['author'] = answer.imie + ' ' + answer.nazwisko;
+    this.book['tytul'] = answer.nazwa;
+    this.book['imie'] = answer.imie;
+    this.book['nazwisko'] = answer.nazwisko;
     this.book['price'] = answer.cena.slice(0, answer.cena.lastIndexOf('00'));
-    this.book['publishing'] = answer.wydawnictwo;
-    this.book['genre'] = answer.gatunek;
-    this.book['category'] = answer.kategoria;
-    this.book['year'] = answer.rok_wyd.slice(0, 4);
+    this.book['wydawnictwo'] = answer.wydawnictwo;
+    this.book['gatunek'] = answer.gatunek;
+    this.book['kategoria'] = answer.kategoria;
+    this.book['rok_wyd'] = answer.rok_wyd.slice(0, 4);
     this.book['grade'] = answer.ocena;
-    this.book['pages'] = answer.strony;
+    this.book['strony'] = answer.strony;
     this.book['cover'] = 'miękka';
     this.book['isbn'] = answer.isbn;
-    this.book['description'] = answer.opis;
+    this.book['opis'] = answer.opis;
     this.book['reviews'] = answer.recenzje;
+    this.book['ilosc'] = answer.ilosc;
   }
 
   sendData(url, body) {
@@ -92,6 +95,47 @@ export class InfoService {
 
   setExists(data) {
     this.exist = data;
+  }
+
+  // Panel admina
+  
+  getAllBooks(addr) {
+    this.books = [];
+    const url = this.mainUrl + addr;
+    const data = this.getService(url)
+    .then(answer => {
+      this.addAllBooks(answer);
+    });
+    return this.books;
+  }
+
+  addAllBooks(answer) {
+    for(let book of answer) {
+      const b = {};
+      b['id'] = book.id;
+      b['nazwa'] = book.nazwa;
+      b['imie'] = book.imie;
+      b['nazwisko'] = book.nazwisko;
+      this.books.push(b);
+    }
+  }
+
+  remove(id) {
+    const url = this.mainUrl + 'book/delete?id=' + id;
+    this.http.get(url)
+      .subscribe(data => this.sendResponse(data));
+  }
+
+  edit(body) {
+    const url = 'book/edit';
+    const isOk = this.sendData(url, body);
+    return isOk;
+  }
+
+  add(body) {
+    const url = 'book/add';
+    const isOk = this.sendData(url, body);
+    return isOk;
   }
 
 }
