@@ -98,25 +98,33 @@ export class InfoService {
     return this.http.post(this.mainUrl + 'session/', body);
   }
   // Panel admina
-  
+
   getAllBooks(addr) {
     this.books = [];
     const url = this.mainUrl + addr;
     const data = this.getService(url)
-    .then(answer => {
-      this.addAllBooks(answer);
-    });
+      .then(answer => {
+        this.addAllBooks(answer);
+      });
     return this.books;
   }
 
   addAllBooks(answer) {
-    for(let book of answer) {
+    for (let book of answer) {
       const b = {};
       b['id'] = book.id;
       b['nazwa'] = book.nazwa;
       b['imie'] = book.imie;
       b['nazwisko'] = book.nazwisko;
       this.books.push(b);
+    }
+  }
+
+  sendResponse(data) {
+    if (data.status === 200) {
+      this.res = true;
+    } else {
+      this.res = false;
     }
   }
 
