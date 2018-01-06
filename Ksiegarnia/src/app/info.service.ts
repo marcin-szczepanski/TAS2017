@@ -59,7 +59,9 @@ export class InfoService {
   }
 
   sendData(url, body) {
-    return this.http.post(this.mainUrl + url, body);
+    this.http.post(this.mainUrl + url, body)
+      .subscribe(data => this.sendResponse(data));
+    return this.res;
   }
 
   deleteFromBasketLogged(id) {

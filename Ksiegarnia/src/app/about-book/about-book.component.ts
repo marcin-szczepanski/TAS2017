@@ -65,27 +65,33 @@ export class AboutBookComponent implements OnChanges {
     } else {
       const url = 'review/';
       const toSend = { ks: this.ident, kto: this.user, text: this.review };
-      this.infoService.sendData(url, toSend)
-        .subscribe(data => this.getBooks());
+      const res = this.infoService.sendData(url, toSend);
+      if (res === true) {
+        this.getBooks();
+        alert('Dziękujemy za dodanie recenzji!');
+      } else {
+        alert('Coś poszło nie tak. Spróbuj ponownie później.');
+      }
+      this.getBooks();
     }
   }
 
   saveGrade() {
     const url = 'grade/';
     const toSend = { ks: this.ident, kto: this.user, ocena: this.grade };
-    this.infoService.sendData(url, toSend)
-      .subscribe(
-      data => {
-        this.getBooks();
-        alert('Dziękujemy za ocenę!');
-        const ob = { id: this.ident, grade: this.grade };
-        localStorage.setItem('WatchedBook' + `${this.ident}`, JSON.stringify(ob));
-        this.graded = true;
-        this.getBooks();
-      }
-      );
-
+    const res = this.infoService.sendData(url, toSend);
+    if (res === true) {
+      this.getBooks();
+      alert('Dziękujemy za ocenę!');
+      const ob = { id: this.ident, grade: this.grade };
+      localStorage.setItem('WatchedBook' + `${this.ident}`, JSON.stringify(ob));
+      this.graded = true;
+    } else {
+      alert('Coś poszło nie tak. Spróbuj ponownie później.');
+    }
+    this.getBooks();
   }
+
   // basket start
   addToBasket(value: any, id, price) {
     if (sessionStorage.getItem('id') !== null && sessionStorage.getItem('id') !== undefined) {
