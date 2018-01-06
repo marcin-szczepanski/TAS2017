@@ -94,8 +94,8 @@ export class AppComponent implements OnInit {
     this.mode = 0;
     this.user = 1;
     this.logged = false;
-    this.basket = parseFloat('0');
-    localStorage.setItem('Basket', '0');
+    this.basket = parseFloat('0.00');
+    localStorage.setItem('Basket', '0.00');
     window.location.reload();
   }
 
@@ -121,9 +121,9 @@ export class AppComponent implements OnInit {
       });
     } else {
       if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {
-        this.basket = parseFloat(JSON.parse(localStorage.getItem('Basket')).toFixed());
+        this.basket = parseFloat(JSON.parse(localStorage.getItem('Basket')).toFixed(2));
       } else {
-        this.basket = parseFloat('0');
+        this.basket = parseFloat('0.00');
       }
     }
   }
