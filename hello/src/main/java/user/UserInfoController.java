@@ -32,6 +32,14 @@ public class UserInfoController {
 	        return r.createUser(user.login, user.haslo, user.email, user.imie, user.nazwisko, user.telefon, user.adres, user.miasto, user.kod);
 		}
 	
+	@RequestMapping("/users")
+	public ArrayList<UserInfo> getUsers() {
+		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+        UserInfoDAO u = (UserInfoDAO)context.getBean("UserInfoDAO");
+        ArrayList<UserInfo> users = u.getUsers();
+		return users;
+	}
+	
 	@RequestMapping(value = "/user/privilages")
 	public Boolean  isAdmin(@RequestParam(value = "id")String id) {
 			ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");

@@ -44,4 +44,10 @@ public class UserInfoDAO {
 			return false;
 		}
 	}
+
+	public ArrayList<UserInfo> getUsers() {
+		String SQL = "SELECT * FROM Uzytkownik";
+		ArrayList<UserInfo> users = (ArrayList<UserInfo>) jdbcTemplateObject.query(SQL, new UserInfoMapper());
+		return users;
+	}
 }
