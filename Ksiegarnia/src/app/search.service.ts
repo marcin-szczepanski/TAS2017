@@ -27,6 +27,9 @@ export class SearchService {
     const url = 'http://localhost:8080/' + addr;
     this.books = [];
     this.answer = {};
+    if (addr == undefined) {
+      return [];
+    }
     const data = this.getService(url)
       .then(answer => this.addBooks(answer));
     return this.books;
