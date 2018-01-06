@@ -10,7 +10,8 @@ CREATE OR ALTER PROCEDURE MODIFYBOOK
 	@Strony int,
 	@ISBN varchar(30),
 	@Opis text,
-	@Cena money
+	@Cena money,
+	@ilosc int
 AS
 BEGIN
 	declare @idwyd int
@@ -43,8 +44,8 @@ BEGIN
 	set @idkat = (SELECT id FROM Kategoria WHERE Kat = @Kategoria)
 	set @idaut = (SELECT id FROM Autor WHERE Imie = @ImieA AND Nazwisko = @NAzwiskoA)
 
-	UPDATE Ksiazka SET Nazwa=@Nazwa, Autor = @idaut, Wydawnictwo = @idwyd, Gatunek = @idgat , Kategoria = @idkat, Rok_wyd = @Rok_wyd, Strony = @Strony , ISBN = @ISBN, Opis = @Opis, Cena = @Cena
+	UPDATE Ksiazka SET Nazwa=@Nazwa, Autor = @idaut, Wydawnictwo = @idwyd, Gatunek = @idgat , Kategoria = @idkat, Rok_wyd = @Rok_wyd, Strony = @Strony , ISBN = @ISBN, Opis = @Opis, Cena = @Cena, Ilosc=@Ilosc
 	WHERE id=@id
 END
 
-exec MODIFYBOOK	idksiazkidomofydikacji,'NazwaKsiazki','ImieAutora','NazwiskoAutora','Wydawnictwo','Gatunek','Kategoria','ROK',ile_stron,'ISBN','opis',cena(format 00.00)
+exec MODIFYBOOK	idksiazkidomofydikacji,'NazwaKsiazki','ImieAutora','NazwiskoAutora','Wydawnictwo','Gatunek','Kategoria','ROK',ile_stron,'ISBN','opis',cena(format 00.00),ilosc
