@@ -47,4 +47,4 @@ BEGIN
 	WHERE id=@id
 END
 
-exec MODIFYBOOK	idksiazkidomofydikacji,'NazwaKsiazki','ImieAutora','NazwiskoAutora','Wydawnictwo','Gatunek','Kategoria','ROK',ile_stron,'ISBN','opis','cena'
+exec MODIFYBOOK	idksiazkidomofydikacji,'NazwaKsiazki','ImieAutora','NazwiskoAutora','Wydawnictwo','Gatunek','Kategoria','ROK',ile_stron,'ISBN','opis',cena(format 00.00)
