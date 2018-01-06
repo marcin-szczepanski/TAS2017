@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +34,7 @@ public class BookController {
         
         return t.deleteBook(id);
 	}
-	@RequestMapping("/book/add")
+	@RequestMapping(value="/book/add", method = RequestMethod.POST)
 	public Boolean addBook(@RequestBody Book book) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
@@ -42,7 +43,7 @@ public class BookController {
         return t.addBook(book);
 	}
 	
-	@RequestMapping("/book/edit")
+	@RequestMapping(value="/book/edit", method = RequestMethod.POST)
 	public Boolean editBook(@RequestBody Book book) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
