@@ -75,7 +75,9 @@ public class Book {
 		this.opis=opis;
 	}
 	
-	
+	public Book() {
+		
+	}
 	
 	public String getId() {
 		return id;
