@@ -18,8 +18,6 @@ public String createSession(String login, String password) {
     String SQL = "select id, login,haslo,imie,status from Uzytkownik where login='"+login+"'";
     User user = ((ArrayList<User>) jdbcTemplateObject.query(SQL, new UserMapper())).get(0);
     if(user.getPassword().equals(password)) {
-    	String SQL2="UPDATE Uzytkownik SET status='1' WHERE login='"+login+"'";
-    	jdbcTemplateObject.update(SQL2);
     	return user.getId();
     }
     else {
