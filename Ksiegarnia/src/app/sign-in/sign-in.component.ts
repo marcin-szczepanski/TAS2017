@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   @Output() loginStatus = new EventEmitter();
   @Output() modeLogged = new EventEmitter();
   @Output() signInWithError = new EventEmitter();
-
+  @Output() isAdmin = new EventEmitter();
   results;
   results2;
   sum = 0;
@@ -33,6 +33,13 @@ export class SignInComponent implements OnInit {
       } else {
         this.results = data.json();
         sessionStorage.setItem('id', this.results);
+        const isAdminSubscribe = this.infoService.isAdmin(this.results).subscribe(
+          d => {
+            const responseAdmin = d.json()
+            this.isAdmin.emit(responseAdmin);
+            console.log(d.json());
+          }
+        );
         this.nieudaneLogowanie = false;
         this.udaneLogowanie = true;
         if (localStorage.getItem('ProductsInBasket') !== undefined && localStorage.getItem('ProductsInBasket') !== null) {
@@ -41,7 +48,7 @@ export class SignInComponent implements OnInit {
           orderTMP.forEach((item) => {
             const addToBasket = this.infoService.addToBasket(item.id, item.num).subscribe(
               d => {
-                console.log(d.json(), item);
+                // console.log(d.json(), item);
                 if (!d.json()) {
                   this.errorAddToBasket = true;
                 }
@@ -54,7 +61,7 @@ export class SignInComponent implements OnInit {
                   () => {
                   });
                 this.orderLen++;
-                console.log(this.orderLen, orderTMPLen, item);
+                // console.log(this.orderLen, orderTMPLen, item);
                 if (this.orderLen === orderTMPLen) {
                   localStorage.removeItem('ProductsInBasket');
                   if (this.errorAddToBasket) {

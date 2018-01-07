@@ -147,4 +147,35 @@ export class InfoService {
     const isOk = this.sendData(url, body);
     return isOk;
   }
+
+  isAdmin(id) {
+    return this.http.get(this.mainUrl + '/user/privilages?id=' + id);
+  }
+
+  showAllUsers() {
+    return this.http.get(this.mainUrl + '/users');
+  }
+
+  removeUser(id) {
+    return this.http.get(this.mainUrl + '/user/delete?id=' + id);
+  }
+
+  onSubmit(value: any) {
+    this.http.post('http://localhost:8080/register/', {
+      login: value.login,
+      haslo: value.haslo,
+      email: value.email,
+      imie: value.imie,
+      nazwisko: value.nazwisko,
+      telefon: value.telefon,
+      adres: value.ulica,
+      miasto: value.miasto,
+      kod: value.kodPocztowy
+    }).subscribe();
+  }
+
+  addUser(body) {
+    return this.http.post('http://localhost:8080/register/', body)
+  }
+
 }

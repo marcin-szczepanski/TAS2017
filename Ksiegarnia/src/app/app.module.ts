@@ -18,6 +18,8 @@ import { ShoppingBasketComponent } from './shopping-basket/shopping-basket.compo
 import { SearchService } from './search.service';
 import { InfoService } from './info.service';
 import { AdminBooksComponent } from './admin-books/admin-books.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AdminBooksComponent } from './admin-books/admin-books.component';
     MyProfileComponent,
     OrderCompComponent,
     ShoppingBasketComponent,
-    AdminBooksComponent
+    AdminBooksComponent,
+    AdminUsersComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

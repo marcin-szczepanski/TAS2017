@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   categorySearch = '';
   querySearch = '';
   id;
-  admin = true;
+  admin = false;
 
   constructor(private infoService: InfoService) { }
 
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
       this.basket = 0.00;
     }
     const oldBasketData = localStorage.getItem('Basket');
-    localStorage.setItem('Basket', JSON.stringify({price: this.basket}));
+    localStorage.setItem('Basket', JSON.stringify({ price: this.basket }));
   }
 
   validateEmail(email) {
@@ -111,6 +111,12 @@ export class AppComponent implements OnInit {
     this.logged = loginStatus;
   }
 
+  handleIsAdmin(isAdmin) {
+    this.admin = isAdmin;
+    console.log(this.admin);
+  }
+
+
   ngOnInit() {
     this.userLogged();
     this.id = sessionStorage.getItem('id');
@@ -119,6 +125,11 @@ export class AppComponent implements OnInit {
         this.basket = data.json();
         localStorage.setItem('Basket', this.basket.toString());
       });
+      const isAdminSubscribe = this.infoService.isAdmin(this.id).subscribe(
+        d => {
+          this.admin = d.json();
+        }
+      );
     } else {
       if (localStorage.getItem('Basket') !== undefined && localStorage.getItem('Basket') !== null) {
         this.basket = parseFloat(JSON.parse(localStorage.getItem('Basket')).toFixed(2));

@@ -1,0 +1,156 @@
+<h4 class="text-gray mb-4">Zarządzaj użytkownikami</h4>
+<div class="row">
+  <form action="/" method="post" class="paddings margins bradius-top" #usrFrm="ngForm" (ngSubmit)="pokaz()">
+    <fieldset>
+      <legend>Pokaż wszystkich użytkowników</legend>
+      <button class="btn btn-primary background-light-blue" type="submit">Pokaż!</button>
+    </fieldset>
+  </form>
+  <form action="/" method="post" class="paddings margins bradius-top" #userForm="ngForm" (ngSubmit)="add()">
+    <fieldset>
+      <legend>Dodaj użytkownika</legend>
+      <button class="btn btn-primary background-light-blue" type="submit">Dodaj!</button>
+    </fieldset>
+  </form>
+</div>
+<div *ngIf="listLength">
+  <button type="submit" class="btn btn-primary" (click)="ukryj()">Ukryj liste użytkowników</button>
+  <table class="table-bordered">
+    <thead>
+      <tr>
+        <td> id</td>
+        <td> login</td>
+        <td> email</td>
+        <td> haslo</td>
+        <td> imie</td>
+        <td> nazwisko</td>
+        <td> adres</td>
+        <td> miasto</td>
+        <td> kod</td>
+        <td> telefon</td>
+        <td> admin</td>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of allBooks">
+      <tr>
+        <td>{{item.id}}</td>
+        <td>{{item.login}}</td>
+        <td>{{item.email}}</td>
+        <td>*******</td>
+        <td>{{item.imie}}</td>
+        <td>{{item.nazwisko}}</td>
+        <td>{{item.adres}}</td>
+        <td>{{item.miasto}}</td>
+        <td>{{item.kod}}</td>
+        <td>{{item.telefon}}</td>
+        <td>{{item.status}}</td>
+        <td>
+          <button (click)="edit(item.id)" class="btn btn-success">Edytuj</button>
+        </td>
+        <td>
+          <button (click)="usun(item.id)" class="btn btn-danger">Usuń</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div *ngIf='addUserForm'>
+  <button type="submit" class="btn btn-primary" (click)="ukryjDodawanie()">Ukryj dodawanie użytkownika</button>
+  <h4 class="text-gray mb-4 centerMargin">Dodaj użytkownika</h4>
+  <div *ngIf="registerStatus" class="alert alert-success">Dodano użytkownika!</div>
+  <div *ngIf="invalidRegister" class="alert alert-danger">Login zajęty. Wybierz inny.</div>
+  <form *ngIf="!registerStatus" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-6 centerMargin">
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="text" placeholder="Login" class="form-control input-lg" pattern="[a-zA-Z0-9]*" name="login" ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="password" placeholder="Hasło" class="form-control input-lg" pattern=".{8,25}" name="haslo" ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="email" placeholder="E-mail" class="form-control input-lg" name="email" ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]*" placeholder="Imię" class="form-control input-lg" name="imie" ngModel
+                required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+" placeholder="Nazwisko" class="form-control input-lg" name="nazwisko"
+                ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="text" pattern="(\+[0-9]{2})*[0-9]{9}" placeholder="Telefon" class="form-control input-lg" name="telefon" ngModel
+                required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="text" placeholder="Ulica" class="form-control input-lg" name="ulica" ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="text" pattern="[a-zA-ZżźćńółęąśŻŹĆĄŚĘŁÓŃ]+" placeholder="Miasto" class="form-control input-lg" name="miasto"
+                ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="form-group">
+            <div>
+              <input type="text" pattern="[0-9]{2}-[0-9]{3}" placeholder="Kod pocztowy" class="form-control input-lg" name="kodPocztowy"
+                ngModel required/>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+          <div class="row">
+            <button type="submit" class="btn btn-primary centerMargin">Dodaj</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="editUserComponentVisibility">
+  <button type="submit" class="btn btn-primary" (click)="ukryjEdytowanie()">Ukryj wyświetlenie użytkownika i edycję</button>
+  <app-edit-user  [user]="editUserId" (userUpdated)="handleUserUpdated($event)"></app-edit-user>
+</div>
