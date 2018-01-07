@@ -161,7 +161,7 @@ export class InfoService {
   }
 
   onSubmit(value: any) {
-    this.http.post('http://localhost:8080/register/', {
+    this.http.post(this.mainUrl + '/register', {
       login: value.login,
       haslo: value.haslo,
       email: value.email,
@@ -175,7 +175,14 @@ export class InfoService {
   }
 
   addUser(body) {
-    return this.http.post('http://localhost:8080/register/', body)
+    return this.http.post(this.mainUrl + '/register/', body);
   }
 
+  getProfile(id) {
+    return this.http.get(this.mainUrl + '/profile?id=' + id);
+  }
+
+  update(body){
+    return this.http.post(this.mainUrl + '/update' , body);
+  }
 }

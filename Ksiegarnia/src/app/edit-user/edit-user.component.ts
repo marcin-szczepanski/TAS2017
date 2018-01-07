@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { OnChanges } from '@angular/core';
+import { InfoService } from '../info.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -32,15 +33,14 @@ export class EditUserComponent implements OnInit, OnChanges {
   statusEdytujKod = false;
   statusEdytujAdmin = false;
   statusZmian = false;
-  constructor(private http: Http) { }
+  constructor(private infoService: InfoService) { }
 
   ngOnChanges() {
     this.ngOnInit();
   }
 
   ngOnInit() {
-    const url = 'http://localhost:8080/profile?id=' + this.user;
-    this.http.get(url).subscribe(data => {
+    this.infoService.getProfile(this.user).subscribe(data => {
       this.results = data.json();
       this.login = this.results[0].login;
       this.email = this.results[0].email;
@@ -67,9 +67,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujLogin(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'login', how: value.login, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujLogin = false;
@@ -89,9 +88,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujHaslo(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'haslo', how: value.haslo, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujHaslo = false;
@@ -111,9 +109,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujEmail(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'email', how: value.email, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujEmail = false;
@@ -133,9 +130,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujImie(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'imie', how: value.imie, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujImie = false;
@@ -155,9 +151,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujNazwisko(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'nazwisko', how: value.nazwisko, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujNazwisko = false;
@@ -177,9 +172,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujTelefon(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'telefon', how: value.telefon, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujTelefon = false;
@@ -200,9 +194,8 @@ export class EditUserComponent implements OnInit, OnChanges {
   }
 
   edytujUlice(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'adres', how: value.ulica, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujUlice = false;
@@ -222,9 +215,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujMiasto(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'miasto', how: value.miasto, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujMiasto = false;
@@ -244,9 +236,8 @@ export class EditUserComponent implements OnInit, OnChanges {
     this.statusZmian = false;
   }
   edytujKod(value: any) {
-    const url = 'http://localhost:8080/update';
     const body = { what: 'kod', how: value.kod, who: this.user };
-    this.http.post(url, body).subscribe(data => { },
+    this.infoService.update(body).subscribe(data => { },
       error => { },
       () => {
         this.statusEdytujKod = false;
@@ -267,9 +258,8 @@ export class EditUserComponent implements OnInit, OnChanges {
   }
   edytujAdmin(value: any) {
     if (value.admin === 'Admin' || value.admin === 'admin') {
-      const url = 'http://localhost:8080/update';
       const body = { what: 'status', how: 1, who: this.user };
-      this.http.post(url, body).subscribe(data => { },
+      this.infoService.update(body).subscribe(data => { },
         error => { },
         () => {
           this.statusEdytujAdmin = false;
@@ -279,9 +269,8 @@ export class EditUserComponent implements OnInit, OnChanges {
         }
       );
     } else {
-      const url = 'http://localhost:8080/update';
       const body = { what: 'status', how: 0, who: this.user };
-      this.http.post(url, body).subscribe(data => { },
+      this.infoService.update(body).subscribe(data => { },
         error => { console.log(error); },
         () => {
           this.statusEdytujAdmin = false;
