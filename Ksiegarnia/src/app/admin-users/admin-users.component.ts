@@ -63,27 +63,28 @@ export class AdminUsersComponent implements OnInit {
       kod: value.kodPocztowy
     }).subscribe(
       data => {
-        this.pokaz();
+        if (this.listLength) {
+          this.pokaz();
+        }
         this.invalidRegister = false;
       },
       error => {
         this.invalidRegister = true;
-        this.ngOnInit();
       },
       () => { }
       );
   }
 
-  edit(id){
+  edit(id) {
     this.editUserId = id;
     this.editUserComponentVisibility = true;
   }
 
-  ukryjEdytowanie(){
+  ukryjEdytowanie() {
     this.editUserComponentVisibility = false;
   }
 
-  handleUserUpdated(){
+  handleUserUpdated() {
     this.pokaz();
   }
 
