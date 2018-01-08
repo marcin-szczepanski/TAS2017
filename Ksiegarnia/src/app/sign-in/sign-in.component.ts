@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
           d => {
             const responseAdmin = d.json()
             this.isAdmin.emit(responseAdmin);
-            console.log(d.json());
+            // console.log(d.json());
           }
         );
         this.nieudaneLogowanie = false;

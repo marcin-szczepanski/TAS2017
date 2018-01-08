@@ -113,7 +113,6 @@ export class AppComponent implements OnInit {
 
   handleIsAdmin(isAdmin) {
     this.admin = isAdmin;
-    console.log(this.admin);
   }
 
 
