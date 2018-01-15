@@ -33,7 +33,7 @@ public class BasketDAO {
 			}
 			}
 		catch(Exception handlerException) {
-			String SQL = "AddIntoBasket "+id+","+kto+","+ilosc+"";
+			String SQL = "EXEC AddIntoBasket "+id+","+kto+","+ilosc+"";
 			try{
 				jdbcTemplateObject.update(SQL);
 				//return "Dodano";
