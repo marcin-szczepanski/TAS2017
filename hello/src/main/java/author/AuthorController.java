@@ -1,26 +1,25 @@
 package author;
 
 import java.util.ArrayList;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
+@CrossOrigin
 @RestController
 public class AuthorController {
-	
-	@CrossOrigin(origins = "http://localhost:4200")
+
+	private AuthorDAO dao;
+
+	@Autowired
+	public void setDAO(AuthorDAO dao) {
+		this.dao = dao;
+	}
+
 	@RequestMapping("/author")
 	public ArrayList<Author> author() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-
-        AuthorDAO a = (AuthorDAO)context.getBean("AuthorDAO");
-        
-        ArrayList<Author> authors = a.listAuthors();
+		ArrayList<Author> authors = dao.listAuthors();
 		return authors;
 	}
 }

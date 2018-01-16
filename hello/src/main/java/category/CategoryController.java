@@ -2,24 +2,26 @@ package category;
 
 import java.util.ArrayList;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @CrossOrigin
 @RestController
 public class CategoryController {
-	
+
+	private CategoryDAO dao;
+
+	@Autowired
+	public void setDAO(CategoryDAO dao) {
+		this.dao = dao;
+	}
 
 	@RequestMapping("/category")
 	public ArrayList<Category> category() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-
-        CategoryDAO c = (CategoryDAO)context.getBean("CategoryDAO");
-        
-        ArrayList<Category> category = c.listCategory();
+		ArrayList<Category> category = dao.listCategory();
 		return category;
 	}
 }

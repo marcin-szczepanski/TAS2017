@@ -2,10 +2,7 @@ package bookauthor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Pattern;
-
 import org.springframework.jdbc.core.RowMapper;
-import java.util.regex.Matcher;
 
 public class KeyWordMapper implements RowMapper<BookAuthor> {
 	protected String query;

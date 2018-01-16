@@ -2,8 +2,7 @@ package bookauthor;
 
 import java.util.ArrayList;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,29 +12,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BookAuthorController {
 
+	private BookAuthorDAO dao;
+
+	@Autowired
+	public void setDAO(BookAuthorDAO dao) {
+		this.dao = dao;
+	}
+
 	@RequestMapping("/top6")
 	public ArrayList<BookAuthor> top6() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-
-		BookAuthorDAO t = (BookAuthorDAO) context.getBean("BookAuthorDAO");
-
-		ArrayList<BookAuthor> top6 = t.listTOP6();
+		ArrayList<BookAuthor> top6 = dao.listTOP6();
 		return top6;
 	}
 
 	@RequestMapping("/books")
-	public ArrayList<BookAuthor> searchByCategory(@RequestParam(value = "category", required=false)String category) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	public ArrayList<BookAuthor> searchByCategory(@RequestParam(value = "category", required = false) String category) {
+		ArrayList<BookAuthor> list;
+		if (category != null && !category.trim().isEmpty()) {
+			list = dao.listByCategory(category);
+		} else {
+			list = dao.getAllBooks();
+		}
 
-        BookAuthorDAO t = (BookAuthorDAO)context.getBean("BookAuthorDAO");
-        ArrayList<BookAuthor> list;
-        if (category != null && !category.trim().isEmpty()) {
-        	list = t.listByCategory(category);
-        }
-        else {
-        	list = t.getAllBooks();
-        }
-         
 		return list;
 	}
 
@@ -49,27 +47,20 @@ public class BookAuthorController {
 			@RequestParam(value = "pagesMin", required = false) String pagesMin,
 			@RequestParam(value = "pagesMax", required = false) String pagesMax,
 			@RequestParam(value = "isbn", required = false) String isbn) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-
-		BookAuthorDAO t = (BookAuthorDAO) context.getBean("BookAuthorDAO");
-
 		if (pagesMin != null && pagesMax != null && Integer.parseInt(pagesMin) > Integer.parseInt(pagesMax)) {
 			String temp;
 			temp = pagesMin;
 			pagesMin = pagesMax;
 			pagesMax = temp;
 		}
-		return t.advancedSearch(title, authorFirstName, authorLastName, category, publisher, year, pagesMin, pagesMax,
+		return dao.advancedSearch(title, authorFirstName, authorLastName, category, publisher, year, pagesMin, pagesMax,
 				isbn);
 	}
 
 	@RequestMapping("/books/keyword")
 	public ArrayList<BookAuthor> keyWordSearch(@RequestParam(value = "query") String query,
 			@RequestParam(value = "category", required = false) String category) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 
-		BookAuthorDAO t = (BookAuthorDAO) context.getBean("BookAuthorDAO");
-
-		return t.searchByKeyWord(query, category);
+		return dao.searchByKeyWord(query, category);
 	}
 }

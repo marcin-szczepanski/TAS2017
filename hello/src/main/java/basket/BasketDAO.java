@@ -1,8 +1,6 @@
 package basket;
 
-import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
