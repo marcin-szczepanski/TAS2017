@@ -81,8 +81,15 @@ export class AppComponent implements OnInit {
 
   saveEmail() {
     if (this.validateEmail(this.email)) {
-      console.log(this.email);
-      alert('Dziękujemy za zapisanie się do newslettera!');
+      let mail = {
+        mail: this.email.toString()
+      };
+      let isOK = this.infoService.addNewsletter(mail);
+      if (isOK) {
+        alert('Dziękujemy za zapisanie się do newslettera!');
+      } else {
+        alert('Coś poszło nie tak. Spróbuj ponownie później.');
+      }
     } else {
       alert('Podaj poprawny adres email!');
     }

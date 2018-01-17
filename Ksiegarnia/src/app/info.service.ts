@@ -148,6 +148,12 @@ export class InfoService {
     return isOk;
   }
 
+  addNewsletter(mail) {
+    const url = "newsletter";
+    const isOK = this.sendData(url, mail);
+    return isOK;
+  }
+
   isAdmin(id) {
     return this.http.get(this.mainUrl + '/user/privilages?id=' + id);
   }
