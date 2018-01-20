@@ -1,4 +1,4 @@
-CREATE OR ALTER VIEW FULLINFO(Id,Nazwa,Imie_autora,Nazwisko_autora,Wydawnictwo,Gatunek,Kategoria,Rok_wyd,Strony,ISBN,Cena,Ocena)
+CREATE OR ALTER VIEW FULLINFO(Id,Nazwa,Imie_autora,Nazwisko_autora,Wydawnictwo,Gatunek,Kategoria,Rok_wyd,Strony,ISBN,Cena,Ocena,Okladka)
 as
 SELECT k.id,k.nazwa,a.Imie,a.Nazwisko,w.nazwa,g.nazwa,t.kat,k.rok_wyd,k.strony,k.isbn,k.cena,AVG(o.ocena),k.Okladka
 FROM Ksiazka k
