@@ -63,7 +63,7 @@ ISBN varchar(30),
 Cena money,
 Opis text,
 Ilosc int,
-Okladka text);
+Okladka varchar(300));
 
 create table Recenzje(
 id int not null primary key,
@@ -85,7 +85,8 @@ create table Koszyk(
 id int not null primary key,
 id_ks int references Ksiazka(id),
 id_kto int references Uzytkownik(id),
-status int DEFAULT 1
+status int DEFAULT 1,
+ile int
 );
 
 --INSERTY
@@ -134,8 +135,8 @@ insert into Oceny values(2,1,1,10)
 insert into Oceny values(3,2,2,10)
 insert into Oceny values(4,3,3,8)
 
-insert into Koszyk values(1,1,2,0)
-insert into Koszyk values(2,2,3,default)
+insert into Koszyk values(1,1,2,0,0)
+insert into Koszyk values(2,2,3,default,0)
 
 --SELECTY
 SELECT * FROM Uzytkownik
@@ -152,7 +153,6 @@ SELECT * FROM Koszyk
 
 --TU TWORZY SIÊ WIDOK WSZYSTKICH KSI¥¯EK
 
-
 CREATE OR ALTER VIEW ALLBOOKS(Id,Nazwa,Imie_autora,Nazwisko_autora,Kategoria,Cena,Okladka)
 as
 SELECT k.id,k.Nazwa,a.Imie,a.Nazwisko,t.Kat,k.Cena,k.Okladka
@@ -162,3 +162,4 @@ FROM Ksiazka k
 	LEFT JOIN Recenzje r ON k.id = r.id_ks
 
 
+	SELECT * FROM ALLBOOKS
