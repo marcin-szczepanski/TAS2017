@@ -152,10 +152,13 @@ SELECT * FROM Koszyk
 
 --TU TWORZY SIÊ WIDOK WSZYSTKICH KSI¥¯EK
 
-CREATE OR ALTER VIEW ALLBOOKS(Id,Nazwa,Imie_autora,Nazwisko_autora,Kategoria,Cena)
+
+CREATE OR ALTER VIEW ALLBOOKS(Id,Nazwa,Imie_autora,Nazwisko_autora,Kategoria,Cena,Okladka)
 as
-SELECT k.id,k.Nazwa,a.Imie,a.Nazwisko,t.Kat,k.Cena
+SELECT k.id,k.Nazwa,a.Imie,a.Nazwisko,t.Kat,k.Cena,k.Okladka
 FROM Ksiazka k
 	JOIN Kategoria t ON k.Kategoria = t.id
 	JOIN Autor a ON k.Autor = a.id
 	LEFT JOIN Recenzje r ON k.id = r.id_ks
+
+
