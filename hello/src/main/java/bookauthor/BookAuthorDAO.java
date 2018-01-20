@@ -17,9 +17,10 @@ public class BookAuthorDAO {
 	}
 
 	public ArrayList<BookAuthor> listTOP6() {
-		String SQL = "SELECT DISTINCT TOP 6  b.*,AVG(o.ocena)\n" + "FROM ALLBOOKS b JOIN Oceny o ON b.id = o.id_ks\n"
-				+ "group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena\n"
-				+ "ORDER BY AVG(o.ocena) DESC";
+		String SQL = "SELECT DISTINCT TOP 6  b.*,AVG(o.ocena) as Ocena\n" + 
+				"FROM ALLBOOKS b JOIN Oceny o ON b.id = o.id_ks\n" + 
+				"group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena,b.Okladka\n" + 
+				"ORDER BY AVG(o.ocena) DESC";
 		ArrayList<BookAuthor> top6 = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
 		return top6;
 	}
@@ -28,7 +29,7 @@ public class BookAuthorDAO {
 		
 		String SQL = String.format("SELECT DISTINCT b.*,AVG(o.ocena)as Ocena\n"
 				+ "FROM ALLBOOKS b LEFT JOIN Oceny o ON b.id = o.id_ks WHERE b.Kategoria='%s'\n"
-				+ "group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena \n" + "ORDER BY b.Id ",
+				+ "group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena, b.Okladka \n" + "ORDER BY b.Id ",
 				category);
 		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
 		return list;
@@ -36,7 +37,7 @@ public class BookAuthorDAO {
 
 	public ArrayList<BookAuthor> advancedSearch(String title, String authorFirstName, String authorLastName,
 			String category, String publisher, String year, String pagesMin, String pagesMax, String isbn) {
-		String SQL = "SELECT DISTINCT Id, Nazwa, Imie_autora, Nazwisko_autora,kategoria, Cena, Ocena from FULLINFO";
+		String SQL = "SELECT DISTINCT Id, Nazwa, Imie_autora, Nazwisko_autora,kategoria, Cena, Okladka, Ocena from FULLINFO";
 		String details = "";
 		if (title != null && !title.trim().isEmpty()) {
 			details = String.format("%sNazwa='%s' ", details, title);
@@ -75,7 +76,7 @@ public class BookAuthorDAO {
 	}
 
 	public ArrayList<BookAuthor> searchByKeyWord(String query, String category) {
-		String SQL = "SELECT f.id, f.Nazwa, f.Imie_autora, f. Nazwisko_autora, f.kategoria, f.cena, f.ocena, f.gatunek, f.isbn, k.Opis from FullINFO f JOIN Ksiazka k on f.id=k.id";
+		String SQL = "SELECT f.id, f.Nazwa, f.Imie_autora, f. Nazwisko_autora, f.kategoria, f.cena, f.okladka, f.ocena, f.gatunek, f.isbn, k.Opis from FullINFO f JOIN Ksiazka k on f.id=k.id";
 		if (category != null && !category.trim().isEmpty()) {
 			SQL = String.format("%s WHERE f.kategoria='%s' ", SQL, category);
 		}
@@ -93,7 +94,7 @@ public class BookAuthorDAO {
 	public ArrayList<BookAuthor> getAllBooks() {
 		String SQL = String.format("SELECT DISTINCT b.*,AVG(o.ocena)as Ocena\n"
 				+ "FROM ALLBOOKS b LEFT JOIN Oceny o ON b.id = o.id_ks "
-				+ "group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena \n" + "ORDER BY b.Id ");
+				+ "group by b.id,b.Imie_autora,b.Nazwisko_autora,b.Kategoria,b.Nazwa,b.Cena,b.okladka \n" + "ORDER BY b.Id ");
 		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
 		return list;
 	}

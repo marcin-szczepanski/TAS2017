@@ -27,14 +27,14 @@ public class KeyWordMapper implements RowMapper<BookAuthor> {
 				accuracy += 3;
 			if (rs.getString(4).matches(p))
 				accuracy += 20;
-			if (rs.getString(8).matches(p))
+			if (rs.getString(9).matches(p))
 				accuracy += 10;
-			if (rs.getString(10).matches(p))
+			if (rs.getString(11).matches(p))
 				accuracy += 2;
 		}
 		if (accuracy > 2) {
 			BookAuthor n = new BookAuthor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-					rs.getString(5), rs.getString(6), rs.getString(7));
+					rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
 			n.setAccuracy(accuracy);
 			return n;
 		} else {

@@ -39,9 +39,10 @@ public class BookDAO {
 	}
 
 	public Boolean addBook(Book b) {
-		String SQL = String.format("exec NewBook '%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,'%s',%s", b.nazwa,
+		String SQL = String.format("exec NewBook '%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,'%s',%s,'%s'", b.nazwa,
 				b.imie, b.nazwisko, b.wydawnictwo, b.gatunek, b.kategoria, b.rok_wyd, b.strony, b.isbn, b.cena, b.opis,
-				b.ilosc);
+				b.ilosc,b.okladka);
+		System.out.println(SQL);
 		try {
 			jdbcTemplateObject.update(SQL);
 			return true;
@@ -52,9 +53,9 @@ public class BookDAO {
 	}
 
 	public Boolean editBook(Book b) {
-		String SQL = String.format("exec MODIFYBOOK	%s,'%s','%s','%s','%s','%s','%s','%s',%s,'%s','%s',%s,%s", b.id,
+		String SQL = String.format("exec MODIFYBOOK	%s,'%s','%s','%s','%s','%s','%s','%s',%s,'%s','%s',%s,%s,'%s'", b.id,
 				b.nazwa, b.imie, b.nazwisko, b.wydawnictwo, b.gatunek, b.kategoria, b.rok_wyd, b.strony, b.isbn, b.opis,
-				b.cena, b.ilosc);
+				b.cena, b.ilosc, b.okladka);
 		try {
 			jdbcTemplateObject.update(SQL);
 			return true;

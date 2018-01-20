@@ -16,12 +16,14 @@ public class Book {
 	protected String opis;
 	protected String ocena;
 	protected String ilosc;
-
+	protected String okladka;
+	
+	
 	protected ArrayList<SimpleReview> recenzje;
 	
 
 	public Book(String id, String nazwa, String imie, String nazwisko, String wydawnictwo, String gatunek,
-			String kategoria, String rok_wyd, String strony, String isbn, String cena, String ocena, String ilosc, String opis) {
+			String kategoria, String rok_wyd, String strony, String isbn, String cena, String ocena, String okladka, String ilosc, String opis) {
 		super();
 		this.id = id;
 		this.nazwa = nazwa;
@@ -35,6 +37,7 @@ public class Book {
 		this.isbn = isbn;
 		this.cena = cena;
 		this.ocena = ocena;
+		this.okladka=okladka;
 		this.ilosc=ilosc;
 		this.opis=opis;
 	}
@@ -162,4 +165,14 @@ public class Book {
 	public void setIlosc(String ilosc) {
 		this.ilosc = ilosc;
 	}
+
+	public String getOkladka() {
+		return okladka;
+	}
+
+	public void setOkladka(String okladka) {
+		this.okladka = okladka;
+	}
+	
+	
 }
