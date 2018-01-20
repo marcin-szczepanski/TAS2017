@@ -62,7 +62,8 @@ Strony int,
 ISBN varchar(30),
 Cena money,
 Opis text,
-Ilosc int);
+Ilosc int,
+Okladka text);
 
 create table Recenzje(
 id int not null primary key,
@@ -115,8 +116,8 @@ insert into Kategoria values(11,'Pozosta³e');
 insert into Autor values(1,'Harlan','Coben')
 insert into Autor values(2,'Remigiusz','Mróz')
 
-insert into Ksiazka values(1,'Schronienie',1,1,1,3,'2017-09-27',564,9788379767120,17.65,'Przyk³adowy opis',100);
-insert into Ksiazka values(2,'Oskar¿enie',2,2,3,3,'2017-09-27',368,9788365781703,20.80,'Przyk³adowy opis',100);
+insert into Ksiazka values(1,'Schronienie',1,1,1,3,'2017-09-27',564,9788379767120,17.65,'Przyk³adowy opis',100,'okladka url');
+insert into Ksiazka values(2,'Oskarżenie',2,2,3,3,'2017-09-27',368,9788365781703,20.80,'Przyk³adowy opis',100,'okladka url');
 
 insert into Newsletter values(1,'email@admin.pl')
 insert into Newsletter values(2,'email2@admin.pl')
@@ -158,4 +159,3 @@ FROM Ksiazka k
 	JOIN Kategoria t ON k.Kategoria = t.id
 	JOIN Autor a ON k.Autor = a.id
 	LEFT JOIN Recenzje r ON k.id = r.id_ks
-
