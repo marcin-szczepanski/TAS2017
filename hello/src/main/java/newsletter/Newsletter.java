@@ -1,13 +1,13 @@
 package newsletter;
 
 public class Newsletter {
-	String mail;
+	protected String mail;
 	
-	Newsletter(){
+	Newsletter() {
 		
 	}
 	
-	Newsletter(String mail){
+	Newsletter(String mail) {
 		this.mail = mail;
 	}
 	

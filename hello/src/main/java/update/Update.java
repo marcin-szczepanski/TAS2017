@@ -39,5 +39,4 @@ public class Update {
 		this.who = who;
 	}
 	
-	
 }

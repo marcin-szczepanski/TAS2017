@@ -5,11 +5,11 @@ public class Grade {
 	protected String kto;
 	protected String ocena;
 	
-	Grade(){
+	public Grade() {
 		
 	}
 	
-	Grade(String ks, String kto, String ocena){
+	public Grade(String ks, String kto, String ocena) {
 		this.ks = ks;
 		this.kto = kto;
 		this.ocena = ocena;
@@ -38,6 +38,5 @@ public class Grade {
 	public void setOcena(String ocena) {
 		this.ocena = ocena;
 	}
-	
 	
 }

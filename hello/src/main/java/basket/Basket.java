@@ -3,22 +3,22 @@ package basket;
 import java.text.DecimalFormat;
 
 public class Basket {
-	public String id_kto;
-	public String id_ks;
-	public String kto;
-	public String nazwa;
-	public String imie_autora;
-	public String nazwisko_autora;
-	public String ilosc;
-	public String cena;
-	public String status;
-	public String okladka;
+	protected String id_kto;
+	protected String id_ks;
+	protected String kto;
+	protected String nazwa;
+	protected String imie_autora;
+	protected String nazwisko_autora;
+	protected String ilosc;
+	protected String cena;
+	protected String status;
+	protected String okladka;
 	
-	Basket(){
+	public Basket() {
 		
 	}
 	
-	Basket(String id_kto,String id_ks, String kto, String nazwa, String ia, String na, String kat, String cena, String stat, String okladka){
+	public Basket(String id_kto,String id_ks, String kto, String nazwa, String ia, String na, String kat, String cena, String stat, String okladka) {
 		this.id_kto = id_kto;
 		this.id_ks = id_ks;
 		this.kto = kto;
