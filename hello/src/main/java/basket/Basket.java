@@ -12,12 +12,13 @@ public class Basket {
 	public String ilosc;
 	public String cena;
 	public String status;
+	public String okladka;
 	
 	Basket(){
 		
 	}
 	
-	Basket(String id_kto,String id_ks, String kto, String nazwa, String ia, String na, String kat, String cena, String stat){
+	Basket(String id_kto,String id_ks, String kto, String nazwa, String ia, String na, String kat, String cena, String stat, String okladka){
 		this.id_kto = id_kto;
 		this.id_ks = id_ks;
 		this.kto = kto;
@@ -30,6 +31,15 @@ public class Basket {
 		DecimalFormat formatter = new DecimalFormat("#,###,###,###.00");
 		this.cena = formatter.format(amount);
 		this.status = stat;
+		this.okladka = okladka;
+	}
+
+	public String getOkladka() {
+		return okladka;
+	}
+
+	public void setOkladka(String okladka) {
+		this.okladka = okladka;
 	}
 
 	public String getId_kto() {
