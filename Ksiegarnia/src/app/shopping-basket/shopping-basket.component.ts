@@ -84,6 +84,7 @@ export class ShoppingBasketComponent implements OnInit {
           const book = data.json();
           const cena = (item.num * book.cena).toFixed(2);
           this.sum += item.num * book.cena;
+          this.sum = parseFloat(this.sum.toFixed(2));
           this.orderSum.emit(this.sum);
           localStorage.setItem('Basket', this.sum.toFixed(2));
           this.zamowienie.push({
