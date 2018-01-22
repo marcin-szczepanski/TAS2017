@@ -39,39 +39,49 @@ public class BookAuthorDAO {
 			String category, String publisher, String year, String pagesMin, String pagesMax, String isbn) {
 		String SQL = "SELECT DISTINCT Id, Nazwa, Imie_autora, Nazwisko_autora,kategoria, Cena, Okladka, Ocena from FULLINFO";
 		String details = "";
+		ArrayList<Object> parameters = new ArrayList<Object>();
 		if (title != null && !title.trim().isEmpty()) {
-			details = String.format("%sNazwa='%s' ", details, title);
+			details = String.format("%sNazwa=? ", details);
+			parameters.add(title);
 		}
 		if (authorFirstName != null && !authorFirstName.trim().isEmpty()) {
-			details = String.format("%sImie_autora='%s' ", details, authorFirstName);
+			details = String.format("%sImie_autora=? ", details);
+			parameters.add(authorFirstName);
 		}
 		if (authorLastName != null && !authorLastName.trim().isEmpty()) {
-			details = String.format("%sNazwisko_autora='%s' ", details, authorLastName);
+			details = String.format("%sNazwisko_autora=? ", details);
+			parameters.add(authorLastName);
 		}
 		if (category != null && !category.trim().isEmpty()) {
-			details = String.format("%sKategoria='%s' ", details, category);
+			details = String.format("%sKategoria=? ", details);
+			parameters.add(category);
 		}
 		if (publisher != null && !publisher.trim().isEmpty()) {
-			details = String.format("%sWydawnictwo='%s' ", details, publisher);
+			details = String.format("%sWydawnictwo=? ", details);
+			parameters.add(publisher);
 		}
 		if (year != null && !year.trim().isEmpty()) {
-			details = String.format("%sYEAR(Rok_wyd)='%s' ", details, year);
+			details = String.format("%sYEAR(Rok_wyd)=? ", details);
+			parameters.add(year);
 		}
 		if (pagesMin != null && !pagesMin.trim().isEmpty()) {
-			details = String.format("%sStrony>'%s' ", details, pagesMin);
+			details = String.format("%sStrony>? ", details);
+			parameters.add(pagesMin);
 		}
 		if (pagesMax != null && !pagesMax.trim().isEmpty()) {
-			details = String.format("%sStrony<'%s' ", details, pagesMax);
+			details = String.format("%sStrony<? ", details);
+			parameters.add(pagesMax);
 		}
 		if (isbn != null && !isbn.trim().isEmpty()) {
-			details = String.format("%sisbn='%s' ", details, isbn);
+			details = String.format("%sisbn=? ", details);
+			parameters.add(isbn);
 		}
 		if (!details.trim().isEmpty()) {
-			details = details.replaceAll("('[^']+') (\\S+[=<>])", "$1 AND $2");
+			details = details.replaceAll("(\\?) (\\S+[=<>])", "$1 AND $2");
 			details = String.format(" WHERE %s", details);
 			SQL = SQL + details;
 		}
-		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper());
+		ArrayList<BookAuthor> list = (ArrayList<BookAuthor>) jdbcTemplateObject.query(SQL, new BookAuthorMapper(),parameters.toArray());
 		return list;
 	}
 
