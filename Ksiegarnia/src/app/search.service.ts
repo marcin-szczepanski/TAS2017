@@ -15,12 +15,20 @@ export class SearchService {
     return this.http
         .get(url)
         .toPromise()
-        .then(res => this.extractData(res));
+        .then(res => this.extractData(res))
+        .catch((response: Response) => { this.errorHandler(response); })
+  }
+
+  errorHandler(response) {
+    console.log(response.status)
   }
 
   private extractData(res: Response) {
-    this.answer = res.json();
-    return res.json() || {};
+    if (res.status == 200) {
+      this.answer = res.json();
+      return res.json() || {};
+    }
+    return {};
   }
 
   getBooks(addr) {
@@ -39,20 +47,23 @@ export class SearchService {
     if (this.books.length !== 0) {
       this.books = [];
     }
-    for (let i = 0; i < answer.length; i++) {
-      const book = {};
-      book['id'] = answer[i].id;
-      book['title'] = answer[i].nazwa;
-      book['author'] = answer[i].imie + ' ' + answer[i].nazwisko;
-      book['price'] = answer[i].cena;
-      book['grade'] = answer[i].ocena;
-      if (answer.okladka == '') {
-        book['okladka'] = '../assets/images/empty.png';
-      } else {
-        book['okladka'] = answer[i].okladka;
+    if (answer != undefined) {
+      for (let i = 0; i < answer.length; i++) {
+        const book = {};
+        book['id'] = answer[i].id;
+        book['title'] = answer[i].nazwa;
+        book['author'] = answer[i].imie + ' ' + answer[i].nazwisko;
+        book['price'] = answer[i].cena;
+        book['grade'] = answer[i].ocena;
+        if (answer.okladka == '') {
+          book['okladka'] = '../assets/images/empty.png';
+        } else {
+          book['okladka'] = answer[i].okladka;
+        }
+        this.books.push(book);
       }
-      this.books.push(book);
     }
+
   }
 
 }
