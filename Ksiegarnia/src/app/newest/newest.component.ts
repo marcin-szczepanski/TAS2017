@@ -37,21 +37,4 @@ export class NewestComponent implements OnInit {
   getBooks() {
     this.books = this.searchService.getBooks(this.url);
   }
-
-  /*getBooks() {
-    const url = 'http://localhost:8080/top6';
-    const data = this.searchService.getService(url)
-    .then(answer => this.addBooks(answer));
-  }
-
-  addBooks(answer) {
-    for (let i = 0; i < answer.length; i++) {
-      const book = {};
-      book['id'] = answer[i].id; 
-      book['title'] = answer[i].nazwa;
-      book['author'] = answer[i].imie + ' ' + answer[i].nazwisko;
-      book['price'] = answer[i].cena;
-      this.books.push(book);
-    }
-  }*/
 }

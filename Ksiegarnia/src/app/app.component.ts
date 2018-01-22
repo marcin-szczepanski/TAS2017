@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   id;
   admin = false;
 
-  constructor(private infoService: InfoService) { }
+  constructor(private infoService: InfoService) {}
 
   onSubmit(value: any) {
     this.querySearch = 'keyword?';

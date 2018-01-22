@@ -11,6 +11,7 @@ export class InfoService {
   res = true;
   exist = false;
   books = [];
+  grade = 0;
 
   constructor(private http: Http) { }
 
@@ -24,6 +25,13 @@ export class InfoService {
   private extractData(res: Response) {
     this.answer = res.json();
     return res.json() || {};
+  }
+
+  getGrade(addr) {
+    this.grade = 0;
+    const url = this.mainUrl + addr;
+    const data = this.getService(url);
+    return data;
   }
 
   getBooks(addr) {
@@ -56,6 +64,11 @@ export class InfoService {
     this.book['opis'] = answer.opis;
     this.book['reviews'] = answer.recenzje;
     this.book['ilosc'] = answer.ilosc;
+    if (answer.okladka == '') {
+      this.book['okladka'] = '../assets/images/empty.png';
+    } else {
+      this.book['okladka'] = answer.okladka;
+    }
   }
 
   sendData(url, body) {

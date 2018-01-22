@@ -23,7 +23,6 @@ export class AboutBookComponent implements OnChanges {
   sum = 0;
   errorTooManyBooks = 0;
 
-
   constructor(private infoService: InfoService) {
     if (this.productsObject === null) {
       this.productsObject = {};
@@ -38,22 +37,21 @@ export class AboutBookComponent implements OnChanges {
         this.getBooks();
       }
       const idGrade = JSON.parse(localStorage.getItem('WatchedBook' + `${this.ident}`));
-      if (idGrade) {
-        if (this.logged === false) {
+      if (this.logged == 'true') {
+        this.getGrade();
+      } else {
+        if (idGrade) {
           this.grade = idGrade.grade;
           this.graded = true;
-        } else {
-          // na razie nie ma obsługi pobrania oceny zalogowanego użytkownika
-          this.grade = idGrade.grade;
-          this.graded = true;
-          // funkcja do pobierania oceny zalogowanego użytkownika
-          // jeśli jest ocena w bazie to ją ustaw oraz graded=true a jeśli nie nic nie rób
         }
       }
     }
   }
 
   getBooks() {
+    if (this.logged == 'true') {
+      this.getGrade();
+    }
     const url = 'book?id=';
     this.book = {};
     this.book = this.infoService.getBooks(url + this.ident);
@@ -76,7 +74,25 @@ export class AboutBookComponent implements OnChanges {
     }
   }
 
-  saveGrade() {
+  getGrade() {
+    this.graded = true;
+    const url = 'grade/view' + '?id_ks=' + this.ident + '&id_kto=' + this.user;
+    let ocena = this.infoService.getGrade(url).then(answer => {
+      if (answer[0] != undefined) {
+        this.grade = answer[0].grade;
+      } else {
+        answer = [{grade: '0'}];
+      }
+      if(answer[0].grade != '0') {
+        this.graded = true;
+      } else {
+        this.graded = false;
+      }
+    });
+  }
+
+  saveGrade(value) {
+    this.grade = value.grade;
     const url = 'grade/';
     const toSend = { ks: this.ident, kto: this.user, ocena: this.grade };
     const res = this.infoService.sendData(url, toSend);

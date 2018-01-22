@@ -23,7 +23,8 @@ export class AdminBooksComponent implements OnInit {
     strony: "",
     isbn: "",
     opis: "",
-    ilosc: ""
+    ilosc: "",
+    okladka: ""
   };
   bookToSend = {
     id: "",
@@ -38,7 +39,8 @@ export class AdminBooksComponent implements OnInit {
     strony: "",
     isbn: "",
     opis: "",
-    ilosc: ""
+    ilosc: "",
+    okladka: ""
   };
   books = [];
 
@@ -109,7 +111,8 @@ export class AdminBooksComponent implements OnInit {
       strony: "",
       isbn: "",
       opis: "",
-      ilosc: ""
+      ilosc: "",
+      okladka: ""
     };
     this.addbook['nazwa'] = value.nazwa;
     this.addbook['imie'] = value.imie;
@@ -123,6 +126,7 @@ export class AdminBooksComponent implements OnInit {
     this.addbook['isbn'] = value.isbn;
     this.addbook['opis'] = value.opis;
     this.addbook['ilosc'] = value.ilosc.toString();
+    this.addbook['okladka'] = value.okladka;
     const isOk = this.infoService.add(this.addbook);
     if (isOk === false) {
       alert('Coś poszło nie tak. Spróbuj ponownie później.');
@@ -145,6 +149,7 @@ export class AdminBooksComponent implements OnInit {
     this.bookToSend['isbn'] = value.isbn;
     this.bookToSend['opis'] = value.opis;
     this.bookToSend['ilosc'] = value.ilosc.toString();
+    this.bookToSend['okladka'] = value.okladka;
     const isOk = this.infoService.edit(this.bookToSend);
     if (isOk === false) {
       alert('Coś poszło nie tak. Spróbuj ponownie później.');

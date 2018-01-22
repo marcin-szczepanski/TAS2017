@@ -46,6 +46,11 @@ export class SearchService {
       book['author'] = answer[i].imie + ' ' + answer[i].nazwisko;
       book['price'] = answer[i].cena;
       book['grade'] = answer[i].ocena;
+      if (answer.okladka == '') {
+        book['okladka'] = '../assets/images/empty.png';
+      } else {
+        book['okladka'] = answer[i].okladka;
+      }
       this.books.push(book);
     }
   }

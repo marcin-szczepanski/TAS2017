@@ -1,7 +1,7 @@
 <h4 class="text-gray mb-4">Wyniki wyszukiwania</h4>
 <div class="row">
   <div *ngFor="let book of books" class="figure d-flex flex-column justify-content-around col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6">
-    <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded">
+      <img src="{{ book.okladka }}" id="{{ book.id }}" (click)="bookId=$event.target.id; changeMode(); changeBookId()" class="figure-img rounded" style="width: 150px; height: 150px; cursor: pointer;">
     <div>
       <h5 class="text-gray">
         <a class="noUnderline text-gray link" id="{{ book.id }}" (click)="bookId=$event.target.id; changeMode(); changeBookId()">

@@ -37,7 +37,6 @@ export class SignInComponent implements OnInit {
           d => {
             const responseAdmin = d.json()
             this.isAdmin.emit(responseAdmin);
-            // console.log(d.json());
           }
         );
         this.nieudaneLogowanie = false;
@@ -48,7 +47,6 @@ export class SignInComponent implements OnInit {
           orderTMP.forEach((item) => {
             const addToBasket = this.infoService.addToBasket(item.id, item.num).subscribe(
               d => {
-                // console.log(d.json(), item);
                 if (!d.json()) {
                   this.errorAddToBasket = true;
                 }
@@ -61,7 +59,6 @@ export class SignInComponent implements OnInit {
                   () => {
                   });
                 this.orderLen++;
-                // console.log(this.orderLen, orderTMPLen, item);
                 if (this.orderLen === orderTMPLen) {
                   localStorage.removeItem('ProductsInBasket');
                   if (this.errorAddToBasket) {
