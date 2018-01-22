@@ -117,7 +117,7 @@ export class AdminBooksComponent implements OnInit {
     this.addbook['nazwa'] = value.nazwa;
     this.addbook['imie'] = value.imie;
     this.addbook['nazwisko'] = value.nazwisko;
-    this.addbook['cena'] = value.cena.replace(',', '.');
+    this.addbook['cena'] = value.cena.toString().replace(',', '.');
     this.addbook['wydawnictwo'] = value.wydawnictwo;
     this.addbook['gatunek'] = value.gatunek;
     this.addbook['kategoria'] = value.kategoria;
@@ -140,7 +140,7 @@ export class AdminBooksComponent implements OnInit {
     this.bookToSend['nazwa'] = value.nazwa;
     this.bookToSend['imie'] = value.imie;
     this.bookToSend['nazwisko'] = value.nazwisko;
-    this.bookToSend['cena'] = value.cena.replace(',', '.');
+    this.bookToSend['cena'] = value.cena.toString().replace(',', '.');
     this.bookToSend['wydawnictwo'] = value.wydawnictwo;
     this.bookToSend['gatunek'] = value.gatunek;
     this.bookToSend['kategoria'] = value.kategoria;
@@ -157,5 +157,4 @@ export class AdminBooksComponent implements OnInit {
       alert('Edytowano!');
     }
   }
-
 }

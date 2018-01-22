@@ -62,7 +62,7 @@
                         <div class="mb-2">
                             <label>
                                 Cena w zł
-                                <input type="text" class="form-control" name="cena" ngModel placeholder="Wpisz cenę w zł" required />
+                                <input type="number" step="0.01" min="0" class="form-control" name="cena" ngModel placeholder="Wpisz cenę w zł" required />
                             </label>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                         <div class="mb-2">
                             <label>
                                 Rok wydania
-                                <input type="number" class="form-control" name="rok_wyd" ngModel placeholder="Wpisz rok wydania" required />
+                                <input type="number" min="0" class="form-control" name="rok_wyd" ngModel placeholder="Wpisz rok wydania" required />
                             </label>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         <div class="mb-2">
                             <label>
                                 Ilość stron
-                                <input type="number" class="form-control" name="strony" ngModel placeholder="Wpisz ilość stron" required />
+                                <input type="number" min="0" class="form-control" name="strony" ngModel placeholder="Wpisz ilość stron" required />
                             </label>
                         </div>
                         <div class="mb-2">
@@ -166,7 +166,7 @@
                         <div class="mb-2">
                             <label>
                                 Cena w zł
-                                <input type="text" class="form-control" name="cena" [(ngModel)]="editbook.price" placeholder="Wpisz cenę w zł" required />
+                                <input type="number" step="0.01" min="0" class="form-control" name="cena" [(ngModel)]="editbook.price" placeholder="Wpisz cenę w zł" required />
                             </label>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
                         <div class="mb-2">
                             <label>
                                 Rok wydania
-                                <input type="number" class="form-control" name="rok_wyd" [(ngModel)]="editbook.rok_wyd" placeholder="Wpisz rok wydania" required />
+                                <input type="number" min="0" class="form-control" name="rok_wyd" [(ngModel)]="editbook.rok_wyd" placeholder="Wpisz rok wydania" required />
                             </label>
                         </div>
                     </div>
@@ -212,7 +212,7 @@
                         <div class="mb-2">
                             <label>
                                 Ilość stron
-                                <input type="number" class="form-control" name="strony" [(ngModel)]="editbook.strony" placeholder="Wpisz ilość stron" required />
+                                <input type="number" min="0" class="form-control" name="strony" [(ngModel)]="editbook.strony" placeholder="Wpisz ilość stron" required />
                             </label>
                         </div>
                         <div class="mb-2">
