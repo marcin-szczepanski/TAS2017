@@ -117,7 +117,7 @@ insert into Kategoria values(11,'Pozosta³e');
 insert into Autor values(1,'Harlan','Coben')
 insert into Autor values(2,'Remigiusz','Mróz')
 
-insert into Ksiazka values(1,'Schronienie',1,1,1,3,'2017-09-27',564,9788379767120,17.65,'Przyk³adowy opis',100,'okladka url');
+insert into Ksiazka values(1,'Schronienie',1,1,1,3,'2017-09-27',564,9788379767120,17.65,'Przyk³adowy opis',100,'http://s.lubimyczytac.pl/upload/books/211000/211004/581384-352x500.jpg');
 insert into Ksiazka values(2,'Oskarżenie',2,2,3,3,'2017-09-27',368,9788365781703,20.80,'Przyk³adowy opis',100,'okladka url');
 
 insert into Newsletter values(1,'email@admin.pl')
