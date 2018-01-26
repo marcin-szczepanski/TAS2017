@@ -11,11 +11,19 @@ CREATE OR ALTER PROCEDURE AddUser
 	@kod varchar(6)
 AS
 BEGIN
- 	declare @id int
-	declare @status int
-	set @id = (SELECT max(id)+1 FROM Uzytkownik)
-	set @status = 0
-	INSERT INTO Uzytkownik VALUES(@id,@login,@haslo,@email,@imie,@nazwisko,@telefon,@adres,@miasto,@kod,@status)
+IF not exists (SELECT * FROM Uzytkownik WHERE @email = email)
+BEGIN
+	IF not exists (SELECT * FROM Uzytkownik WHERE @login = login)
+	BEGIN
+ 		declare @id int
+		declare @status int
+		set @id = (SELECT max(id)+1 FROM Uzytkownik)
+		set @status = 0
+		INSERT INTO Uzytkownik VALUES(@id,@login,@haslo,@email,@imie,@nazwisko,@telefon,@adres,@miasto,@kod,@status)
+	END
+	ELSE RAISERROR('Login zajęty',16,1)
+END
+ELSE RAISERROR('Mail zajęty',16,1)
 END
 
 AddUser 'Noob2017','qwerty123','noob2017@email.com','Gal','Galowy','666666666','Kwiacista 200','Poznan','60-666'
