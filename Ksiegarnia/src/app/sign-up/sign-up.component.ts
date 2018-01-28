@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { InfoService } from '../info.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -8,10 +8,10 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 export class SignUpComponent implements OnInit {
   registerStatus = false;
   invalidRegister = false;
-  constructor(private http: Http) { }
+  constructor(private infoService: InfoService) { }
 
   onSubmit(value: any) {
-    this.http.post('http://localhost:8080/register/', {
+    this.infoService.addUser({
       login: value.login,
       haslo: value.haslo,
       email: value.email,
@@ -24,14 +24,12 @@ export class SignUpComponent implements OnInit {
     }).subscribe(data => {
       this.registerStatus = true;
       this.invalidRegister = false;
-      this.ngOnInit();
     },
-      error=>{
+      error => {
         this.invalidRegister = true;
-        this.ngOnInit();
       },
-      ()=>{}
-    );
+      () => { }
+      );
   }
 
   ngOnInit() {

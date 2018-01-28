@@ -13,7 +13,6 @@ export class ShoppingBasketComponent implements OnInit {
   @Output() modeChanged = new EventEmitter();
   @Output() bookIdChanged = new EventEmitter();
   @Input() logged;
-  url = 'http://localhost:8080/';
   zamowienie = [];
   zamowienieDlugosc = 0;
   sum = 0;
@@ -89,7 +88,8 @@ export class ShoppingBasketComponent implements OnInit {
           localStorage.setItem('Basket', this.sum.toFixed(2));
           this.zamowienie.push({
             nazwa: book.nazwa, imie_autora: book.imie,
-            nazwisko_autora: book.nazwisko, ilosc: item.num, cena: cena, id_ks: book.id
+            nazwisko_autora: book.nazwisko, ilosc: item.num, cena: cena, id_ks: book.id,
+            okladka: book.okladka
           });
         });
       });

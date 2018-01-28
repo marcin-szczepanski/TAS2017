@@ -3,7 +3,7 @@
 <div class="row">
   <ul class="list-group">
     <li *ngFor="let book of zamowienie" class="list-group-item">
-      <img src="../assets/images/empty.png" class="figure-img img-thumbnail rounded removeMargin">
+      <img src="{{ book.okladka }}" class="figure-img rounded" style="width: 200px; height: 200px;">
       <a class="noUnderline text-gray link" (click)="changeMode(); changeBookId(book.id_ks)">{{book.nazwa}}</a>
       <p class="removeMargin">{{book.imie_autora}} {{book.nazwisko_autora}}</p>
       <p class="removeMargin">{{book.ilosc}} szt.</p>
