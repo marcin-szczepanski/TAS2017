@@ -55,14 +55,14 @@ exec NewBook 'Leczenie odżywianiem. Refluks','Kimberly','Tessmer','Vivante','Po
 exec NewBook 'Dzika fermentacja','Sandor','Katz','Vivante','Poradnik','Poradniki','2017',328,'9788365601582',35.00,'Książka o kiszeniu ogórków.',100,'http://www.taniaksiazka.pl/images/popups/6BD/9788365601582.jpg'
 
 --Sport
-exec NewBook 'Polski sport','Krzysztof','Laskowski','SBM','album','Sport','2016',128,'9788380590540',22.50,'Album zawiera opisy najpopularniejszych dyscyplin sportowych, które na przestrzeni lat uprawiali i uprawiają polscy zawodnicy.',100,'http://www.taniaksiazka.pl/images/popups/748/9788380590540.jpg'
-exec NewBook 'E-sport Optymalizacja gracza','Maciej','Cypryjański','Helion','instruktarz','Sport','2017',120,'9788328337657',23.32,'Poznaj czynniki mające wpływ na sprawność e-zawodnika.',100,'http://www.taniaksiazka.pl/images/popups/A45/9788328337657.jpg'
-exec NewBook 'Koszykówka','Filip','Wróblewski','Dragon','instruktarz','Sport','2016',32,'9788378871873',14.99,'Laik, młody pasjonat czy nawet dorosły – każdy, kto pierwszy raz weźmie do ręki piłkę do koszykówki marzy, by stać się najlepszym koszykarzem.',100,'http://www.taniaksiazka.pl/images/popups/ED5/9788378871873.jpg'
+exec NewBook 'Polski sport','Krzysztof','Laskowski','SBM','album','Sport i turystyka','2016',128,'9788380590540',22.50,'Album zawiera opisy najpopularniejszych dyscyplin sportowych, które na przestrzeni lat uprawiali i uprawiają polscy zawodnicy.',100,'http://www.taniaksiazka.pl/images/popups/748/9788380590540.jpg'
+exec NewBook 'E-sport Optymalizacja gracza','Maciej','Cypryjański','Helion','instruktarz','Sport i turystyka','2017',120,'9788328337657',23.32,'Poznaj czynniki mające wpływ na sprawność e-zawodnika.',100,'http://www.taniaksiazka.pl/images/popups/A45/9788328337657.jpg'
+exec NewBook 'Koszykówka','Filip','Wróblewski','Dragon','instruktarz','Sport i turystyka','2016',32,'9788378871873',14.99,'Laik, młody pasjonat czy nawet dorosły – każdy, kto pierwszy raz weźmie do ręki piłkę do koszykówki marzy, by stać się najlepszym koszykarzem.',100,'http://www.taniaksiazka.pl/images/popups/ED5/9788378871873.jpg'
 
 
 --Encyklopedie
-exec NewBook 'Klucz do oznaczania roślin naczyniowych Polski niżowej','Lucjan','Rutkowski','Wydawnictwo Naukowe PWN','Encyklopedia','Encyklopedie','2018',816,'9788301143428',55.89,'Zaktualizowane wydanie najpopularniejszego i oczekiwanego klucza do oznaczania roślin!',100,'https://emp-scs-uat.img-osdw.pl/img-p/1/kipwn/d576082e/std/2bc-452/106409373o.jpg'
-exec NewBok 'Encyklopedia Popularna PWN',' ',' ','Wydawnictwo Naukowe PWN','Encyklopedia','Encyklopedie','2017',1160,'9788301194482',161.19,'Encyklopedia popularna PWN to najbardziej znana jednotomowa encyklopedia w Polsce.',100,'https://emp-scs-uat.img-osdw.pl/img-p/1/kipwn/d576082e/std/2bc-452/729265453o.jpg'
+exec NewBook 'Klucz do oznaczania roślin naczyniowych Polski niżowej','Lucjan','Rutkowski','Wydawnictwo Naukowe PWN','Encyklopedia','Encyklopedie i słowniki','2018',816,'9788301143428',55.89,'Zaktualizowane wydanie najpopularniejszego i oczekiwanego klucza do oznaczania roślin!',100,'https://emp-scs-uat.img-osdw.pl/img-p/1/kipwn/d576082e/std/2bc-452/106409373o.jpg'
+exec NewBok 'Encyklopedia Popularna PWN',' ',' ','Wydawnictwo Naukowe PWN','Encyklopedia','Encyklopedie i słowniki','2017',1160,'9788301194482',161.19,'Encyklopedia popularna PWN to najbardziej znana jednotomowa encyklopedia w Polsce.',100,'https://emp-scs-uat.img-osdw.pl/img-p/1/kipwn/d576082e/std/2bc-452/729265453o.jpg'
 
 --Poezja
 exec NewBook 'Pięćdziesiąt lat życia z poezją 1963-2013','Opracowanie zbiorowe',' ','Poligraf','Poezja','Poezja','2017',214,'9733301194482',66.90,'Napisanie wiersza nie zajmowało więcej niż minutę, a czasem nawet mniej niż sześćdziesiąt sekund.',100,'http://ecsmedia.pl/c/piecdziesiat-lat-zycia-z-poezja-1963-2013-b-iext50859115.jpg'
