@@ -9,7 +9,7 @@ BEGIN
 	INSERT INTO Recenzje VALUES (@id,@id_ks,@id_kto,@tekst)
 END
 
-NewRec 3,3,'Bardzo dobra ksi¹¿ka, polecam i podrawiam Piotr Fr¹czewski'
+NewRec 3,3,'Bardzo dobra ksiÂ¹Â¿ka, polecam i podrawiam Piotr FrÂ¹czewski'
 
 CREATE or ALTER PROCEDURE NewGrade
 	@id_ks int,
@@ -25,27 +25,27 @@ END
 NewGrade 3,3,7
 
 
---WYŒWIETLENIE OPISU KSI¥¯KI
+--WYÅ’WIETLENIE OPISU KSIÂ¥Â¯KI
 SELECT Opis FROM Ksiazka WHERE id=1
 
---TU TWORZY SIÊ WIDOK WSZYSTKICH RECENZJI
+--TU TWORZY SIÃŠ WIDOK WSZYSTKICH RECENZJI
 
 CREATE OR ALTER VIEW REC(id,id_ks,id_kto,Recenzja)
 as
 SELECT r.id,k.id,r.id_kto,r.tekst
 FROM Recenzje r JOIN Ksiazka k on r.id_ks = k.id
 
---TU TWORZY SIÊ WIDOK WSZYSTKICH OCEN
+--TU TWORZY SIÃŠ WIDOK WSZYSTKICH OCEN
 CREATE OR ALTER VIEW GRADES(id,id_ks,id_kto,Ocena)
 as
 SELECT o.id,k.id,o.id_kto,o.ocena
 FROM Oceny o JOIN Ksiazka k on o.id_ks = k.id
 
---WYŒWIETLANIE RECENZJI, OCEN DLA DANEJ KSI¥¯KI
+--WYÅ’WIETLANIE RECENZJI, OCEN DLA DANEJ KSIÂ¥Â¯KI
 SELECT DISTINCT  * FROM  ALLBOOKS  WHERE id=1
 SELECT Recenzja FROM REC WHERE id_ks = 1
 
-SELECT TOP 6 AVG(ocena) as OcenaŒrednia
+SELECT TOP 6 AVG(ocena) as OcenaÅ’rednia
 FROM Oceny
 WHERE id_ks=1
 GROUP BY id_ks
