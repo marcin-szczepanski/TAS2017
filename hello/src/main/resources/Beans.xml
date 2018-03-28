@@ -1,0 +1,70 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" 
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd ">
+
+   <!-- Initialization for data source -->
+   <bean id="dataSource" 
+      class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name = "driverClassName" value = "com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name = "url" value = "jdbc:sqlserver://localhost:1433;databaseName=ks;integratedSecurity=false;"/>
+      <property name="username" value="name"/>
+      <property name="password" value="WxQ54!8XMa"/>
+   </bean>
+
+   <bean id = "AuthorDAO" 
+      class = "author.AuthorDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "CategoryDAO" 
+      class = "category.CategoryDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+    <bean id = "BookAuthorDAO" 
+      class = "bookauthor.BookAuthorDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "BookDAO" 
+      class = "book.BookDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+      
+   <bean id = "ReviewDAO" 
+      class = "review.ReviewDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "GradeDAO" 
+      class = "grade.GradeDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "SessionDAO" 
+      class = "session.SessionDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "UserInfoDAO" 
+      class = "user.UserInfoDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "UpdateDAO" 
+      class = "update.UpdateDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+   <bean id = "BasketDAO" 
+      class = "basket.BasketDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+   
+      <bean id = "NewsletterDAO" 
+      class = "newsletter.NewsletterDAO">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
+</beans>
