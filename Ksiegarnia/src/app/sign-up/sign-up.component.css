@@ -1,0 +1,11 @@
+.centerMargin{
+    margin: 0 auto;
+}
+
+input:invalid{
+    border-color: red;
+}
+
+input:valid{
+    border-color: green;
+}

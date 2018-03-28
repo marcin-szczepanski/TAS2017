@@ -1,0 +1,31 @@
+<h4 class="text-gray mb-4">Logowanie</h4>
+<div *ngIf="nieudaneLogowanie" class="alert alert-danger">Logowanie nieudane! Nieprawidłowy login lub hasło.</div>
+<div *ngIf="udaneLogowanie" class="centerAll">
+  <div class="alert alert-success">Logowanie udane!</div>
+  <div *ngIf="errorAddToBasket" class="alert alert-danger">Niektóre książki zostały usunięte z twojego koszyka. Produkt może być już niedostępny lub jego ilość jest mniejsza niż ta, którą miałeś w koszyku.</div>
+</div>
+<form *ngIf="!udaneLogowanie" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)" method="post">
+  <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 centerMargin">
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="text" placeholder="Login" class="form-control input-lg " name="login" ngModel required />
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="form-group">
+          <div>
+            <input type="password" placeholder="Hasło" class="form-control input-lg" name="haslo" ngModel required/>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 centerMargin">
+        <div class="row">
+          <button type="submit" class="btn btn-primary centerMargin">Zaloguj się</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

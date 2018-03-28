@@ -1,0 +1,26 @@
+<h4 class="text-gray mb-4">Koszyk</h4>
+<div *ngIf="errorTooManyBooks" class="alert alert-danger"> Niewystarczająca ilość książek. Wprowadź mniejszą ilość.</div>
+<div class="row">
+  <ul class="list-group">
+    <li *ngFor="let book of zamowienie" class="list-group-item">
+      <img src="{{ book.okladka }}" class="figure-img rounded" style="width: 200px; height: 200px;">
+      <a class="noUnderline text-gray link" (click)="changeMode(); changeBookId(book.id_ks)">{{book.nazwa}}</a>
+      <p class="removeMargin">{{book.imie_autora}} {{book.nazwisko_autora}}</p>
+      <p class="removeMargin">{{book.ilosc}} szt.</p>
+      <p class="removeMargin">{{book.cena}} zł</p>
+      <div class="removeMargin">
+      <form #userForm="ngForm" (ngSubmit)="editNumberOfCopies(userForm.value, book.id_ks)">
+        <p><input type="number" placeholder="Nowa ilość kopii" class="form-control input-lg" name="numberOfCopies" min="0" ngModel required/></p>
+        <p><button type="submit" class="btn btn-success">Edytuj ilość</button></p>
+      </form>
+      </div>
+      <button type="button" (click)="deleteFromBasket(book.id_ks)" class="btn btn-danger">Usuń z koszyka</button>
+    </li>
+  </ul>
+</div>
+<div class="summary">
+  <h5>
+    Razem: {{sum}} zł.
+  </h5>
+  <button *ngIf = "zamowienieDlugosc && logged" type="submit" class="btn btn-primary" (click)="goToOrder()">Złóż zamówienie</button>
+</div>

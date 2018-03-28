@@ -1,0 +1,51 @@
+<h5 class="text-gray pb-2">Wyszukiwanie zaawansowane</h5>
+<form method="post" action="/" class="paddings margins bg-primary bradius-top" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+  <div class="form-row align-items-center">
+    <div class="col-md-6 col-sm-6 min">
+      <div class="mb-2">
+        <input type="text" class="form-control" ngModel name="title" placeholder="Wpisz tytuł" />
+      </div>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="author_first" ngModel placeholder="Wpisz imię autora" />
+      </div>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="author_last" ngModel placeholder="Wpisz nazwisko autora" />
+      </div>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="publisher" ngModel placeholder="Wpisz wydawnictwo" />
+      </div>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="isbn" ngModel placeholder="Wpisz kod ISBN" />
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 min">
+      <label for="categories">Wybierz kategorię:</label>
+      <select ngModel name="category" id="categories" class="form-control mb-2">
+        <option value=""></option>
+        <option value="Lektury">Lektury</option>
+        <option value="Literatura piękna">Literatura piękna</option>
+        <option value="Literatura faktu">Literatura faktu</option>
+        <option value="Literatura dziecięca">Literatura dziecięca</option>
+        <option value="Podręczniki">Podręczniki</option>
+        <option value="Encyklopedie i słowniki">Encyklopedie i słowniki</option>
+        <option value="Komiksy">Komiksy</option>
+        <option value="Poezja">Poezja</option>
+        <option value="Poradniki">Poradniki</option>
+        <option value="Sport i turystyka">Sport i turystyka</option>
+        <option value="Pozostałe">Pozostałe</option>
+      </select>
+      <div class="mb-2">
+        <input type="text" class="form-control" name="year" ngModel placeholder="Wpisz rok wydania" />
+      </div>
+      <div class="mb-2">
+        <input type="number" min="0" class="form-control" name="pagesMin" ngModel placeholder="Zakres ilości stron: od" />
+      </div>
+      <div class="mb-2">
+        <input type="number" min="0" class="form-control" name="pagesMax" ngModel placeholder="Zakres ilości stron: do" />
+      </div>
+    </div>
+  </div>
+  <div class="mb-2">
+    <button class="btn btn-primary background-light-blue" type="submit">Szukaj</button>
+  </div>
+</form>

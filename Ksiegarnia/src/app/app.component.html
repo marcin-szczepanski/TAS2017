@@ -1,0 +1,154 @@
+<div class="body">
+  <div class="container">
+    <header class="pt-4 pb-4 row text-gray">
+      <div class="logo col-sm-6">
+        <h3>
+          <a class="noUnderline text-gray link" modeNewest="0" (click)="mode = 0">NaszaKsiegarnia.pl</a>
+        </h3>
+      </div>
+      <div class="basket col-sm-3 col-6">
+        <h3>
+          <a class="noUnderline text-gray link" (click)="mode = 8">Twój koszyk</a>
+        </h3>
+        <a class="noUnderline text-blue  link" (click)="mode = 8">{{ basket }} zł</a>
+      </div>
+      <div class="your-profile col-sm-3 col-6">
+        <h3>
+          <a class="noUnderline text-gray link" (click)="mode = 9" *ngIf="id">Twoje konto</a>
+        </h3>
+        <div class="hgroup row">
+          <h6>
+            <a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="mode = 10" *ngIf="!id">Logowanie</a>
+          </h6>
+          <h6>
+            <a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="logOff()" *ngIf="id">Wyloguj</a>
+          </h6>
+          <h6>
+            <a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="mode = 20" *ngIf="admin">Zarządzaj książkami</a>
+          </h6>
+          <h6>
+            <a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="mode = 21" *ngIf="admin">Zarządzaj użytkownikami</a>
+          </h6>
+          <h6>
+            <a class="noUnderline col-xl-4 col-lg-5 col-md-6 text-orange link" (click)="mode = 6" *ngIf="!id">Rejestracja</a>
+          </h6>
+        </div>
+      </div>
+    </header>
+    <div class="background">
+      <form action="/" method="post" class="paddings margins bg-primary bradius-top" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
+        <label for="category">Wybierz kategorię:</label>
+        <div class="form-row align-items-center">
+          <div class="col-md-3 col-sm-3 min">
+            <select ngModel id="category" name="category" class="form-control">
+              <option value=""></option>
+              <option value="Lektury">Lektury</option>
+              <option value="Literatura piękna">Literatura piękna</option>
+              <option value="Literatura faktu">Literatura faktu</option>
+              <option value="Literatura dziecięca">Literatura dziecięca</option>
+              <option value="Podręczniki">Podręczniki</option>
+              <option value="Encyklopedie i słowniki">Encyklopedie i słowniki</option>
+              <option value="Komiksy">Komiksy</option>
+              <option value="Poezja">Poezja</option>
+              <option value="Poradniki">Poradniki</option>
+              <option value="Sport i turystyka">Sport i turystyka</option>
+              <option value="Pozostałe">Pozostałe</option>
+            </select>
+          </div>
+          <div class="col-md-5 col-sm-5 min">
+            <input type="text" class="form-control" name="keywords" ngModel placeholder="Wpisz słowa kluczowe" />
+          </div>
+          <div class="col-md-3 col-sm-3 min">
+            <button class="btn btn-primary background-light-blue" (click)="mode = 3" type="submit">Szukaj</button>
+          </div>
+          <a class="text-white mt-2 link" (click)="mode = 2">Wyszukiwanie zaawansowane</a>
+        </div>
+      </form>
+      <nav class="paddings margins navbar navbar-expand navbar-light bg-light bradius-bottom background">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav row mx-auto">
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Lektury</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Literatura piękna</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Literatura faktu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Literatura dziecięca</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Podręczniki</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Encyklopedie i&nbsp;słowniki</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Komiksy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Poezja</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Poradniki</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Sport i&nbsp;turystyka</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-gray link" (click)="mode = 4; categorySearch = $event.target.textContent">Pozostałe</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <section class="adres text-light-gray paddings margins"></section>
+    <section class="paddings margins bradius mb-4 bg-white" [ngSwitch]="mode">
+      <app-static-pages *ngSwitchCase="1"></app-static-pages>
+      <app-sign-in *ngSwitchCase="10" (orderSum)="handleOrderSum($event)" (loginStatus)="handleLoginStatus($event)" (isAdmin)="handleIsAdmin($event)" (modeLogged)="setMode($event); ngOnInit()"
+        (signInWithError)="ngOnInit()"></app-sign-in>
+      <app-advanced-search (queryChanged)="setQuery($event)" (modeChangedA)="setMode($event)" *ngSwitchCase="2"></app-advanced-search>
+      <app-books-in-search query="{{ querySearch }}" (modeChangedS)="setMode($event)" (bookIdChangedS)="setIdBook($event)" *ngSwitchCase="3"></app-books-in-search>
+      <app-sign-up *ngSwitchCase="6"></app-sign-up>
+      <app-order-comp *ngSwitchCase="7" (orderSum)="handleOrderSum($event)"></app-order-comp>
+      <app-shopping-basket *ngSwitchCase="8" (orderMode)="handleOrderMode($event)" (orderSum)="handleOrderSum($event)" (modeChanged)="setMode($event)"
+        (bookIdChanged)="setIdBook($event)" [logged]="logged"></app-shopping-basket>
+      <app-my-profile *ngSwitchCase="9"></app-my-profile>
+      <app-books-in-category category="{{ categorySearch }}" (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)"
+        *ngSwitchCase="4"></app-books-in-category>
+      <app-about-book *ngSwitchCase="5" ident="{{ idBook }}" user="{{ user }}" logged="{{ logged }}" (load)="getBooks()" (orderSum)="handleOrderSum($event)"></app-about-book>
+      <app-newest (modeChanged)="setMode($event)" (bookIdChanged)="setIdBook($event)" *ngSwitchDefault></app-newest>
+      <app-admin-books *ngSwitchCase="20"></app-admin-books>
+      <app-admin-users *ngSwitchCase="21"></app-admin-users>
+    </section>
+    <footer class="paddings margins background-blue mt-4 bradius">
+      <div class="row newsletter-section mt-4" style="text-align: center;">
+        <h3 class="newsletter col-md-3 col-sm-4 text-white">Newsletter: </h3>
+        <form action="/" method="post" class="col">
+          <div class="form-row align-items-center">
+            <div class="col-md-7 col-sm-6 min">
+              <input type="text" required class="form-control" id="newsletter" name="subscriber" (keyup)="email = $event.target.value"
+                placeholder="Wpisz adres e-mail" />
+            </div>
+            <div class="col-md-2 col-sm-2 min">
+              <button type="submit" class="btn btn-primary" (click)="saveEmail()">Zamów</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="info-pages d-flex flex-wrap justify-content-around paddings bradius mt-4 background min">
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">O&nbsp;nas</a>
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">Sposoby i&nbsp;koszty dostawy</a>
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">Regulamin</a>
+        <a class="p-2 text-white link" style="text-align: center;" (click)="mode = 1">Kontakt</a>
+      </div>
+    </footer>
+    <div class="pb-4 pt-4" style="text-align: center;">
+      <b>
+        <span>Projekt wykonany w ramach przedmiotu TAS.</span>
+      </b>
+    </div>
+  </div>
+</div>
